@@ -1,4 +1,4 @@
-@extends('layouts.crud')
+@extends('layouts.admin')
 
 @section('content')
 <div id="page-content-wrapper">
@@ -41,52 +41,25 @@
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container">
             <h1>{{$title}}</h1>
-            @if (Auth::user()->level == 'admin')
-            <a href="/db_admin-product" class="btn btn-info btn-edit text-light">Back</a>
-            @else
-            <a href="/db_mitra-product/{{Auth::user()->name}}" class="btn btn-info btn-edit text-light">Back</a>
-            @endif
-            <h2>{{ $products->product_name }}</h2>
-            <div class="row mt-4">
-                @php
-                $image = explode('|', $products->images);
-                @endphp
-                @foreach ($image as $item)
-                <div class="col-md-3">
-                    <div class="card mb-5" style="max-width: 20rem;">
-                        <a href="{{asset("storage/product_images/".$item)}}" class="example-image-link"
-                            data-lightbox="example-2" data-title="{{ $item }}">
-                            <img src="{{asset("storage/product_images/".$item)}}" alt="image-1"
-                                class="card-img-top"></a>
-                    </div>
-                </div>
-                @endforeach
-            </div>
+            <h2>{{ $messages->fullName }}</h2>
+            <a href="/db_admin-message" class="btn btn-info btn-edit text-light mb-3">Back</a>
         </div>
         <div class="container">
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <tr>
-                        <th>Mitra</th>
-                        <td>{{$products->mitra}}</td>
+                        <th>Email</th>
+                        <td>{{$messages->email}}</td>
                     </tr>
                     <tr>
-                        <th>Harga</th>
-                        <td>{{$products->price}}</td>
+                        <th>Subject</th>
+                        <td>{{$messages->subject}}</td>
                     </tr>
                     <tr>
-                        <th>Category</th>
-                        <td>{{$products->category}}</td>
-                    </tr>
-                    <tr>
-                        <th>Nomor Whatsapp</th>
-                        <td>{{$products->p_number}}</td>
-                    </tr>
-                    <tr>
-                        <th>Deskripsi</th>
+                        <th>Isi Pesan</th>
                         <td>
                             @php
-                            $paragraph = explode('<br />', $products->description);
+                            $paragraph = explode('<br />', $messages->content);
                             @endphp
                             @foreach ($paragraph as $item)
                             <div>{{$item}}</div>
@@ -96,14 +69,12 @@
                 </table>
             </div>
             <div class="d-flex flex-row">
-                <a href="/admin-products/{{$products->id}}/edit"
-                    class="btn btn-primary mr-2 btn-edit text-light">Edit</a>
-                <form action="{{ route('admin-products.destroy', $products->id) }}" method="POST">
+                <form action="{{ route('admin-message.destroy', $messages->id) }}" method="POST">
                     @method('DELETE')
                     {{ csrf_field() }}
-                    <input type="hidden" name="id" value="{{ $products->id }}">
+                    <input type="hidden" name="id" value="{{ $messages->id }}">
                     <button type="submit" class="btn btn-danger btn-delete"
-                        onclick="return confirm('Produk akan dihapus')">Delete</button>
+                        onclick="return confirm('Pesan akan dihapus')">Delete</button>
                 </form>
             </div>
         </div>

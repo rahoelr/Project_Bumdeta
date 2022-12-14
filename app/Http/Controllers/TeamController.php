@@ -15,7 +15,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        return view('admin.admin_anggota', [
+        return view('admin.dashboard_admin_team', [
             "title" => "| Team",
             "teams" => Team::orderBy('level', 'asc')->paginate(10)
         ]);
@@ -29,7 +29,7 @@ class TeamController extends Controller
     public function create()
     {
         $data = array(
-            'title' => "| Create Team Member"
+            'title' => "| Team"
         );
         return view('admin.add_anggota')->with($data);
     }
@@ -42,6 +42,13 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'images' => 'required',
+                'name' => 'required|max:50',
+                'position' => 'required|max:50'
+            ]
+        );
         if ($files = $request->file('images')) {
             $filenameWithExt = $files->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -74,7 +81,7 @@ class TeamController extends Controller
         $team->position = $request->input('position');
         $team->level = $level;
         $team->save();
-        return redirect('admin-teams')->with('success', 'Berhasil Menambah Anggota Baru!!');
+        return redirect('db_admin-team')->with('success', 'Berhasil Menambah Anggota Baru!!');
     }
 
     /**
@@ -88,6 +95,15 @@ class TeamController extends Controller
         //
     }
 
+    public function adminShow($id)
+    {
+        $data = array(
+            'title' => "| Team",
+        );
+        $teams = Team::find($id);
+        return view('admin.admin_anggota', compact('teams'))->with($data);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -97,7 +113,7 @@ class TeamController extends Controller
     public function edit($id)
     {
         return view('admin.edit_anggota', [
-            'title' => "Edit Team Member",
+            'title' => "| Team",
             'teams' => Team::find($id)
         ]);
     }
@@ -111,6 +127,13 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                'images' => 'required',
+                'name' => 'required|max:50',
+                'position' => 'required|max:50'
+            ]
+        );
         $team = Team::find($id);
         $team->name = $request->input('name');
         $team->position = $request->input('position');
@@ -146,7 +169,7 @@ class TeamController extends Controller
         }
         $team->images = $image;
         $team->update();
-        return redirect('admin-teams')->with('success', 'Berhasil diupdate!!');
+        return redirect('db_admin-team')->with('success', 'Berhasil diupdate!!');
     }
 
     /**
@@ -162,6 +185,11 @@ class TeamController extends Controller
             unlink('storage/team_images/' . $team->images);
         }
         $team->delete();
-        return redirect('admin-teams')->with('success', 'Berhasil dihapus!!');
+        return redirect('db_admin-team')->with('success', 'Berhasil dihapus!!');
+    }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 }

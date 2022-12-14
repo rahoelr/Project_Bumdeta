@@ -21,6 +21,14 @@ class AboutUsController extends Controller
         ]);
     }
 
+    public function adminView($id)
+    {
+        return view('admin.dashboard_admin_aboutus', [
+            "title" => "| About Us",
+            'about_us' => AboutUs::find($id)
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -29,7 +37,7 @@ class AboutUsController extends Controller
     public function create()
     {
         $data = array(
-            'title' => "| Create About Us"
+            'title' => "| About Us"
         );
         return view('admin.add_about-us')->with($data);
     }
@@ -42,6 +50,16 @@ class AboutUsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'images' => 'required',
+                'history' => 'required',
+                'logo_meaning' => 'required',
+                'visi' => 'required',
+                'misi' => 'required'
+            ]
+        );
+
         if ($files = $request->file('images')) {
             $filenameWithExt = $files->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -53,12 +71,11 @@ class AboutUsController extends Controller
         $ab_us = new AboutUs;
         $ab_us->images = $image;
         $ab_us->history = nl2br($request->input('history'));
-        $ab_us->description = nl2br($request->input('description'));
         $ab_us->logo_meaning = nl2br($request->input('logo_meaning'));
         $ab_us->visi = nl2br($request->input('visi'));
         $ab_us->misi = nl2br($request->input('misi'));
         $ab_us->save();
-        return redirect('admin-about_us')->with('success', 'Berhasil Menambah Data Baru!!');
+        return redirect('db_admin-aboutus/1')->with('success', 'Berhasil Menambah Data Baru!!');
     }
 
     /**
@@ -85,7 +102,7 @@ class AboutUsController extends Controller
     public function edit($id)
     {
         return view('admin.edit_about-us', [
-            'title' => "Edit About Us",
+            'title' => "| About Us",
             'about_us' => AboutUs::find($id)
         ]);
     }
@@ -99,9 +116,17 @@ class AboutUsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                'images' => 'required',
+                'history' => 'required',
+                'logo_meaning' => 'required',
+                'visi' => 'required',
+                'misi' => 'required'
+            ]
+        );
         $ab_us = AboutUs::find($id);
         $ab_us->history = nl2br($request->input('history'));
-        $ab_us->description = nl2br($request->input('description'));
         $ab_us->logo_meaning = nl2br($request->input('logo_meaning'));
         $ab_us->visi = nl2br($request->input('visi'));
         $ab_us->misi = nl2br($request->input('misi'));
@@ -118,7 +143,7 @@ class AboutUsController extends Controller
         }
         $ab_us->images = $image;
         $ab_us->update();
-        return redirect('admin-about_us')->with('success', 'Berhasil diupdate!!');
+        return redirect('db_admin-aboutus/1')->with('success', 'Berhasil diupdate!!');
     }
 
     /**
@@ -134,6 +159,11 @@ class AboutUsController extends Controller
             unlink('storage/aboutUs_images/' . $ab_us->images);
         }
         $ab_us->delete();
-        return redirect('admin-about_us')->with('success', 'Berhasil dihapus!!');
+        return redirect('db_admin-aboutus/1')->with('success', 'Berhasil dihapus!!');
+    }
+
+    public function __construct()
+    {
+        $this->middleware('auth', ["except" => ["show"]]);
     }
 }

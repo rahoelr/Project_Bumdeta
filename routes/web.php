@@ -3,13 +3,17 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LandingPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,58 +26,21 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LandingPageController::class, 'publicView']);
 
-Route::get('/home', function () {
-    return view('home', [
-        "title" => ""
-    ]);
-});
+Route::get('/home', [LandingPageController::class, 'publicView']);
 
-// Route::get('/tentang_kami', function () {
-//     return view('tentang_kami', [
-//         "title" => "| Tentang Kami"
-//     ]);
-// });
 Route::get('/tentang_kami', [AboutUsController::class, 'show']);
 
-// Route::get('/mitra', function () {
-//     return view('mitra', [
-//         "title" => "| Mitra"
-//     ]);
-// });
 Route::get('/mitra', [MitraController::class, 'show']);
 
-// Route::get('/produk', function () {
-//     return view('produk', [
-//         "title" => "| Produk"
-//     ]);
-// });
 Route::get('/produk', [ProductController::class, 'list_product']);
 
-// Route::get('/artikel', function () {
-//     return view('artikel', [
-//         "title" => "| Artikel"
-//     ]);
-// });
 Route::get('/artikel', [ArticleController::class, 'show']);
 
-// Route::get('/detail_artikel', function () {
-//     return view('detail_artikel', [
-//         "title" => "| Detail Artikel"
-//     ]);
-// });
 Route::get('/detail-artikel/{id}', [ArticleController::class, 'detail_article']);
 
-// Route::get('/detail_produk', function () {
-//     return view('detail_produk', [
-//         "title" => "| Detail Produk"
-//     ]);
-// });
 Route::get('/detail_produk/{id}', [ProductController::class, 'details_product']);
-
 
 Route::resource('admin-products', 'App\Http\Controllers\ProductController');
 Route::resource('admin-mitras', 'App\Http\Controllers\MitraController');
@@ -82,8 +49,9 @@ Route::resource('admin-teams', 'App\Http\Controllers\TeamController');
 Route::resource('admin-categories', 'App\Http\Controllers\CategoryController');
 Route::resource('admin-about_us', 'App\Http\Controllers\AboutUsController');
 Route::resource('users', 'App\Http\Controllers\UserController');
-// Route::get('/user/{id}/edit', [UserController::class, 'edit']);
-// Route::put('/user/{id}', [PostController::class, 'update']);
+Route::resource('admin-message', 'App\Http\Controllers\MessageController');
+Route::resource('admin-landing', 'App\Http\Controllers\LandingpageController');
+Route::resource('admin-users', 'App\Http\Controllers\UserController');
 
 Auth::routes([
     'reset' => true,
@@ -91,18 +59,24 @@ Auth::routes([
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/db_mitra', function () {
-    return view('admin.dashboard_mitra', [
-        "title" => "| Dashboard"
-    ]);
-});
-Route::get('/db_product', function () {
-    return view('admin.dashboard_mitra_product', [
-        "title" => "| Product"
-    ]);
-});
-Route::get('/db_toko', function () {
-    return view('admin.dashboard_mitra_toko', [
-        "title" => "| Mitra"
-    ]);
-});
+Route::get('/db_mitra/{owner}', [ProductController::class, 'mitraViewlatest']);
+Route::get('/db_mitra-product/{owner}', [ProductController::class, 'mitraView']);
+Route::get('/db_mitra-toko/{owner}', [MitraController::class, 'mitraView']);
+Route::get('/db_admin', [ProductController::class, 'adminViewlatest']);
+Route::get('/db_admin-landing/{id}', [LandingPageController::class, 'adminView']);
+Route::get('/db_admin-landing-detail/{id}', [LandingPageController::class, 'adminShow']);
+Route::get('/db_admin-product', [ProductController::class, 'adminView']);
+Route::get('/db_admin-product-detail/{id}', [ProductController::class, 'adminShow']);
+Route::get('/db_admin-mitra', [MitraController::class, 'adminView']);
+Route::get('/db_admin-mitra-detail/{id}', [MitraController::class, 'adminShow']);
+Route::get('/db_admin-article', [ArticleController::class, 'index']);
+Route::get('/db_admin-article-detail/{id}', [ArticleController::class, 'adminShow']);
+Route::get('/db_admin-category', [CategoryController::class, 'index']);
+Route::get('/db_admin-category-detail/{id}', [CategoryController::class, 'adminShow']);
+Route::get('/db_admin-aboutus/{id}', [AboutUsController::class, 'adminView']);
+Route::get('/db_admin-message', [MessageController::class, 'index']);
+Route::get('/db_admin-message-detail/{id}', [MessageController::class, 'adminShow']);
+Route::get('/db_admin-team', [TeamController::class, 'index']);
+Route::get('/db_admin-team-detail/{id}', [TeamController::class, 'adminShow']);
+Route::get('/db_admin-user', [UserController::class, 'index']);
+Route::get('/db_admin-user-detail/{id}', [UserController::class, 'show']);

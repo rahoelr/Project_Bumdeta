@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Mitra;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -22,6 +24,48 @@ class ProductController extends Controller
         ]);
     }
 
+    public function adminView()
+    {
+        return view('admin.dashboard_admin_product', [
+            "title" => "| Product",
+            "products" => Product::orderBy('product_name', 'asc')->paginate(10)
+        ]);
+    }
+
+    public function mitraView($owner)
+    {
+        $mitras = Mitra::where('owner', $owner)->first();
+        $mitra = "";
+        if ($mitras != null) {
+            $mitra = $mitras->mitra_name;
+        }
+        return view('admin.dashboard_mitra_product', [
+            "title" => "| Product",
+            "products" => Product::where('mitra', '=', $mitra)->orderBy('created_at', 'desc')->get()
+        ]);
+    }
+
+    public function adminViewlatest()
+    {
+        return view('admin.dashboard_admin', [
+            "title" => "| Dashboard",
+            "products" => Product::orderBy('created_at', 'desc')->get()
+        ]);
+    }
+
+    public function mitraViewlatest($owner)
+    {
+        $mitras = Mitra::where('owner', $owner)->first();
+        $mitra = "";
+        if ($mitras != null) {
+            $mitra = $mitras->mitra_name;
+        }
+        return view('admin.dashboard_mitra', [
+            "title" => "| Dashboard",
+            "products" => Product::where('mitra', '=', $mitra)->orderBy('created_at', 'desc')->get()
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -30,8 +74,9 @@ class ProductController extends Controller
     public function create()
     {
         $data = array(
-            'title' => "| Create Product",
-            "categories" => Category::orderBy('category', 'asc')->get()
+            'title' => "| Product",
+            "categories" => Category::orderBy('category', 'asc')->get(),
+            "mitras" => Mitra::orderBy('mitra_name', 'asc')->get()
         );
         return view('admin.add_product')->with($data);
     }
@@ -44,6 +89,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'images' => 'required',
+                'product_name' => 'required|unique:products,product_name|max:50',
+                'category' => 'required|max:30',
+                'price' => 'required|max:30',
+                'mitra' => 'required|max:30',
+                'p_number' => 'required|max:13',
+                'description' => 'required'
+            ]
+        );
         $image = array();
         if ($files = $request->file('images')) {
             foreach ($files as $file) {
@@ -64,7 +120,11 @@ class ProductController extends Controller
         $product->mitra = $request->input('mitra');
         $product->p_number = $request->input('p_number');
         $product->save();
-        return redirect('admin-products')->with('success', 'Berhasil Menambah Produk Baru!!');
+        if (Auth::user()->level == 'admin') {
+            return redirect('db_admin-product')->with('success', 'Berhasil Menambah Produk Baru!!');
+        } else {
+            return redirect('db_mitra-product/' . Auth::user()->name)->with('success', 'Berhasil Menambah Produk Baru!!');
+        }
     }
 
     /**
@@ -73,21 +133,21 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function adminShow($id)
     {
         $data = array(
-            'title' => "| Product Picture",
+            'title' => "| Product",
         );
         $products = Product::find($id);
         if (!$products) abort(404);
         $images = $products->productImages;
-        return view('admin.product_picture', compact('products', 'images'))->with($data);
+        return view('admin.admin_product', compact('products', 'images'))->with($data);
     }
 
     public function list_product()
     {
         return view('produk', [
-            'title' => "| Product",
+            "title" => "| Product",
             "categories" => Category::orderBy('category', 'asc')->get(),
             "products" => Product::orderBy('product_name', 'asc')->paginate(10)
         ]);
@@ -110,9 +170,10 @@ class ProductController extends Controller
     public function edit($id)
     {
         return view('admin.edit_product', [
-            'title' => "Edit Product",
+            'title' => "| Product",
             'products' => Product::find($id),
-            "categories" => Category::orderBy('category', 'asc')->get()
+            "categories" => Category::orderBy('category', 'asc')->get(),
+            "mitras" => Mitra::orderBy('mitra_name', 'asc')->get()
         ]);
     }
 
@@ -125,6 +186,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                'images' => 'required',
+                'product_name' => 'required|max:50',
+                'category' => 'required|max:30',
+                'price' => 'required|max:30',
+                'mitra' => 'required|max:30',
+                'p_number' => 'required|max:13',
+                'description' => 'required'
+            ]
+        );
         $product = Product::find($id);
         $product->product_name = $request->input('product_name');
         $product->category = $request->input('category');
@@ -151,7 +223,11 @@ class ProductController extends Controller
         }
         $product->images = implode('|', $image);
         $product->update();
-        return redirect('admin-products')->with('success', 'Berhasil diupdate!!');
+        if (Auth::user()->level == 'admin') {
+            return redirect('db_admin-product')->with('success', 'Berhasil Mengubah Data Produk!!');
+        } else {
+            return redirect('db_mitra-product/' . Auth::user()->name)->with('success', 'Berhasil Mengubah Data Produk!!');
+        }
     }
 
     /**
@@ -170,6 +246,15 @@ class ProductController extends Controller
             }
         }
         $product->delete();
-        return redirect('admin-products')->with('success', 'Berhasil dihapus!!');
+        if (Auth::user()->level == 'admin') {
+            return redirect('db_admin-product')->with('success', 'Berhasil Menghapus Produk!!');
+        } else {
+            return redirect('db_mitra-product/' . Auth::user()->name)->with('success', 'Berhasil Menghapus Produk!!');
+        }
+    }
+
+    public function __construct()
+    {
+        $this->middleware('auth', ["except" => ["details_product", "list_product"]]);
     }
 }

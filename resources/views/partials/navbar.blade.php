@@ -33,7 +33,11 @@
                         Hi, {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu">
-                        <a href="/admin-products" class="dropdown-item">Dashboard</a>
+                        @if (Auth::user()->level == 'admin')
+                        <a href="/db_admin" class="dropdown-item">Dashboard</a>
+                        @else
+                        <a href="/db_mitra/{{Auth::user()->name}}" class="dropdown-item">Dashboard</a>
+                        @endif
                         <a href="/users/{{Auth::user()->id}}/edit" class="dropdown-item">Settings</a>
                         <div class="dropdown-divider"></div>
                         <a href="{{route("logout")}}" class="dropdown-item">Logout</a>
@@ -66,16 +70,16 @@
                 <li class="nav-item {{($title === "") ? 'active' : ''}}">
                     <a href="/home" class="nav-link">Beranda</a>
                 </li>
-                <li class="nav-item {{($title === "| Produk") ? 'active' : ''}}">
+                <li class="nav-item {{($title === "| Product") ? 'active' : ''}}">
                     <a href="/produk" class="nav-link">Produk</a>
                 </li>
                 <li class="nav-item {{($title === "| Mitra") ? 'active' : ''}}">
                     <a href="/mitra" class="nav-link">Mitra</a>
                 </li>
-                <li class="nav-item {{($title === "| Artikel") ? 'active' : ''}}">
+                <li class="nav-item {{($title === "| Article") ? 'active' : ''}}">
                     <a href="/artikel" class="nav-link">Artikel</a>
                 </li>
-                <li class="nav-item {{($title === "| Tentang Kami") ? 'active' : ''}}">
+                <li class="nav-item {{($title === "| About Us") ? 'active' : ''}}">
                     <a href="/tentang_kami" class="nav-link">Tentang Kami</a>
                 </li>
                 <li class="nav-item">

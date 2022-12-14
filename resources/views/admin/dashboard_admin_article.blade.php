@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('mitra')
+@section('content')
 <!-- Page Content -->
 <div id="page-content-wrapper">
     <nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top" data-aos="fade-down">
@@ -43,34 +43,38 @@
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container-fluid">
             <div class="dashboard-heading">
-                <h2 class="dashboard-title">My Products</h2>
-                <p class="dashboard-subtitle">Manage it well and get money</p>
+                <h2 class="dashboard-title">Artikel</h2>
+                <p class="dashboard-subtitle">Kelola Semua Artikel</p>
+                @if (\Session::has('success'))
+                <div class="alert alert-success">
+                    {!! \Session::get('success') !!}
+                </div>
+                @endif
             </div>
             <div class="dashboard-content">
                 <div class="row">
                     <div class="col-12">
-                        <a href="/admin-products/create" class="btn btn-success btn-dashboard">Add New
-                            Product</a>
+                        <a href="admin-articles/create" class="btn btn-success btn-dashboard">Tambah Artikel</a>
                     </div>
                 </div>
                 <div class="row mt-4">
-                    @if(count($products)>0)
-                    @foreach ($products as $product)
+                    @if(count($articles)>0)
+                    @foreach ($articles as $article)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <a class="card card-dashboard-product d-block" href="/db_admin-product-detail/{{$product->id}}">
+                        <a class="card card-dashboard-product d-block" href="/db_admin-article-detail/{{$article->id}}">
                             <div class="card-body">
-                                @php
-                                $image = explode('|', $product->images);
-                                @endphp
-                                <img src="{{asset("storage/product_images/".$image[0])}}" alt="" class="w-100 mb-2" />
-                                <div class="product-title">{{ $product->product_name }}</div>
-                                <div class="product-category">{{ $product->category }}</div>
+                                <img src="{{asset("storage/article_images/".$article->images)}}" alt=""
+                                    class="w-100 mb-2" />
+                                <div class="product-title">
+                                    {{ $article->title }}
+                                </div>
+                                <div class="product-category">{{ $article->created_at }}</div>
                             </div>
                         </a>
                     </div>
                     @endforeach
                     @else
-                    <h3 class="text-center">No products yet!!!</h3>
+                    <h3 class="text-center">No articles yet!!!</h3>
                     @endif
                 </div>
             </div>

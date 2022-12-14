@@ -4,32 +4,36 @@
 <div class="page-content page-home">
     <div class="container">
         <h1 class="title" data-aos="fade-up">Artikel</h1>
-        @php
-        $i = 50;
-        @endphp
-        @foreach ($articles as $object)
-        <a href="/detail-artikel/{{$object->id}}">
-            <div class="grid-horizontal-artikel" data-aos="fade-up" data-aos-delay="{{$i+=50}}">
-                <div class="desc-gambar">
-                    <img src="{{asset("storage/article_images/".$object->images)}}" alt="" data-aos="zoom-in">
-                </div>
-                <div class="flex-vertical-articel">
-                    <h2 class="sub-title">{{$object->title}}</h2>
-                    <div class="flex-date">
-                        <div class="date">
-                            {{$object->created_at}}
+        <div class="row">
+            @php
+            $i = 100;
+            @endphp
+            @foreach ($articles as $article)
+            <a href="/detail-artikel/{{$article->id}}">
+                <div class="col-6 col-md-4 col-lg-12" data-aos="fade-up" data-aos-delay="{{$i+=50}}">
+                    <div class="component-products d-block">
+                        <div class="products-thumbnail article-thumbnail">
+                            <div class="products-image" style="
+                            background-image: url('{{asset("storage/article_images/".$article->images)}}');
+                        "></div>
                         </div>
-                        <div class="penulis">
-                            Penulis: {{$object->author}}
+                        <h2 class="sub-title">{{$article->title}}</h2>
+                        <div class="flex-date">
+                            <div class="date">
+                                {{$article->created_at}}
+                            </div>
+                            <div class="penulis">
+                                Penulis: {{$article->author}}
+                            </div>
                         </div>
+                        <div class="article-desc">{{substr($article->description, 0, 200)}}</div>
                     </div>
-                    <p>{{substr($object->description, 0, 200)}}<br></p>
                 </div>
-            </div>
-        </a>
-        @endforeach
-        <div class="d-flex">
-            {{ $articles->links('pagination::bootstrap-4') }}
+            </a>
+            @endforeach
+        </div>
+        <div class="d-flex justify-content-center">
+            {{ $articles->links() }}
         </div>
     </div>
 </div>

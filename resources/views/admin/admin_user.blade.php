@@ -1,4 +1,4 @@
-@extends('layouts.crud')
+@extends('layouts.admin')
 
 @section('content')
 <div id="page-content-wrapper">
@@ -40,70 +40,39 @@
     </nav>
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container">
-            <h1>{{$title}}</h1>
-            @if (Auth::user()->level == 'admin')
-            <a href="/db_admin-product" class="btn btn-info btn-edit text-light">Back</a>
-            @else
-            <a href="/db_mitra-product/{{Auth::user()->name}}" class="btn btn-info btn-edit text-light">Back</a>
-            @endif
-            <h2>{{ $products->product_name }}</h2>
+            <h1>{{ $title }}</h1>
+            <a href="/db_admin-user" class="btn btn-info btn-edit text-light">Back</a>
             <div class="row mt-4">
-                @php
-                $image = explode('|', $products->images);
-                @endphp
-                @foreach ($image as $item)
                 <div class="col-md-3">
                     <div class="card mb-5" style="max-width: 20rem;">
-                        <a href="{{asset("storage/product_images/".$item)}}" class="example-image-link"
-                            data-lightbox="example-2" data-title="{{ $item }}">
-                            <img src="{{asset("storage/product_images/".$item)}}" alt="image-1"
+                        <a href="{{asset("storage/user_images/".$users->images)}}" class="example-image-link"
+                            data-lightbox="example-2" data-title="{{ $users->images }}">
+                            <img src="{{asset("storage/user_images/".$users->images)}}" alt="image-1"
                                 class="card-img-top"></a>
                     </div>
                 </div>
-                @endforeach
             </div>
         </div>
         <div class="container">
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <tr>
-                        <th>Mitra</th>
-                        <td>{{$products->mitra}}</td>
+                        <th>Email</th>
+                        <td>{{$users->email}}</td>
                     </tr>
                     <tr>
-                        <th>Harga</th>
-                        <td>{{$products->price}}</td>
-                    </tr>
-                    <tr>
-                        <th>Category</th>
-                        <td>{{$products->category}}</td>
-                    </tr>
-                    <tr>
-                        <th>Nomor Whatsapp</th>
-                        <td>{{$products->p_number}}</td>
-                    </tr>
-                    <tr>
-                        <th>Deskripsi</th>
-                        <td>
-                            @php
-                            $paragraph = explode('<br />', $products->description);
-                            @endphp
-                            @foreach ($paragraph as $item)
-                            <div>{{$item}}</div>
-                            @endforeach
-                        </td>
+                        <th>Username</th>
+                        <td>{{$users->name}}</td>
                     </tr>
                 </table>
             </div>
             <div class="d-flex flex-row">
-                <a href="/admin-products/{{$products->id}}/edit"
-                    class="btn btn-primary mr-2 btn-edit text-light">Edit</a>
-                <form action="{{ route('admin-products.destroy', $products->id) }}" method="POST">
+                <form action="{{ route('admin-users.destroy', $users->id) }}" method="POST">
                     @method('DELETE')
                     {{ csrf_field() }}
-                    <input type="hidden" name="id" value="{{ $products->id }}">
+                    <input type="hidden" name="id" value="{{ $users->id }}">
                     <button type="submit" class="btn btn-danger btn-delete"
-                        onclick="return confirm('Produk akan dihapus')">Delete</button>
+                        onclick="return confirm('Akun akan dihapus')">Delete</button>
                 </form>
             </div>
         </div>

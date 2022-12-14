@@ -14,7 +14,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.dashboard_admin_mitraAcc', [
+            "title" => "| User",
+            "users" => User::orderBy('created_at', 'asc')->paginate(10)
+        ]);
     }
 
     /**
@@ -46,7 +49,11 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = array(
+            'title' => "| User",
+        );
+        $users = User::find($id);
+        return view('admin.admin_user', compact('users'))->with($data);
     }
 
     /**
@@ -58,7 +65,7 @@ class UserController extends Controller
     public function edit($id)
     {
         return view('admin.edit_profile', [
-            'title' => "Edit User Profile",
+            'title' => "| Dashboard",
             'users' => User::find($id)
         ]);
     }
@@ -72,6 +79,12 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                'images' => 'required',
+                'name' => 'required|max:40'
+            ]
+        );
         $user = User::find($id);
         $user->name = $request->input('name');
         if ($files = $request->file('images')) {
@@ -100,6 +113,18 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        if ($user->images) {
+            if ($user->images != 'user_image_default.png') {
+                unlink('storage/user_images/' . $user->images);
+            }
+        }
+        $user->delete();
+        return redirect('db_admin-user')->with('success', 'Berhasil dihapus!!');
+    }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 }

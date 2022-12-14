@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="page-content page-home">
+    @if (\Session::has('success'))
+    <div class="alert alert-success">
+        {!! \Session::get('success') !!}
+    </div>
+    @endif
     <section class="store-carousel">
         <div class="container">
             <div class="row">
@@ -13,14 +18,20 @@
                             <li data-target="#storeCarousel" data-slide-to="2"></li>
                         </ol>
                         <div class="carousel-inner">
+                            @php
+                            $carousel = explode('|', $landings->carousel);
+                            @endphp
                             <div class="carousel-item active">
-                                <img src="{{asset("img/banner 1.jpg")}}" alt="Carousel Image" class="d-block w-100" />
+                                <img src="{{asset("storage/landingPage_images/".$carousel[0])}}" alt="Carousel Image"
+                                    class="d-block w-100" />
                             </div>
                             <div class="carousel-item">
-                                <img src="{{asset("img/banner 1.jpg")}}" alt="Carousel Image" class="d-block w-100" />
+                                <img src="{{asset("storage/landingPage_images/".$carousel[1])}}" alt="Carousel Image"
+                                    class="d-block w-100" />
                             </div>
                             <div class="carousel-item">
-                                <img src="{{asset("img/banner 1.jpg")}}" alt="Carousel Image" class="d-block w-100" />
+                                <img src="{{asset("storage/landingPage_images/".$carousel[2])}}" alt="Carousel Image"
+                                    class="d-block w-100" />
                             </div>
                         </div>
                     </div>
@@ -36,54 +47,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="100">
+                @php
+                $i = 100;
+                @endphp
+                @foreach ($categories as $category)
+                <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="{{$i+=200}}">
                     <a href="#" class="component-categories d-block">
                         <div class="categories-image">
-                            <img src="{{asset("img/categories-agriculture.svg")}}" alt="" class="w-100" />
+                            <img src="{{asset("storage/category_images/".$category->images)}}" alt="" class="w-100" />
                         </div>
-                        <p class="categories-text">Pertanian</p>
+                        <p class="categories-text">{{$category->category}}</p>
                     </a>
                 </div>
-                <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="200">
-                    <a href="#" class="component-categories d-block">
-                        <div class="categories-image">
-                            <img src="{{asset("img/categories-livestock.svg")}}" alt="" class="w-100" />
-                        </div>
-                        <p class="categories-text">Ternak</p>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="300">
-                    <a href="#" class="component-categories d-block">
-                        <div class="categories-image">
-                            <img src="{{asset("img/categories-souvenir.svg")}}" alt="" class="w-100" />
-                        </div>
-                        <p class="categories-text">Souvenir</p>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="400">
-                    <a href="#" class="component-categories d-block">
-                        <div class="categories-image">
-                            <img src="{{asset("img/categories-food.svg")}}" alt="" class="w-100" />
-                        </div>
-                        <p class="categories-text">Makanan</p>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="500">
-                    <a href="#" class="component-categories d-block">
-                        <div class="categories-image">
-                            <img src="{{asset("img/categories_goods.svg")}}" alt="" class="w-100" />
-                        </div>
-                        <p class="categories-text">Barang</p>
-                    </a>
-                </div>
-                <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="600">
-                    <a href="#" class="component-categories d-block">
-                        <div class="categories-image">
-                            <img src="{{asset("img/categories-service.svg")}}" alt="" class="w-100" />
-                        </div>
-                        <p class="categories-text">Jasa</p>
-                    </a>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -96,272 +72,242 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-                    <a href="/detail_produk" class="component-products d-block">
+                @php
+                $i = 100;
+                $j = 100;
+                @endphp
+                @if (count($products) > 7)
+                @for ($k = 0; $k < 8; $k++) <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up"
+                    data-aos-delay="{{$i+=200}}">
+                    @php
+                    $image = explode('|', $products[$k]->images);
+                    @endphp
+                    <a href="/detail_produk/{{$products[$k]->id}}" class="component-products d-block">
                         <div class="products-thumbnail">
                             <div class="products-image" style="
-                    background-image: url('{{asset("img/products-mentimun.jpg")}}');"></div>
+                    background-image: url('{{asset("storage/product_images/".$image[0])}}');"></div>
                         </div>
-                        <div class="products-text">Mentimun</div>
-                        <div class="products-price">Rp 13.000/kg</div>
+                        <div class="products-text">{{$products[$k]->product_name}}</div>
+                        <div class="products-price">Rp {{$products[$k]->price}}</div>
                     </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-                    <a href="/detail_produk" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image" style="
-                    background-image: url('{{asset("img/products-telur-ayam.jpg")}}');"></div>
-                        </div>
-                        <div class="products-text">Telur Ayam</div>
-                        <div class="products-price">Rp 30.000/kg</div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-                    <a href="/detail_produk" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image"
-                                style="background-image: url('{{asset("img/products-mangga.jpg")}}')">
-                            </div>
-                        </div>
-                        <div class="products-text">Mangga</div>
-                        <div class="products-price">Rp 18.000/kg</div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-                    <a href="/detail_produk" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image" style="
-                    background-image: url('{{asset("img/products-rambutan.jpg")}}');"></div>
-                        </div>
-                        <div class="products-text">Rambutan</div>
-                        <div class="products-price">Rp 30.000/kg</div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="500">
-                    <a href="/detail_produk" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image" style="
-                    background-image: url('{{asset("img/products-kentang.jpg")}}');"></div>
-                        </div>
-                        <div class="products-text">Kentang</div>
-                        <div class="products-price">Rp 17.000/kg</div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="600">
-                    <a href="/detail_produk" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image"
-                                style="background-image: url('{{asset("img/products-ikan.jpg")}}')">
-                            </div>
-                        </div>
-                        <div class="products-text">Ikan</div>
-                        <div class="products-price">Rp 35.000/kg</div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="700">
-                    <a href="/detail_produk" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image" style="
-                    background-image: url('{{asset("img/products-semangka.jpg")}}');"></div>
-                        </div>
-                        <div class="products-text">Semangka</div>
-                        <div class="products-price">Rp 21.000/buah</div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="800">
-                    <a href="/detail_produk" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image" style="
-                    background-image: url('{{asset("img/products-cabai-merah.jpg")}}');"></div>
-                        </div>
-                        <div class="products-text">Cabai Merah</div>
-                        <div class="products-price">Rp 40.000/kg</div>
-                    </a>
-                </div>
+            </div>
+            @endfor
+            @else
+            @foreach ($products as $product)
+            <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="{{$j+=200}}">
+                @php
+                $image = explode('|', $product->images);
+                @endphp
+                <a href="/detail_produk/{{$product->id}}" class="component-products d-block">
+                    <div class="products-thumbnail">
+                        <div class="products-image" style="
+                    background-image: url('{{asset("storage/product_images/".$image[0])}}');"></div>
+                    </div>
+                    <div class="products-text">{{$product->product_name}}</div>
+                    <div class="products-price">Rp {{$product->price}}</div>
+                </a>
+            </div>
+            @endforeach
+            @endif
+        </div>
+</div>
+</section>
+<section class="store-new-products">
+    <div class="container">
+        <div class="row">
+            <div class="col-12" data-aos="fade-up">
+                <h5>Mitra</h5>
             </div>
         </div>
-    </section>
-    <section class="store-new-products">
-        <div class="container">
-            <div class="row">
-                <div class="col-12" data-aos="fade-up">
-                    <h5>Mitra</h5>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-                    <a href="/details-mitra.html" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image" style="
-                      background-image: url('{{asset('img/Toko Mentari.png')}}');
+        <div class="row">
+            @php
+            $i = 100;
+            $j = 100;
+            @endphp
+            @if (count($mitras) > 3)
+            @for ($k = 0; $k < 4; $k++) <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up"
+                data-aos-delay="{{$i+=200}}">
+                <a href="#" class="component-products d-block">
+                    <div class="products-thumbnail">
+                        <div class="products-image" style="
+                        background-image: url('{{asset("storage/mitra_images/".$mitras[$k]->images)}}');
                     "></div>
-                        </div>
-                        <div class="products-text">Toko Mentari</div>
-                        <div class="products-price">Material Bangunan</div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-                    <a href="/details-mitra.html" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image" style="
-                      background-image: url('/images/mitra-toko-buah-abc.jpg');
-                    "></div>
-                        </div>
-                        <div class="products-text">Toko Buah ABC</div>
-                        <div class="products-price">Buah-buahan</div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-                    <a href="/details-mitra.html" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image" style="
-                      background-image: url('/images/mitra-percetakan-arjuna.jpg');
-                    "></div>
-                        </div>
-                        <div class="products-text">Percetakan Arjuna</div>
-                        <div class="products-price">Percetakan</div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-                    <a href="/details-mitra.html" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image" style="
-                      background-image: url('/images/mitra-warung-barokah.jpg');
-                    "></div>
-                        </div>
-                        <div class="products-text">Warung Barokah</div>
-                        <div class="products-price">Sembako</div>
-                    </a>
-                </div>
-            </div>
+                    </div>
+                    <div class="products-text">{{$mitras[$k]->mitra_name}}</div>
+                    <div class="products-price">{{$mitras[$k]->t_o_business}}</div>
+                </a>
         </div>
-    </section>
-    <section class="testimoni-carousel">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12" data-aos="zoom-in">
-                    <div id="testimoniCarousel" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li class="active" data-target="#testimoniCarousel" data-slide-to="0"></li>
-                            <li data-target="#testimoniCarousel" data-slide-to="1"></li>
-                            <li data-target="#testimoniCarousel" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="{{asset('img/testimoni 1.jpg')}}" alt="Carousel Image"
-                                    class="d-block w-100" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{asset('img/testimoni 1.jpg')}}" alt="Carousel Image"
-                                    class="d-block w-100" />
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{asset('img/testimoni 1.jpg')}}" alt="Carousel Image"
-                                    class="d-block w-100" />
-                            </div>
+        @endfor
+        @else
+        @foreach ($mitras as $mitra)
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="{{$j+=200}}">
+            <a href="#" class="component-products d-block">
+                <div class="products-thumbnail">
+                    <div class="products-image" style="
+                        background-image: url('{{asset("storage/mitra_images/".$mitra->images)}}');
+                    "></div>
+                </div>
+                <div class="products-text">{{$mitra->mitra_name}}</div>
+                <div class="products-price">{{$mitra->t_o_business}}</div>
+            </a>
+        </div>
+        @endforeach
+        @endif
+    </div>
+    </div>
+</section>
+<section class="testimoni-carousel">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12" data-aos="zoom-in" data-aos-delay="100">
+                <div id="testimoniCarousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li class="active" data-target="#testimoniCarousel" data-slide-to="0"></li>
+                        <li data-target="#testimoniCarousel" data-slide-to="1"></li>
+                        <li data-target="#testimoniCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        @php
+                        $testimoni = explode('|', $landings->testimoni);
+                        @endphp
+                        <div class="carousel-item active">
+                            <img src="{{asset("storage/landingPage_images/".$testimoni[0])}}" alt="Carousel Image"
+                                class="d-block w-100" />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{asset("storage/landingPage_images/".$testimoni[1])}}" alt="Carousel Image"
+                                class="d-block w-100" />
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{asset("storage/landingPage_images/".$testimoni[2])}}" alt="Carousel Image"
+                                class="d-block w-100" />
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <section class="store-new-products">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 mt-4" data-aos="fade-up">
-                    <h5>Artikel</h5>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
-                    <a href="/details-mitra.html" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image" style="background-image: url('{{asset('img/Artikel-1.png')}}')">
-                            </div>
-                        </div>
-                        <div class="products-text">
-                            Update Harga Barang Kebutuhan Pokok
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-                    <a href="/details-mitra.html" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image" style="background-image: url('/images/artikel-2.jpg')"></div>
-                        </div>
-                        <div class="products-text">
-                            Pemanfaatan Lahan untuk Hidroponik
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-                    <a href="/details-mitra.html" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image" style="background-image: url('/images/artikel-3.jpg')"></div>
-                        </div>
-                        <div class="products-text">
-                            Pembekalan Budidaya Bawang untuk Petani
-                        </div>
-                    </a>
-                </div>
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-                    <a href="/details-mitra.html" class="component-products d-block">
-                        <div class="products-thumbnail">
-                            <div class="products-image" style="background-image: url('/images/artikel-4.jpg')"></div>
-                        </div>
-                        <div class="products-text">
-                            Desa Tawangsari Gelar Rapat Rutin Bersama
-                        </div>
-                    </a>
-                </div>
+    </div>
+</section>
+<section class="store-new-products">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-4" data-aos="fade-up" data-aos-delay="100">
+                <h5>Artikel</h5>
             </div>
         </div>
-    </section>
-
-    <section class="store-new-products">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 mt-4" data-aos="fade-up">
-                    <h5>Hubungi Kami</h5>
+        <div class="row">
+            @php
+            $i = 200;
+            $j = 200;
+            @endphp
+            @if (count($articles) > 3)
+            @for ($k = 0; $k < 4; $k++) <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up"
+                data-aos-delay="{{$i+=200}}">
+                <a href="/detail-artikel/{{$articles[$k]->id}}" class="component-products d-block">
+                    <div class="products-thumbnail">
+                        <div class="products-image"
+                            style="background-image: url('{{asset("storage/article_images/".$articles[$k]->images)}}')">
+                        </div>
+                    </div>
+                    <div class="products-text">
+                        {{ substr($articles[$k]->title, 0, 30) }}...
+                    </div>
+                </a>
+        </div>
+        @endfor
+        @else
+        @foreach ($articles as $article)
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="{{$j+=200}}">
+            <a href="/detail-artikel/{{$article->id}}" class="component-products d-block">
+                <div class="products-thumbnail">
+                    <div class="products-image"
+                        style="background-image: url('{{asset("storage/article_images/".$article->images)}}')"></div>
                 </div>
+                <div class="products-text">
+                    {{ substr($article->title, 0, 30) }}...
+                </div>
+            </a>
+        </div>
+        @endforeach
+        @endif
+    </div>
+    </div>
+</section>
+
+<section class="store-new-products">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-4" data-aos="fade-up" data-aos-delay="100">
+                <h5>Hubungi Kami</h5>
             </div>
-            <div class="row" data-aos="fade-up">
+        </div>
+        <form action="{{ route('admin-message.store') }}" method="POST" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="row" data-aos="fade-up" data-aos-delay="200">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="fullname">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="fullname" aria-describedby="emailHelp"
-                            name="fullname" />
+                        <label for="fullName">Nama Lengkap</label>
+                        <input type="text" class="form-control @error('fullName')
+                        is-invalid
+                    @enderror" id="fullName" aria-describedby="emailHelp" name="fullName"
+                            value="{{ old('fullName') }}" />
+                        @error('fullName')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" />
+                        <input type="email" class="form-control @error('email')
+                        is-invalid
+                    @enderror" id="email" aria-describedby="emailHelp" name="email" value="{{ old('email') }}" />
+                        @error('email')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="subject">Subjek Pesan</label>
-                        <input type="text" class="form-control" id="subject" aria-describedby="emailHelp"
-                            name="subject" />
+                        <input type="text" class="form-control @error('subject')
+                        is-invalid
+                    @enderror" id="subject" aria-describedby="emailHelp" name="subject" value="{{ old('subject') }}" />
+                        @error('subject')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="subject">Isi Pesan</label>
-                        <textarea type="text" class="form-control" id="messagevalue" rows="5"
-                            aria-describedby="emailHelp" name="messagevalue"></textarea>
+                        <label for="content">Isi Pesan</label>
+                        <textarea type="text" class="form-control @error('content')
+                        is-invalid
+                    @enderror" id="content" rows="5" aria-describedby="emailHelp"
+                            name="content">{{ old('content') }}</textarea>
+                        @error('content')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                 </div>
             </div>
-            <div class="row" data-aos="fade-up">
+            <div class="row" data-aos="fade-up" data-aos-delay="300">
                 <div class="col-md-12 text-right">
                     <button type="submit" class="btn btn-success btn-block px-5 btn-send">
                         Kirim Sekarang
                     </button>
                 </div>
             </div>
-        </div>
-    </section>
+        </form>
+    </div>
+</section>
 </div>
 @endsection

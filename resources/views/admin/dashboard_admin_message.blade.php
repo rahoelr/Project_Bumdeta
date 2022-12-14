@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('mitra')
+@section('content')
 <!-- Page Content -->
 <div id="page-content-wrapper">
     <nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top" data-aos="fade-down">
@@ -44,62 +44,39 @@
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container-fluid">
             <div class="dashboard-heading">
-                <h2 class="dashboard-title">Dashboard</h2>
-                <p class="dashboard-subtitle">Look what you have made today!</p>
+                <h2 class="dashboard-title">Pesan</h2>
+                <p class="dashboard-subtitle">Kelola pesan yang masuk</p>
+                @if (\Session::has('success'))
+                <div class="alert alert-success">
+                    {!! \Session::get('success') !!}
+                </div>
+                @endif
             </div>
             <div class="dashboard-content">
                 <div class="row mt-3">
                     <div class="col-12 mt-2">
-                        <h5 class="mb-3">Recently Added</h5>
-                        @if (count($products) >= 3)
-                        @php
-                        $j = 0;
-                        @endphp
-                        @while ($j <= 2) <a class="card card-list d-block"
-                            href="/db_admin-product-detail/{{$product->id}}">
+                        <h5 class="mb-3">Daftar Pesan</h5>
+                        @if(count($messages)>0)
+                        @foreach ($messages as $message)
+                        <a class="card card-list d-block" href="/db_admin-message-detail/{{$message->id}}">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-1">
-                                        @php
-                                        $image = explode('|', $products[$j]->images);
-                                        @endphp
-                                        <img src="{{asset("storage/product_images/".$image[0])}}" alt="" />
+                                    <div class="col-md-2">{{$message->fullName}}</div>
+                                    <div class="col-md-3">{{$message->email}}</div>
+                                    <div class="col-md-2">{{$message->subject}}</div>
+                                    <div class="col-md-4">
+                                        {{ substr($message->content, 0, 20) }}
                                     </div>
-                                    <div class="col-md-4">{{$products[$j]->product_name}}</div>
-                                    <div class="col-md-3">{{$products[$j]->price}}</div>
-                                    <div class="col-md-3">{{$products[$j]->created_at}}</div>
                                     <div class="col-md-1 d-none d-md-block">
                                         <img src="{{asset('img/dashboard-arrow-right.svg')}}" alt="" />
                                     </div>
                                 </div>
                             </div>
-                            </a>
-                            @php
-                            $j++;
-                            @endphp
-                            @endwhile
-                            @else
-                            @foreach ($products as $product)
-                            <a class="card card-list d-block" href="/db_admin-product-detail/{{$product->id}}">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-1">
-                                            @php
-                                            $image = explode('|', $product->images);
-                                            @endphp
-                                            <img src="{{asset("storage/product_images/".$image[0])}}" alt="" />
-                                        </div>
-                                        <div class="col-md-4">{{$product->product_name}}</div>
-                                        <div class="col-md-3">{{$product->price}}</div>
-                                        <div class="col-md-3">{{$product->created_at}}</div>
-                                        <div class="col-md-1 d-none d-md-block">
-                                            <img src="{{asset('img/dashboard-arrow-right.svg')}}" alt="" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            @endforeach
-                            @endif
+                        </a>
+                        @endforeach
+                        @else
+                        <h3 class="text-center">No messages yet!!!</h3>
+                        @endif
                     </div>
                 </div>
             </div>

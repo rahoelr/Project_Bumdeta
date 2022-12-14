@@ -33,27 +33,37 @@
         </div>
         <hr>
         <h3 class="third-title" data-aos="fade-up">Latest Article</h3>
-        <div class="grid-horizontal">
+        <div class="row">
             @php
-            $i = 100;
-            $j = 3;
+            $i = 200;
+            $j = 200;
             @endphp
             @if (count($articles) > 3)
-            @for ($k = 0; $k < $j; $k++) <div class="team" data-aos="fade-up" data-aos-delay="{{$i+=200}}">
-                <a href="/detail-artikel/{{$articles[$k]->id}}">
-                    <img src="{{asset("storage/article_images/".$articles[$k]->images)}}">
-                    <h4 class="fourth-title">{{$articles[$k]->title}}</h4>
-                    <p>{{substr($articles[$k]->description, 0, 200)}}</p>
+            @for ($k = 0; $k < 4; $k++) <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up"
+                data-aos-delay="{{$i+=200}}">
+                <a href="/detail-artikel/{{$articles[$k]->id}}" class="component-products d-block">
+                    <div class="products-thumbnail">
+                        <div class="products-image"
+                            style="background-image: url('{{asset("storage/article_images/".$articles[$k]->images)}}')">
+                        </div>
+                    </div>
+                    <div class="products-text">
+                        {{ substr($articles[$k]->title, 0, 30) }}...
+                    </div>
                 </a>
         </div>
         @endfor
         @else
-        @foreach ($articles as $item)
-        <div class="team" data-aos="fade-up" data-aos-delay="{{$i+=200}}">
-            <a href="/detail-artikel/{{$item->id}}">
-                <img src="{{asset("storage/article_images/".$item->images)}}">
-                <h4 class="fourth-title">{{$item->title}}</h4>
-                <p>{{substr($item->description, 0, 100)}}</p>
+        @foreach ($articles as $article)
+        <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="{{$j+=200}}">
+            <a href="/detail-artikel/{{$article->id}}" class="component-products d-block">
+                <div class="products-thumbnail">
+                    <div class="products-image"
+                        style="background-image: url('{{asset("storage/article_images/".$article->images)}}')"></div>
+                </div>
+                <div class="products-text">
+                    {{ substr($article->title, 0, 30) }}...
+                </div>
             </a>
         </div>
         @endforeach

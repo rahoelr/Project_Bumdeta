@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.admin_category', [
+        return view('admin.dashboard_admin_category', [
             "title" => "| Category",
             "categories" => Category::orderBy('category', 'asc')->paginate(10)
         ]);
@@ -29,7 +29,7 @@ class CategoryController extends Controller
     public function create()
     {
         $data = array(
-            'title' => "| Create Category"
+            'title' => "| Category"
         );
         return view('admin.add_category')->with($data);
     }
@@ -42,6 +42,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'images' => 'required',
+                'category' => 'required|unique:categories,category'
+            ]
+        );
         if ($files = $request->file('images')) {
             $filenameWithExt = $files->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -54,7 +60,7 @@ class CategoryController extends Controller
         $category->images = $image;
         $category->category = $request->input('category');
         $category->save();
-        return redirect('admin-categories')->with('success', 'Berhasil Menambah Category Baru!!');
+        return redirect('db_admin-category')->with('success', 'Berhasil Menambah Category Baru!!');
     }
 
     /**
@@ -68,6 +74,15 @@ class CategoryController extends Controller
         //
     }
 
+    public function adminShow($id)
+    {
+        $data = array(
+            'title' => "| Category",
+        );
+        $categories = Category::find($id);
+        return view('admin.admin_category', compact('categories'))->with($data);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -77,7 +92,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         return view('admin.edit_category', [
-            'title' => "Edit Category",
+            'title' => "| Category",
             'categories' => Category::find($id)
         ]);
     }
@@ -91,6 +106,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                'images' => 'required',
+                'category' => 'required'
+            ]
+        );
         $category = Category::find($id);
         $category->category = $request->input('category');
         if ($files = $request->file('images')) {
@@ -106,7 +127,7 @@ class CategoryController extends Controller
         }
         $category->images = $image;
         $category->update();
-        return redirect('admin-categories')->with('success', 'Berhasil diupdate!!');
+        return redirect('db_admin-category')->with('success', 'Berhasil diupdate!!');
     }
 
     /**
@@ -122,6 +143,6 @@ class CategoryController extends Controller
             unlink('storage/category_images/' . $category->images);
         }
         $category->delete();
-        return redirect('admin-categories')->with('success', 'Berhasil dihapus!!');
+        return redirect('db_admin-category')->with('success', 'Berhasil dihapus!!');
     }
 }

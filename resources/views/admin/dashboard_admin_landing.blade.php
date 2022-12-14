@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('mitra')
+@section('content')
 <!-- Page Content -->
 <div id="page-content-wrapper">
     <nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top" data-aos="fade-down">
@@ -44,62 +44,61 @@
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container-fluid">
             <div class="dashboard-heading">
-                <h2 class="dashboard-title">Dashboard</h2>
-                <p class="dashboard-subtitle">Look what you have made today!</p>
+                <h2 class="dashboard-title">Landing Page</h2>
+                <p class="dashboard-subtitle">
+                    Kelola konten pada halaman landing page
+                </p>
+                @if (\Session::has('success'))
+                <div class="alert alert-success">
+                    {!! \Session::get('success') !!}
+                </div>
+                @endif
             </div>
             <div class="dashboard-content">
                 <div class="row mt-3">
                     <div class="col-12 mt-2">
-                        <h5 class="mb-3">Recently Added</h5>
-                        @if (count($products) >= 3)
-                        @php
-                        $j = 0;
-                        @endphp
-                        @while ($j <= 2) <a class="card card-list d-block"
-                            href="/db_admin-product-detail/{{$product->id}}">
+                        <h5 class="mb-3">Carousel</h5>
+                        <a class="card card-list d-block" href="/db_admin-landing-detail/{{$landings->id}}">
+                            @php
+                            $image = explode('|', $landings->carousel);
+                            $i = 1;
+                            @endphp
+                            @foreach ($image as $item)
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-1">
-                                        @php
-                                        $image = explode('|', $products[$j]->images);
-                                        @endphp
-                                        <img src="{{asset("storage/product_images/".$image[0])}}" alt="" />
+                                        <img src="{{asset("storage/landingPage_images/".$item)}}" alt="" />
                                     </div>
-                                    <div class="col-md-4">{{$products[$j]->product_name}}</div>
-                                    <div class="col-md-3">{{$products[$j]->price}}</div>
-                                    <div class="col-md-3">{{$products[$j]->created_at}}</div>
+                                    <div class="col-md-10">Carousel {{$i++}}</div>
                                     <div class="col-md-1 d-none d-md-block">
                                         <img src="{{asset('img/dashboard-arrow-right.svg')}}" alt="" />
                                     </div>
                                 </div>
                             </div>
-                            </a>
+                            @endforeach
+                        </a>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <h5 class="mb-3">Testimoni</h5>
+                        <a class="card card-list d-block" href="/db_admin-landing-detail/{{$landings->id}}">
                             @php
-                            $j++;
+                            $image = explode('|', $landings->testimoni);
+                            $i = 1;
                             @endphp
-                            @endwhile
-                            @else
-                            @foreach ($products as $product)
-                            <a class="card card-list d-block" href="/db_admin-product-detail/{{$product->id}}">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-1">
-                                            @php
-                                            $image = explode('|', $product->images);
-                                            @endphp
-                                            <img src="{{asset("storage/product_images/".$image[0])}}" alt="" />
-                                        </div>
-                                        <div class="col-md-4">{{$product->product_name}}</div>
-                                        <div class="col-md-3">{{$product->price}}</div>
-                                        <div class="col-md-3">{{$product->created_at}}</div>
-                                        <div class="col-md-1 d-none d-md-block">
-                                            <img src="{{asset('img/dashboard-arrow-right.svg')}}" alt="" />
-                                        </div>
+                            @foreach ($image as $item)
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <img src="{{asset("storage/landingPage_images/".$item)}}" alt="" />
+                                    </div>
+                                    <div class="col-md-10">Testimoni {{$i++}}</div>
+                                    <div class="col-md-1 d-none d-md-block">
+                                        <img src="{{asset('img/dashboard-arrow-right.svg')}}" alt="" />
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                             @endforeach
-                            @endif
+                        </a>
                     </div>
                 </div>
             </div>

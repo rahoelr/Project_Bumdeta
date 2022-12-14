@@ -15,7 +15,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return view('admin.admin_artikel', [
+        return view('admin.dashboard_admin_article', [
             "title" => "| Article",
             "articles" => Article::orderBy('created_at', 'desc')->paginate(10)
         ]);
@@ -29,7 +29,7 @@ class ArticleController extends Controller
     public function create()
     {
         $data = array(
-            'title' => "| Create Article"
+            'title' => "| Article"
         );
         return view('admin.add_artikel')->with($data);
     }
@@ -42,6 +42,14 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(
+            [
+                'images' => 'required',
+                'title' => 'required|unique:articles,title',
+                'author' => 'required',
+                'description' => 'required'
+            ]
+        );
         if ($files = $request->file('images')) {
             $filenameWithExt = $files->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -56,7 +64,7 @@ class ArticleController extends Controller
         $article->author = $request->input('author');
         $article->description = nl2br($request->input('description'));
         $article->save();
-        return redirect('admin-articles')->with('success', 'Berhasil Menambah Artikel Baru!!');
+        return redirect('db_admin-article')->with('success', 'Berhasil Menambah Artikel Baru!!');
     }
 
     /**
@@ -69,8 +77,17 @@ class ArticleController extends Controller
     {
         return view('artikel', [
             'title' => "| Article",
-            "articles" => Article::orderBy('created_at', 'desc')->paginate(10)
+            "articles" => Article::orderBy('created_at', 'desc')->paginate(5)
         ]);
+    }
+
+    public function adminShow($id)
+    {
+        $data = array(
+            'title' => "| Article",
+        );
+        $articles = Article::find($id);
+        return view('admin.admin_artikel', compact('articles'))->with($data);
     }
 
     public function detail_article($id)
@@ -81,12 +98,6 @@ class ArticleController extends Controller
         $article = Article::find($id);
         $articles = Article::orderBy('created_at', 'desc')->get();
         return view('detail_artikel', compact('article', 'articles'))->with($data);
-        // $articles = Article::orderBy('created_at', 'desc')->get();
-        // if (count($articles) > 3) {
-        //     return "lebih 3";
-        // } else {
-        //     return "kurang 3";
-        // }
     }
 
     /**
@@ -98,7 +109,7 @@ class ArticleController extends Controller
     public function edit($id)
     {
         return view('admin.edit_artikel', [
-            'title' => "Edit Article",
+            'title' => "| Article",
             'articles' => Article::find($id)
         ]);
     }
@@ -112,6 +123,14 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                'images' => 'required',
+                'title' => 'required',
+                'author' => 'required',
+                'description' => 'required'
+            ]
+        );
         $article = Article::find($id);
         $article->title = $request->input('title');
         $article->author = $request->input('author');
@@ -129,7 +148,7 @@ class ArticleController extends Controller
         }
         $article->images = $image;
         $article->update();
-        return redirect('admin-articles')->with('success', 'Berhasil diupdate!!');
+        return redirect('db_admin-article')->with('success', 'Berhasil diupdate!!');
     }
 
     /**
@@ -145,6 +164,11 @@ class ArticleController extends Controller
             unlink('storage/article_images/' . $article->images);
         }
         $article->delete();
-        return redirect('admin-articles')->with('success', 'Berhasil dihapus!!');
+        return redirect('db_admin-article')->with('success', 'Berhasil dihapus!!');
+    }
+
+    public function __construct()
+    {
+        $this->middleware('auth', ["except" => ["detail_article", "show"]]);
     }
 }

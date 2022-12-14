@@ -225,27 +225,6 @@ p {
     margin-right: 50px;
 }
 
-.pagination a {
-    color: #396051;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
-    transition: background-color .3s;
-    border-radius: 5px;
-    border: 1px solid #396051;
-    margin: 0 4px;
-}
-
-.pagination a.active {
-    background-color: #396051;
-    color: white;
-    border: 1px solid #396051;
-}
-
-.pagination a:hover:not(.active) {
-    background-color: #BDDD99;
-}
-
 .container hr {
     border-top: 4px solid #000000;
     border-radius: 5px;
@@ -390,7 +369,7 @@ figure {
 
 .container .content textarea {
     width: 92%;
-    height: 50px;
+    height: auto;
     margin: 7px 20px 15px 20px !important;
     padding: 10px;
     border-radius: 10px;
@@ -481,4 +460,59 @@ th {
 
 .btn-success {
     background-color: #396051 !important;
+}
+
+.btn-info {
+    background-color: #FF8372 !important;
+    border-color: #FF8372 !important;
+}
+
+.label-edit {
+    display: block;
+    position: relative;
+    background-color: #FF8372;
+    text-align: center;
+    width: 80%;
+    padding: 18px 0;
+    margin: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 22px;
+}
+
+
+.pagination a:hover:not(.active) {
+    background-color: #BDDD99;
+}
+
+.pagination span {
+    border-color: #396051 !important;
+    color: #396051 !important;
+    border-radius: 5px !important;
+    margin: 0 2px !important;
+    padding: 8px 16px !important;
+    transition: background-color .3s !important;
+}
+
+.pagination a {
+    border-color: #396051 !important;
+    color: #396051 !important;
+    border-radius: 5px !important;
+    margin: 0 2px !important;
+    padding: 8px 16px !important;
+    transition: background-color .3s !important;
+}
+
+.page-item.active .page-link {
+    background-color: #396051 !important;
+    border-color: #396051 !important;
+    color: #fff !important;
+}
+
+.grid-horizontal-mitra {
+    display: grid;
+    grid-template-columns: 550px 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
 }

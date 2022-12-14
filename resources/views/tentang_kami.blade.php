@@ -16,22 +16,16 @@
                 @endforeach
             </div>
             <div data-aos="fade-up">
-                <h2 class="second-title">Nama dan Logo</h2>
+                <h2 class="second-title">Makna Logo</h2>
                 <img data-aos="zoom-in" class="contents-img" src="{{asset("storage/aboutUs_images/".$object->images)}}"
                     alt="">
-                @php
-                $paragraph = explode('<br />', $object->description);
-                @endphp
-                @foreach ($paragraph as $item)
-                <p class="item-list" style="text-align: justify; text-indent: 0.5in;">{{$item}}</p>
-                @endforeach
                 @php
                 $paragraph = explode('<br />', $object->logo_meaning);
                 @endphp
                 @foreach ($paragraph as $item)
                 <ul class="list-about_us">
                     <li>
-                        <p class="item-list">{{$item}}</p>
+                        <p class="item-list" data-aos="fade-up">{{$item}}</p>
                     </li>
                 </ul>
                 @endforeach

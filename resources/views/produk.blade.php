@@ -55,7 +55,7 @@
                 @endforeach
             </div>
             <div class="d-flex">
-                {{ $products->links('pagination::bootstrap-4') }}
+                {{ $products->links() }}
             </div>
         </div>
     </section>
