@@ -26,12 +26,12 @@
                 $image = explode('|', $products->images);
                 @endphp
                 <img class="img-fluid pb-1 w-100 products-details" id="MainImg"
-                    src="{{asset("storage/product_images/".$image[0])}}" alt="" data-aos="zoom-in">
+                    src="{{asset("storage/product_images/".$image[0])}}" alt="" data-aos="zoom-in" data-aos-delay="200">
                 <div class="small-img-group">
                     <div class="small-img-col thumb">
                         @foreach ($image as $item)
                         <img src="{{asset("storage/product_images/".$item)}}" class="small-img w-25 pb-1" alt=""
-                            data-aos="zoom-in" data-aos-delay="100">
+                            data-aos="zoom-in" data-aos-delay="200">
                         @endforeach
                     </div>
                 </div>

@@ -31,10 +31,10 @@
                 <!-- Grid column -->
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <!-- Content -->
-                    <h6 class="text-uppercase fw-bold text-28">About</h6>
+                    <h6 class="text-uppercase fw-bold text-16">About</h6>
                     <hr class="mb-4 mt-0 d-inline-block mx-auto"
                         style="width: 60px; background-color: #bddd99; height: 2px" />
-                    <p class="text-22" style="color: white">
+                    <p class="text-16" style="color: white">
                         Bumdeta adalah sebuah website yang menampilkan berbagai seluk
                         beluk tentang Bumdes Tawangsari seperti profil, produk, berita,
                         dan lain-lain.
@@ -45,20 +45,20 @@
                 <!-- Grid column -->
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
-                    <h6 class="text-uppercase fw-bold text-28">Menu</h6>
+                    <h6 class="text-uppercase fw-bold text-16">Menu</h6>
                     <hr class="mb-4 mt-0 d-inline-block mx-auto"
                         style="width: 60px; background-color: #bddd99; height: 2px" />
                     <p>
-                        <a href="#!" class="text-white text-22">Produk</a>
+                        <a href="#!" class="text-white text-16">Produk</a>
                     </p>
                     <p>
-                        <a href="#!" class="text-white text-22">Mitra</a>
+                        <a href="#!" class="text-white text-16">Mitra</a>
                     </p>
                     <p>
-                        <a href="#!" class="text-white text-22">Artikel</a>
+                        <a href="#!" class="text-white text-16">Artikel</a>
                     </p>
                     <p>
-                        <a href="#!" class="text-white text-22">Tentang Kami</a>
+                        <a href="#!" class="text-white text-16">Tentang Kami</a>
                     </p>
                 </div>
                 <!-- Grid column -->
@@ -66,13 +66,13 @@
                 <!-- Grid column -->
                 <div class="col-md-3 col-lg-2 col-xl-3 mx-auto mb-4">
                     <!-- Links -->
-                    <h6 class="text-uppercase fw-bold text-28">Contact</h6>
+                    <h6 class="text-uppercase fw-bold text-16">Contact</h6>
                     <hr class="mb-4 mt-0 d-inline-block mx-auto"
                         style="width: 60px; background-color: #bddd99; height: 2px" />
-                    <p class="text-22" style="color: white">
+                    <p class="text-16" style="color: white">
                         <i class="fas fa-phone mr-3"></i> 08123456789
                     </p>
-                    <p class="text-22" style="color: white">
+                    <p class="text-16" style="color: white">
                         <i class="fas fa-envelope mr-3"></i> bumdeta@gmail.com
                     </p>
                 </div>
@@ -81,10 +81,10 @@
                 <!-- Grid column -->
                 <div class="col-md-4 col-lg-3 col-xl-4 mx-auto mb-md-0 mb-4">
                     <!-- Links -->
-                    <h6 class="text-uppercase fw-bold text-28">Location</h6>
+                    <h6 class="text-uppercase fw-bold text-16">Location</h6>
                     <hr class="mb-4 mt-0 d-inline-block mx-auto"
                         style="width: 60px; background-color: #bddd99; height: 2px" />
-                    <p class="text-22" style="color: white">
+                    <p class="text-16" style="color: white">
                         <i class="fas fa-home mr-3"></i> Desa Tawangsari, Sleman
                     </p>
                 </div>

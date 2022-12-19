@@ -88,11 +88,10 @@
         imageContainer.innerHTML = "";
         numOfFiles.textContent = '';
         if (fileInput.files.length != 3) {
-            swal({
-                title: "Warning!",
-                text: "Harus upload 3 gambar!",
-                icon: "warning",
-                button: "Close",
+            Swal.fire({
+                icon: 'error',
+                title: 'Warning!!!',
+                text: 'Wajib upload 3 gambar',
             }).then((value) => {
                 location.reload();;
             });
@@ -122,11 +121,10 @@
         imageContainer1.innerHTML = "";
         numOfFiles1.textContent = '';
         if (fileInput1.files.length != 3) {
-            swal({
-                title: "Warning!",
-                text: "Harus upload 3 gambar!",
-                icon: "warning",
-                button: "Close",
+            Swal.fire({
+                icon: 'error',
+                title: 'Warning!!!',
+                text: 'Wajib upload 3 gambar',
             }).then((value) => {
                 location.reload();;
             });

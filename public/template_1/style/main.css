@@ -11259,6 +11259,15 @@ footer p {
     z-index: 1;
 }
 
+.component-products .article-thumbnail {
+    width: 100%;
+    height: 350px !important;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
 .component-products .products-thumbnail:hover .products-image,
 .component-products .products-thumbnail:focus .products-image {
     transform: scale(1.1);
