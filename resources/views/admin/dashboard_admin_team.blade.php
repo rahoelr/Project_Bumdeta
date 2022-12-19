@@ -31,15 +31,22 @@
 
                 <ul class="navbar-nav d-block d-lg-none">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <p>Hi, <b>{{ Auth::user()->name }}</b></p>
+                        <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown">
+                            <img src="{{asset("storage/user_images/".Auth::user()->images)}}" alt=""
+                                class="rounded-circle mr-2 profile-picture" />
+                            Hi, {{ Auth::user()->name }}
                         </a>
+                        <div class="dropdown-menu">
+                            <a href="/home" class="dropdown-item">Back To Home</a>
+                            <a href="/users/{{Auth::user()->id}}/edit" class="dropdown-item">Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{route("logout")}}" class="dropdown-item">Logout</a>
+                        </div>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container-fluid">
             <div class="dashboard-heading">
