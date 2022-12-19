@@ -19,71 +19,52 @@
         </div>
     </section>
     <!-- Start section gallery -->
-    <section class="store-gallery my-2" id="gallery">
-        <div class="container">
-            <div class="row">
+    <section class="container product">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 col-12 mr-3">
                 @php
                 $image = explode('|', $products->images);
                 @endphp
-                <div class="col-lg-8 imgBox" data-aos="zoom-in">
-                    <img src="{{asset("storage/product_images/".$image[0])}}" class="w-100 main-image" alt="" />
-                </div>
-                <div class="col-lg-2 thumb">
-                    @foreach ($image as $item)
-                    <div class="row">
-                        <div class="col-3 col-lg-12 mt-2 mt-lg-0 my-2" data-aos="zoom-in" data-aos-delay="100">
-                            <a href="{{asset("storage/product_images/".$item)}}" target="imgBox">
-                                <img src="{{asset("storage/product_images/".$item)}}" alt="" />
-                            </a>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="store-details-container" data-aos="fade-up">
-        <section class="store-heading">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <h1>{{$products->product_name}}</h1>
-                        <div class="owner">By: {{$products->mitra}}</div>
-                        <div class="price">Rp {{$products->price}}</div>
-                    </div>
-                    <div class="col-lg-2" data-aos="zoom-in">
-                        <a href="https://wa.link/cxs25l" target="_blank"
-                            class="btn btn-success px4 text-white btn-block mb-3">Beli Sekarang</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="store-description">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-lg-8">
-                        @php
-                        $paragraph = explode('<br />', $products->description);
-                        @endphp
-                        @foreach ($paragraph as $item)
-                        <p>{{$item}}</p>
+                <img class="img-fluid pb-1 w-100 products-details" id="MainImg"
+                    src="{{asset("storage/product_images/".$image[0])}}" alt="" data-aos="zoom-in">
+                <div class="small-img-group">
+                    <div class="small-img-col thumb">
+                        @foreach ($image as $item)
+                        <img src="{{asset("storage/product_images/".$item)}}" class="small-img w-25 pb-1" alt=""
+                            data-aos="zoom-in" data-aos-delay="100">
                         @endforeach
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
-    <!-- End section gallery -->
+            <div class="col-lg-5 col-md-12 col-12" data-aos="fade-up">
+                <h3 class="pt-2">{{$products->product_name}}</h3>
+                <h5 class="product-price">Rp. {{$products->price}}</h5>
+                <div class="product_meta">
+                    <span class="posted_in"> <strong>Category: </strong>{{$products->category}}</span>
+                    <span class="posted_in"> <strong>Mitra: </strong>{{$products->mitra}}</span>
+                </div>
+                <h4 class="my-2" data-aos="fade-up">Product Details</h4>
+                @php
+                $paragraph = explode('<br />', $products->description);
+                @endphp
+                @foreach ($paragraph as $item)
+                <p class="product-desc mb-0" data-aos="fade-up" data-aos-delay="100">{{$item}}</p>
+                @endforeach
+                <div class="col-lg-6 p-0 mt-2" data-aos="zoom-in">
+                    <a href="https://wa.me/6285866963759?text={{$message}}" target="_blank"
+                        class="btn btn-success px4 text-white btn-block mb-3">Beli Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 <!-- Start script Vue js gallery -->
-<script src="{{("template_1/vendor/vue/vue.js")}}"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
     $(document).ready(function () {
-        $('.thumb a').mouseover(function (e) {
+        $('.thumb img').click(function (e) {
             e.preventDefault();
-            $('.imgBox img').attr("src", $(this).attr("href"));
+            $('#MainImg').attr("src", $(this).attr("src"));
         })
     })
 

@@ -69,6 +69,9 @@
                     <h3 class="text-center">No users yet!!!</h3>
                     @endif
                 </div>
+                <div class="d-flex justify-content-center">
+                    {{ $users->links() }}
+                </div>
             </div>
         </div>
     </div>

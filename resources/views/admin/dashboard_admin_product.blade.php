@@ -78,6 +78,9 @@
                     <h3 class="text-center">No products yet!!!</h3>
                     @endif
                 </div>
+                <div class="d-flex justify-content-center">
+                    {{ $products->links() }}
+                </div>
             </div>
         </div>
     </div>

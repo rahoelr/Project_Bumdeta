@@ -6,6 +6,8 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
+date_default_timezone_set("Asia/Jakarta");
+
 class MessageController extends Controller
 {
     /**
@@ -17,7 +19,7 @@ class MessageController extends Controller
     {
         return view('admin.dashboard_admin_message', [
             "title" => "| Message",
-            "messages" => Message::orderBy('created_at', 'asc')->paginate(10)
+            "messages" => Message::orderBy('created_at', 'desc')->paginate(10)
         ]);
     }
 

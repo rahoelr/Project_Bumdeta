@@ -66,9 +66,9 @@
                                 <img src="{{asset("storage/article_images/".$article->images)}}" alt=""
                                     class="w-100 mb-2" />
                                 <div class="product-title">
-                                    {{ $article->title }}
+                                    {{ substr($article->title, 0, 23) }}...
                                 </div>
-                                <div class="product-category">{{ $article->created_at }}</div>
+                                <div class="product-category">{{ $article->updated_at }}</div>
                             </div>
                         </a>
                     </div>
@@ -76,6 +76,9 @@
                     @else
                     <h3 class="text-center">No articles yet!!!</h3>
                     @endif
+                </div>
+                <div class="d-flex justify-content-center">
+                    {{ $articles->links() }}
                 </div>
             </div>
         </div>

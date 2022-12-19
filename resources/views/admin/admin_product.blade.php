@@ -44,7 +44,7 @@
             @if (Auth::user()->level == 'admin')
             <a href="/db_admin-product" class="btn btn-info btn-edit text-light">Back</a>
             @else
-            <a href="/db_mitra-product/{{Auth::user()->name}}" class="btn btn-info btn-edit text-light">Back</a>
+            <a href="/db_mitra-product/{{Auth::user()->id}}" class="btn btn-info btn-edit text-light">Back</a>
             @endif
             <h2>{{ $products->product_name }}</h2>
             <div class="row mt-4">
@@ -97,17 +97,33 @@
             </div>
             <div class="d-flex flex-row">
                 <a href="/admin-products/{{$products->id}}/edit"
-                    class="btn btn-primary mr-2 btn-edit text-light">Edit</a>
+                    class="btn btn-primary mr-2 mb-3 btn-edit text-light">Edit</a>
                 <form action="{{ route('admin-products.destroy', $products->id) }}" method="POST">
                     @method('DELETE')
                     {{ csrf_field() }}
                     <input type="hidden" name="id" value="{{ $products->id }}">
-                    <button type="submit" class="btn btn-danger btn-delete"
-                        onclick="return confirm('Produk akan dihapus')">Delete</button>
+                    <button type="button" class="btn btn-danger btn-delete" data-toggle="modal"
+                        data-target="#modalConfirmDelete">
+                        Delete
+                    </button>
+
+                    <div class="modal fade modal-delete" id="modalConfirmDelete" data-backdrop="false">
+                        <div class="modal-dialog modal-dialog-centered modal-notify modal-danger">
+                            <div class="modal-content text-center">
+                                <div class="modal-header d-flex justify-content-center">
+                                    <p class="heading">Are you sure to delete {{ $products->product_name }}?</p>
+                                </div>
+                                <div class="modal-body"><i class="fa-solid fa-trash fa-4x"></i></div>
+                                <div class="modal-footer flex-center">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                    <button type="submit" class="btn btn-outline-danger">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection

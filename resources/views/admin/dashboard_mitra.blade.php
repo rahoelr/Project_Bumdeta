@@ -56,7 +56,7 @@
                         $j = 0;
                         @endphp
                         @while ($j <= 2) <a class="card card-list d-block"
-                            href="/db_admin-product-detail/{{$product->id}}">
+                            href="/db_admin-product-detail/{{$products[$j]->id}}">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-1">

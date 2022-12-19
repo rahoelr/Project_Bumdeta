@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Intervention\Image\Facades\Image;
+
+date_default_timezone_set("Asia/Jakarta");
 
 class ArticleController extends Controller
 {
@@ -17,7 +20,7 @@ class ArticleController extends Controller
     {
         return view('admin.dashboard_admin_article', [
             "title" => "| Article",
-            "articles" => Article::orderBy('created_at', 'desc')->paginate(10)
+            "articles" => Article::orderBy('created_at', 'desc')->paginate(20)
         ]);
     }
 
@@ -56,6 +59,8 @@ class ArticleController extends Controller
             $extension = $files->getClientOriginalExtension();
             $filenameSimpan = $filename . '_' . time() . '.' . $extension;
             $files->storeAs('public/article_images', $filenameSimpan);
+            $thumbnailPath = public_path("storage/article_images/{$filenameSimpan}");
+            $img = Image::make($thumbnailPath)->resize(1200, 600)->save($thumbnailPath);
             $image = $filenameSimpan;
         }
         $article = new Article;
@@ -144,6 +149,8 @@ class ArticleController extends Controller
             $extension = $files->getClientOriginalExtension();
             $filenameSimpan = $filename . '_' . time() . '.' . $extension;
             $files->storeAs('public/article_images', $filenameSimpan);
+            $thumbnailPath = public_path("storage/article_images/{$filenameSimpan}");
+            $img = Image::make($thumbnailPath)->resize(1200, 600)->save($thumbnailPath);
             $image = $filenameSimpan;
         }
         $article->images = $image;

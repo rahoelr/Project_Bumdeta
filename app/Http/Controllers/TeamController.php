@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Intervention\Image\Facades\Image;
+
+date_default_timezone_set("Asia/Jakarta");
 
 class TeamController extends Controller
 {
@@ -17,7 +20,7 @@ class TeamController extends Controller
     {
         return view('admin.dashboard_admin_team', [
             "title" => "| Team",
-            "teams" => Team::orderBy('level', 'asc')->paginate(10)
+            "teams" => Team::orderBy('level', 'asc')->paginate(20)
         ]);
     }
 
@@ -55,6 +58,8 @@ class TeamController extends Controller
             $extension = $files->getClientOriginalExtension();
             $filenameSimpan = $filename . '_' . time() . '.' . $extension;
             $files->storeAs('public/team_images', $filenameSimpan);
+            $thumbnailPath = public_path("storage/team_images/{$filenameSimpan}");
+            $img = Image::make($thumbnailPath)->resize(353, 353)->save($thumbnailPath);
             $image = $filenameSimpan;
         }
         if ($request->input('position') == 'Ketua') {
@@ -165,6 +170,8 @@ class TeamController extends Controller
             $extension = $files->getClientOriginalExtension();
             $filenameSimpan = $filename . '_' . time() . '.' . $extension;
             $files->storeAs('public/team_images', $filenameSimpan);
+            $thumbnailPath = public_path("storage/team_images/{$filenameSimpan}");
+            $img = Image::make($thumbnailPath)->resize(353, 353)->save($thumbnailPath);
             $image = $filenameSimpan;
         }
         $team->images = $image;

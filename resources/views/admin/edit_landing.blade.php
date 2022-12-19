@@ -63,7 +63,7 @@
                             @enderror" id="input-file1" name="testimoni[]" accept="image/*" onchange="previewImage1()"
                                 multiple><i class="fa-solid fa-upload"></i> &nbsp; Choose 3 Testimoni Pictures</label>
                         <p id="num-of-files1">No File Chosen</p>
-                        <div id="images"></div>
+                        <div id="images1"></div>
                     </div>
                 </div>
                 <button type="submit" class="buttonProd">Simpan Data</button>
@@ -80,8 +80,14 @@
         imageContainer.innerHTML = "";
         numOfFiles.textContent = '';
         if (fileInput.files.length != 3) {
-            alert("Harus Upload 3 Gambar");
-            location.reload();
+            swal({
+                title: "Warning!",
+                text: "Harus upload 3 gambar!",
+                icon: "warning",
+                button: "Close",
+            }).then((value) => {
+                location.reload();;
+            });
         } else {
             for (i of fileInput.files) {
                 let reader = new FileReader();
@@ -101,15 +107,21 @@
     }
 
     let fileInput1 = document.getElementById("input-file1");
-    let imageContainer1 = document.getElementById("images")
+    let imageContainer1 = document.getElementById("images1")
     let numOfFiles1 = document.getElementById("num-of-files1");
 
     function previewImage1() {
         imageContainer1.innerHTML = "";
         numOfFiles1.textContent = '';
         if (fileInput1.files.length != 3) {
-            alert("Harus Upload 3 Gambar");
-            location.reload();
+            swal({
+                title: "Warning!",
+                text: "Harus upload 3 gambar!",
+                icon: "warning",
+                button: "Close",
+            }).then((value) => {
+                location.reload();;
+            });
         } else {
             for (i of fileInput1.files) {
                 let reader = new FileReader();

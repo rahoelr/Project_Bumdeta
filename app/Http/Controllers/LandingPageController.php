@@ -9,6 +9,9 @@ use App\Models\Category;
 use App\Models\LandingPage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
+
+date_default_timezone_set("Asia/Jakarta");
 
 class LandingPageController extends Controller
 {
@@ -57,6 +60,8 @@ class LandingPageController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filenameSimpan = $filename . '_' . time() . '.' . $extension;
                 $file->storeAs('public/landingPage_images', $filenameSimpan);
+                $thumbnailPath = public_path("storage/landingPage_images/{$filenameSimpan}");
+                $img = Image::make($thumbnailPath)->resize(1904, 720)->save($thumbnailPath);
                 $carousel[] = $filenameSimpan;
             }
         }
@@ -68,6 +73,8 @@ class LandingPageController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filenameSimpan = $filename . '_' . time() . '.' . $extension;
                 $file->storeAs('public/landingPage_images', $filenameSimpan);
+                $thumbnailPath = public_path("storage/landingPage_images/{$filenameSimpan}");
+                $img = Image::make($thumbnailPath)->resize(1904, 720)->save($thumbnailPath);
                 $testimoni[] = $filenameSimpan;
             }
         }
@@ -149,8 +156,8 @@ class LandingPageController extends Controller
         $carousel = array();
         if ($files = $request->file('carousel')) {
             if ($landing->carousel) {
-                $img = explode('|', $landing->carousel);
-                foreach ($img as $item) {
+                $imgs = explode('|', $landing->carousel);
+                foreach ($imgs as $item) {
                     unlink('storage/landingPage_images/' . $item);
                 }
             }
@@ -160,14 +167,16 @@ class LandingPageController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filenameSimpan = $filename . '_' . time() . '.' . $extension;
                 $file->storeAs('public/landingPage_images', $filenameSimpan);
+                $thumbnailPath = public_path("storage/landingPage_images/{$filenameSimpan}");
+                $img = Image::make($thumbnailPath)->resize(1904, 720)->save($thumbnailPath);
                 $carousel[] = $filenameSimpan;
             }
         }
         $testimoni = array();
         if ($files = $request->file('testimoni')) {
             if ($landing->testimoni) {
-                $img = explode('|', $landing->testimoni);
-                foreach ($img as $item) {
+                $imgs = explode('|', $landing->testimoni);
+                foreach ($imgs as $item) {
                     unlink('storage/landingPage_images/' . $item);
                 }
             }
@@ -177,6 +186,8 @@ class LandingPageController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filenameSimpan = $filename . '_' . time() . '.' . $extension;
                 $file->storeAs('public/landingPage_images', $filenameSimpan);
+                $thumbnailPath = public_path("storage/landingPage_images/{$filenameSimpan}");
+                $img = Image::make($thumbnailPath)->resize(1904, 720)->save($thumbnailPath);
                 $testimoni[] = $filenameSimpan;
             }
         }

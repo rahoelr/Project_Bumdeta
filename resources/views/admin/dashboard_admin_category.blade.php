@@ -3,38 +3,40 @@
 @section('content')
 <!-- Page Content -->
 <div id="page-content-wrapper">
-    <nav class="navbar navbar-store navbar-expand-lg navbar-light fixed-top" data-aos="fade-down">
-        <button class="btn btn-secondary d-md-none mr-auto mr-2" id="menu-toggle">
-            &laquo; Menu
-        </button>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top" data-aos="fade-down">
+        <div class="container-fluid">
+            <button class="btn btn-secondary d-md-none mr-auto mr-2" id="menu-toggle">
+                &laquo; Menu
+            </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Desktop Menu -->
+                <ul class="navbar-nav d-none d-lg-flex ml-auto">
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown">
+                            <img src="{{asset("storage/user_images/".Auth::user()->images)}}" alt=""
+                                class="rounded-circle mr-2 profile-picture" />
+                            Hi, {{ Auth::user()->name }}
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="/home" class="dropdown-item">Back To Home</a>
+                            <a href="/users/{{Auth::user()->id}}/edit" class="dropdown-item">Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{route("logout")}}" class="dropdown-item">Logout</a>
+                        </div>
+                    </li>
+                </ul>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto d-none d-lg-flex">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <img src="/images/icon-user.png" alt="" class="rounded-circle mr-2 profile-picture" />
-                        Hi, James
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/index.html">Back to Store</a>
-                        <a class="dropdown-item" href="/dashboard-account.html">Settings</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/">Logout</a>
-                    </div>
-                </li>
-            </ul>
-            <!-- Mobile Menu -->
-            <ul class="navbar-nav d-block d-lg-none mt-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="#"> Hi, James </a>
-                </li>
-            </ul>
+                <ul class="navbar-nav d-block d-lg-none">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <p>Hi, <b>{{ Auth::user()->name }}</b></p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -74,6 +76,9 @@
                     @else
                     <h3 class="text-center">No categories yet!!!</h3>
                     @endif
+                </div>
+                <div class="d-flex justify-content-center">
+                    {{ $categories->links() }}
                 </div>
             </div>
         </div>

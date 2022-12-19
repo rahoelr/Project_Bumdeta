@@ -19,7 +19,7 @@
         </section>
         <h2 class="second-title" data-aos="fade-up">{{$article->title}}</h2>
         <div class="meta-post post-author" data-aos="fade-up">
-            <span><i class="fa-solid fa-calendar-days"></i> {{$article->created_at}}</span>
+            <span><i class="fa-solid fa-calendar-days"></i> {{$article->updated_at}}</span>
             <span><i class="fa-solid fa-user"></i> Penulis: {{$article->author}}</span>
         </div>
         <img class="img-article" data-aos="zoom-in" src="{{asset("storage/article_images/".$article->images)}}" alt="">
@@ -31,7 +31,7 @@
             <p>{{$item}}</p>
             @endforeach
         </div>
-        <hr>
+        <hr class="hr-artikel">
         <h3 class="third-title" data-aos="fade-up">Latest Article</h3>
         <div class="row">
             @php

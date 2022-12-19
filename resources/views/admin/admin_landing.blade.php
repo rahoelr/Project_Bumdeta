@@ -80,7 +80,7 @@
             </div>
             <div class="d-flex flex-row">
                 <a href="/admin-landing/{{$landings->id}}/edit"
-                    class="btn btn-primary mr-2 btn-edit text-light">Edit</a>
+                    class="btn btn-primary mr-2 mb-3 btn-edit text-light">Edit</a>
             </div>
         </div>
     </div>

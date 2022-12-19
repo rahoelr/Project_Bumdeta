@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Mitra;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+
+date_default_timezone_set("Asia/Jakarta");
 
 class ProductController extends Controller
 {
@@ -18,30 +21,21 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.admin_product', [
-            "title" => "| Product",
-            "products" => Product::orderBy('product_name', 'asc')->paginate(10)
-        ]);
     }
 
     public function adminView()
     {
         return view('admin.dashboard_admin_product', [
             "title" => "| Product",
-            "products" => Product::orderBy('product_name', 'asc')->paginate(10)
+            "products" => Product::orderBy('product_name', 'asc')->paginate(20)
         ]);
     }
 
-    public function mitraView($owner)
+    public function mitraView($userId)
     {
-        $mitras = Mitra::where('owner', $owner)->first();
-        $mitra = "";
-        if ($mitras != null) {
-            $mitra = $mitras->mitra_name;
-        }
         return view('admin.dashboard_mitra_product', [
             "title" => "| Product",
-            "products" => Product::where('mitra', '=', $mitra)->orderBy('created_at', 'desc')->get()
+            "products" => Product::where('userId', '=', $userId)->orderBy('created_at', 'desc')->paginate(20)
         ]);
     }
 
@@ -53,16 +47,11 @@ class ProductController extends Controller
         ]);
     }
 
-    public function mitraViewlatest($owner)
+    public function mitraViewlatest($userId)
     {
-        $mitras = Mitra::where('owner', $owner)->first();
-        $mitra = "";
-        if ($mitras != null) {
-            $mitra = $mitras->mitra_name;
-        }
         return view('admin.dashboard_mitra', [
             "title" => "| Dashboard",
-            "products" => Product::where('mitra', '=', $mitra)->orderBy('created_at', 'desc')->get()
+            "products" => Product::where('userId', '=', $userId)->orderBy('created_at', 'desc')->get()
         ]);
     }
 
@@ -108,6 +97,8 @@ class ProductController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filenameSimpan = $filename . '_' . time() . '.' . $extension;
                 $file->storeAs('public/product_images', $filenameSimpan);
+                $thumbnailPath = public_path("storage/product_images/{$filenameSimpan}");
+                $img = Image::make($thumbnailPath)->resize(800, 400)->save($thumbnailPath);
                 $image[] = $filenameSimpan;
             }
         }
@@ -119,11 +110,12 @@ class ProductController extends Controller
         $product->description = nl2br($request->input('description'));
         $product->mitra = $request->input('mitra');
         $product->p_number = $request->input('p_number');
+        $product->userId = Auth::user()->id;
         $product->save();
         if (Auth::user()->level == 'admin') {
             return redirect('db_admin-product')->with('success', 'Berhasil Menambah Produk Baru!!');
         } else {
-            return redirect('db_mitra-product/' . Auth::user()->name)->with('success', 'Berhasil Menambah Produk Baru!!');
+            return redirect('db_mitra-product/' . Auth::user()->id)->with('success', 'Berhasil Menambah Produk Baru!!');
         }
     }
 
@@ -149,15 +141,17 @@ class ProductController extends Controller
         return view('produk', [
             "title" => "| Product",
             "categories" => Category::orderBy('category', 'asc')->get(),
-            "products" => Product::orderBy('product_name', 'asc')->paginate(10)
+            "products" => Product::orderBy('product_name', 'asc')->paginate(20)
         ]);
     }
 
     public function details_product($id)
     {
+        $product = Product::find($id);
         return view('detail_produk', [
             'title' => "| Detail Product",
-            "products" => Product::find($id)
+            "products" => Product::find($id),
+            "message" => "Hallo $product->mitra, saya tertarik dengan produk $product->product_name yang anda tawarkan. Apakah saya dapat berdiskusi lebih lanjut mengenai produk tersebut?"
         ]);
     }
 
@@ -207,8 +201,8 @@ class ProductController extends Controller
         $image = array();
         if ($files = $request->file('images')) {
             if ($product->images) {
-                $img = explode('|', $product->images);
-                foreach ($img as $item) {
+                $imgs = explode('|', $product->images);
+                foreach ($imgs as $item) {
                     unlink('storage/product_images/' . $item);
                 }
             }
@@ -218,15 +212,18 @@ class ProductController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filenameSimpan = $filename . '_' . time() . '.' . $extension;
                 $file->storeAs('public/product_images', $filenameSimpan);
+                $thumbnailPath = public_path("storage/product_images/{$filenameSimpan}");
+                $img = Image::make($thumbnailPath)->resize(800, 400)->save($thumbnailPath);
                 $image[] = $filenameSimpan;
             }
         }
         $product->images = implode('|', $image);
+        $product->userId = Auth::user()->id;
         $product->update();
         if (Auth::user()->level == 'admin') {
             return redirect('db_admin-product')->with('success', 'Berhasil Mengubah Data Produk!!');
         } else {
-            return redirect('db_mitra-product/' . Auth::user()->name)->with('success', 'Berhasil Mengubah Data Produk!!');
+            return redirect('db_mitra-product/' . Auth::user()->id)->with('success', 'Berhasil Mengubah Data Produk!!');
         }
     }
 
@@ -249,7 +246,7 @@ class ProductController extends Controller
         if (Auth::user()->level == 'admin') {
             return redirect('db_admin-product')->with('success', 'Berhasil Menghapus Produk!!');
         } else {
-            return redirect('db_mitra-product/' . Auth::user()->name)->with('success', 'Berhasil Menghapus Produk!!');
+            return redirect('db_mitra-product/' . Auth::user()->id)->with('success', 'Berhasil Menghapus Produk!!');
         }
     }
 

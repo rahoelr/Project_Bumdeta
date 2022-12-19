@@ -6,6 +6,9 @@ use App\Models\Mitra;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+
+date_default_timezone_set("Asia/Jakarta");
 
 class MitraController extends Controller
 {
@@ -16,25 +19,25 @@ class MitraController extends Controller
      */
     public function index()
     {
-        return view('admin.admin_mitra', [
-            "title" => "| Mitra",
-            "mitras" => Mitra::orderBy('mitra_name', 'asc')->paginate(10)
-        ]);
+        // return view('admin.admin_mitra', [
+        //     "title" => "| Mitra",
+        //     "mitras" => Mitra::orderBy('mitra_name', 'asc')->paginate(20)
+        // ]);
     }
 
     public function adminView()
     {
         return view('admin.dashboard_admin_mitra', [
             "title" => "| Mitra",
-            "mitras" => Mitra::orderBy('mitra_name', 'asc')->paginate(10)
+            "mitras" => Mitra::orderBy('mitra_name', 'asc')->paginate(20)
         ]);
     }
 
-    public function mitraView($owner)
+    public function mitraView($userId)
     {
         return view('admin.dashboard_mitra_toko', [
             "title" => "| Mitra",
-            'mitras' => Mitra::where('owner', $owner)->first()
+            'mitras' => Mitra::where('userId', $userId)->first()
         ]);
     }
 
@@ -74,6 +77,8 @@ class MitraController extends Controller
             $extension = $files->getClientOriginalExtension();
             $filenameSimpan = $filename . '_' . time() . '.' . $extension;
             $files->storeAs('public/mitra_images', $filenameSimpan);
+            $thumbnailPath = public_path("storage/mitra_images/{$filenameSimpan}");
+            $img = Image::make($thumbnailPath)->resize(464, 379)->save($thumbnailPath);
             $image = $filenameSimpan;
         }
         $mitra = new Mitra;
@@ -82,11 +87,12 @@ class MitraController extends Controller
         $mitra->owner = $request->input('owner');
         $mitra->t_o_business = $request->input('t_o_business');
         $mitra->address = $request->input('address');
+        $mitra->userId = Auth::user()->id;
         $mitra->save();
         if (Auth::user()->level == 'admin') {
             return redirect('db_admin-mitra')->with('success', 'Berhasil Menambah Mitra Baru!!');
         } else {
-            return redirect('db_mitra-toko/' . Auth::user()->name)->with('success', 'Berhasil Menambah Mitra Baru!!');
+            return redirect('db_mitra-toko/' . Auth::user()->id)->with('success', 'Berhasil Menambah Mitra Baru!!');
         }
     }
 
@@ -159,14 +165,17 @@ class MitraController extends Controller
             $extension = $files->getClientOriginalExtension();
             $filenameSimpan = $filename . '_' . time() . '.' . $extension;
             $files->storeAs('public/mitra_images', $filenameSimpan);
+            $thumbnailPath = public_path("storage/mitra_images/{$filenameSimpan}");
+            $img = Image::make($thumbnailPath)->resize(464, 379)->save($thumbnailPath);
             $image = $filenameSimpan;
         }
         $mitra->images = $image;
+        $mitra->userId = Auth::user()->id;
         $mitra->update();
         if (Auth::user()->level == 'admin') {
             return redirect('db_admin-mitra')->with('success', 'Berhasil Merubah Data Mitra!!');
         } else {
-            return redirect('db_mitra-toko/' . Auth::user()->name)->with('success', 'Berhasil Merubah Data Mitra!!');
+            return redirect('db_mitra-toko/' . Auth::user()->id)->with('success', 'Berhasil Merubah Data Mitra!!');
         }
     }
 
@@ -186,7 +195,7 @@ class MitraController extends Controller
         if (Auth::user()->level == 'admin') {
             return redirect('db_admin-mitra')->with('success', 'Berhasil Menghapus Data Mitra!!');
         } else {
-            return redirect('db_mitra-toko/' . Auth::user()->name)->with('success', 'Berhasil Menghapus Data Mitra!!');
+            return redirect('db_mitra-toko/' . Auth::user()->id)->with('success', 'Berhasil Menghapus Data Mitra!!');
         }
     }
 

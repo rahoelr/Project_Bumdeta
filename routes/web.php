@@ -59,9 +59,9 @@ Auth::routes([
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/db_mitra/{owner}', [ProductController::class, 'mitraViewlatest']);
-Route::get('/db_mitra-product/{owner}', [ProductController::class, 'mitraView']);
-Route::get('/db_mitra-toko/{owner}', [MitraController::class, 'mitraView']);
+Route::get('/db_mitra/{id}', [ProductController::class, 'mitraViewlatest']);
+Route::get('/db_mitra-product/{id}', [ProductController::class, 'mitraView']);
+Route::get('/db_mitra-toko/{id}', [MitraController::class, 'mitraView']);
 Route::get('/db_admin', [ProductController::class, 'adminViewlatest']);
 Route::get('/db_admin-landing/{id}', [LandingPageController::class, 'adminView']);
 Route::get('/db_admin-landing-detail/{id}', [LandingPageController::class, 'adminShow']);

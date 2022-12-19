@@ -75,6 +75,9 @@
                     <h3 class="text-center">No mitra yet!!!</h3>
                     @endif
                 </div>
+                <div class="d-flex justify-content-center">
+                    {{ $mitras->links() }}
+                </div>
             </div>
         </div>
     </div>

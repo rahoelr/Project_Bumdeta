@@ -73,8 +73,25 @@
                     @method('DELETE')
                     {{ csrf_field() }}
                     <input type="hidden" name="id" value="{{ $messages->id }}">
-                    <button type="submit" class="btn btn-danger btn-delete"
-                        onclick="return confirm('Pesan akan dihapus')">Delete</button>
+                    <button type="button" class="btn btn-danger btn-delete mb-3" data-toggle="modal"
+                        data-target="#modalConfirmDelete">
+                        Delete
+                    </button>
+
+                    <div class="modal fade modal-delete" id="modalConfirmDelete" data-backdrop="false">
+                        <div class="modal-dialog modal-dialog-centered modal-notify modal-danger">
+                            <div class="modal-content text-center">
+                                <div class="modal-header d-flex justify-content-center">
+                                    <p class="heading">Are you sure to delete this message?</p>
+                                </div>
+                                <div class="modal-body"><i class="fa-solid fa-trash fa-4x"></i></div>
+                                <div class="modal-footer flex-center">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                    <button type="submit" class="btn btn-outline-danger">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

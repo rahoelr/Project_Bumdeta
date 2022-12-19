@@ -44,7 +44,7 @@
             @if (Auth::user()->level == 'admin')
             <a href="/db_admin-mitra-detail/{{$mitras->id}}" class="btn btn-info btn-edit text-light">Back</a>
             @else
-            <a href="/db_mitra-toko/{{Auth::user()->name}}" class="btn btn-info btn-edit text-light">Back</a>
+            <a href="/db_mitra-toko/{{Auth::user()->id}}" class="btn btn-info btn-edit text-light">Back</a>
             @endif
             <form action="{{ route('admin-mitras.update', $mitras->id) }}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
@@ -73,11 +73,9 @@
                         </div>
                         <div class="Owner">
                             <label for="owner">Pemilik Toko</label>
-                            <input type="text" name="owner" id="owner" class="form-control mb-0 @error('owner')
+                            <input type="text" name="owner" id="owner" class="form-control @error('owner')
                         is-invalid
                     @enderror" value="{{ $mitras->owner }}">
-                            <small class="form-text text-muted ml-4 mb-1">*Nama pemilik toko harus sama dengan
-                                username.</small>
                             @error('owner')
                             <div class="invalid-feedback ml-4">
                                 {{ $message }}

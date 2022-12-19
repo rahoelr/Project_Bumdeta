@@ -35,6 +35,7 @@
 
     </script>
     <script src="{{asset("template_1/script/navbar-scroll.js")}}"></script>
+    <script src="https://kit.fontawesome.com/8b03b562bf.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

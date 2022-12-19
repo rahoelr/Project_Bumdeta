@@ -36,7 +36,7 @@
                         @if (Auth::user()->level == 'admin')
                         <a href="/db_admin" class="dropdown-item">Dashboard</a>
                         @else
-                        <a href="/db_mitra/{{Auth::user()->name}}" class="dropdown-item">Dashboard</a>
+                        <a href="/db_mitra/{{Auth::user()->id}}" class="dropdown-item">Dashboard</a>
                         @endif
                         <a href="/users/{{Auth::user()->id}}/edit" class="dropdown-item">Settings</a>
                         <div class="dropdown-divider"></div>

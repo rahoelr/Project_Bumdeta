@@ -79,6 +79,9 @@
                         @endif
                     </div>
                 </div>
+                <div class="d-flex justify-content-center">
+                    {{ $messages->links() }}
+                </div>
             </div>
         </div>
     </div>

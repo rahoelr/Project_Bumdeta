@@ -72,13 +72,31 @@
                 </table>
             </div>
             <div class="d-flex flex-row">
-                <a href="/admin-mitras/{{$mitras->id}}/edit" class="btn btn-primary mr-2 btn-edit text-light">Edit</a>
+                <a href="/admin-mitras/{{$mitras->id}}/edit"
+                    class="btn btn-primary mr-2 mb-3 btn-edit text-light">Edit</a>
                 <form action="{{ route('admin-mitras.destroy', $mitras->id) }}" method="POST">
                     @method('DELETE')
                     {{ csrf_field() }}
                     <input type="hidden" name="id" value="{{ $mitras->id }}">
-                    <button type="submit" class="btn btn-danger btn-delete"
-                        onclick="return confirm('Mitra akan dihapus')">Delete</button>
+                    <button type="button" class="btn btn-danger btn-delete" data-toggle="modal"
+                        data-target="#modalConfirmDelete">
+                        Delete
+                    </button>
+
+                    <div class="modal fade modal-delete" id="modalConfirmDelete" data-backdrop="false">
+                        <div class="modal-dialog modal-dialog-centered modal-notify modal-danger">
+                            <div class="modal-content text-center">
+                                <div class="modal-header d-flex justify-content-center">
+                                    <p class="heading">Are you sure to delete this store?</p>
+                                </div>
+                                <div class="modal-body"><i class="fa-solid fa-trash fa-4x"></i></div>
+                                <div class="modal-footer flex-center">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                                    <button type="submit" class="btn btn-outline-danger">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

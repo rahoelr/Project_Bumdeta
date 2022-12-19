@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\AboutUs;
 use App\Models\Team;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+
+date_default_timezone_set("Asia/Jakarta");
 
 class AboutUsController extends Controller
 {
@@ -66,6 +69,8 @@ class AboutUsController extends Controller
             $extension = $files->getClientOriginalExtension();
             $filenameSimpan = $filename . '_' . time() . '.' . $extension;
             $files->storeAs('public/aboutUs_images', $filenameSimpan);
+            $thumbnailPath = public_path("storage/aboutUs_images/{$filenameSimpan}");
+            $img = Image::make($thumbnailPath)->resize(600, 600)->save($thumbnailPath);
             $image = $filenameSimpan;
         }
         $ab_us = new AboutUs;
@@ -139,6 +144,8 @@ class AboutUsController extends Controller
             $extension = $files->getClientOriginalExtension();
             $filenameSimpan = $filename . '_' . time() . '.' . $extension;
             $files->storeAs('public/aboutUs_images', $filenameSimpan);
+            $thumbnailPath = public_path("storage/aboutUs_images/{$filenameSimpan}");
+            $img = Image::make($thumbnailPath)->resize(600, 600)->save($thumbnailPath);
             $image = $filenameSimpan;
         }
         $ab_us->images = $image;

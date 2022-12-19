@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Intervention\Image\Facades\Image;
+
+date_default_timezone_set("Asia/Jakarta");
 
 class CategoryController extends Controller
 {
@@ -17,7 +20,7 @@ class CategoryController extends Controller
     {
         return view('admin.dashboard_admin_category', [
             "title" => "| Category",
-            "categories" => Category::orderBy('category', 'asc')->paginate(10)
+            "categories" => Category::orderBy('category', 'asc')->paginate(20)
         ]);
     }
 
@@ -54,6 +57,8 @@ class CategoryController extends Controller
             $extension = $files->getClientOriginalExtension();
             $filenameSimpan = $filename . '_' . time() . '.' . $extension;
             $files->storeAs('public/category_images', $filenameSimpan);
+            $thumbnailPath = public_path("storage/category_images/{$filenameSimpan}");
+            $img = Image::make($thumbnailPath)->resize(154, 154)->save($thumbnailPath);
             $image = $filenameSimpan;
         }
         $category = new Category;
@@ -123,6 +128,8 @@ class CategoryController extends Controller
             $extension = $files->getClientOriginalExtension();
             $filenameSimpan = $filename . '_' . time() . '.' . $extension;
             $files->storeAs('public/category_images', $filenameSimpan);
+            $thumbnailPath = public_path("storage/category_images/{$filenameSimpan}");
+            $img = Image::make($thumbnailPath)->resize(154, 154)->save($thumbnailPath);
             $image = $filenameSimpan;
         }
         $category->images = $image;

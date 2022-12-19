@@ -10,7 +10,7 @@
             @endphp
             @foreach ($articles as $article)
             <a href="/detail-artikel/{{$article->id}}">
-                <div class="col-6 col-md-4 col-lg-12" data-aos="fade-up" data-aos-delay="{{$i+=50}}">
+                <div class="col-12 col-md-12 col-lg-12" data-aos="fade-up" data-aos-delay="{{$i+=50}}">
                     <div class="component-products d-block">
                         <div class="products-thumbnail article-thumbnail">
                             <div class="products-image" style="
@@ -20,7 +20,7 @@
                         <h2 class="sub-title">{{$article->title}}</h2>
                         <div class="flex-date">
                             <div class="date">
-                                {{$article->created_at}}
+                                {{$article->updated_at}}
                             </div>
                             <div class="penulis">
                                 Penulis: {{$article->author}}

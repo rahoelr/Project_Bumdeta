@@ -44,7 +44,7 @@
             @if (Auth::user()->level == 'admin')
             <a href="/db_admin-mitra" class="btn btn-info btn-edit text-light">Back</a>
             @else
-            <a href="/db_mitra-toko/{{Auth::user()->name}}" class="btn btn-info btn-edit text-light">Back</a>
+            <a href="/db_mitra-toko/{{Auth::user()->id}}" class="btn btn-info btn-edit text-light">Back</a>
             @endif
             <form action="{{ route('admin-mitras.store') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -72,11 +72,9 @@
                         </div>
                         <div class="Owner">
                             <label for="owner">Pemilik Toko</label>
-                            <input type="text" name="owner" id="owner" class="form-control mb-0 @error('owner')
+                            <input type="text" name="owner" id="owner" class="form-control @error('owner')
                         is-invalid
                     @enderror" placeholder="Masukkan Nama Pemilik Toko" value="{{ old('owner') }}">
-                            <small class="form-text text-muted ml-4 mb-1">*Nama pemilik toko harus sama dengan
-                                username.</small>
                             @error('owner')
                             <div class="invalid-feedback ml-4">
                                 {{ $message }}

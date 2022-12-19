@@ -44,7 +44,7 @@
             @if (Auth::user()->level == 'admin')
             <a href="/db_admin-product" class="btn btn-info btn-edit text-light">Back</a>
             @else
-            <a href="/db_mitra-product/{{Auth::user()->name}}" class="btn btn-info btn-edit text-light">Back</a>
+            <a href="/db_mitra-product/{{Auth::user()->id}}" class="btn btn-info btn-edit text-light">Back</a>
             @endif
             <form action="{{ route('admin-products.store') }}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
@@ -116,9 +116,11 @@
                         </div>
                         <div class="Phone">
                             <label for="p_number">Nomor Telepon</label>
-                            <input type="text" name="p_number" id="p_number" class="form-control @error('p_number')
+                            <input type="text" name="p_number" id="p_number" class="form-control mb-0 @error('p_number')
                         is-invalid
                     @enderror" placeholder="Nomor Whatsapp">
+                            <small class="form-text text-muted ml-4 mb-1">*Nomor whatsapp harus disertai kode negara
+                                tanpa tanda "+" (ex: 6282123444xxx)</small>
                             @error('p_number')
                             <div class="invalid-feedback ml-4">
                                 {{ $message }}

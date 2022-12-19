@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+
+date_default_timezone_set("Asia/Jakarta");
 
 class UserController extends Controller
 {
@@ -98,6 +101,8 @@ class UserController extends Controller
             $extension = $files->getClientOriginalExtension();
             $filenameSimpan = $filename . '_' . time() . '.' . $extension;
             $files->storeAs('public/user_images', $filenameSimpan);
+            $thumbnailPath = public_path("storage/user_images/{$filenameSimpan}");
+            $img = Image::make($thumbnailPath)->resize(500, 500)->save($thumbnailPath);
             $image = $filenameSimpan;
         }
         $user->images = $image;

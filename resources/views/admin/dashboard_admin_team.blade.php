@@ -74,6 +74,9 @@
                     <h3 class="text-center">No teams yet!!!</h3>
                     @endif
                 </div>
+                <div class="d-flex justify-content-center">
+                    {{ $teams->links() }}
+                </div>
             </div>
         </div>
     </div>

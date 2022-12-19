@@ -44,6 +44,8 @@
         });
 
     </script>
+    <script src="https://kit.fontawesome.com/8b03b562bf.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 
 </html>
