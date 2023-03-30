@@ -51,7 +51,7 @@
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container-fluid">
             <div class="dashboard-heading">
-                <h2 class="dashboard-title">My Store</h2>
+                <h1 class="dashboard-title">Toko Saya</h1>
                 @if (\Session::has('success'))
                 <div class="alert alert-success">
                     {!! \Session::get('success') !!}
@@ -61,19 +61,17 @@
             </div>
             <div class="dashboard-content" data-aos="fade-up">
                 @if ($mitras != null)
-                <h2>{{ $mitras->mitra_name }}</h2>
+                <h4>{{ $mitras->mitra_name }}</h4>
                 <div class="row mt-4">
-                    <div class="col-md-3">
-                        <div class="card mb-5" style="max-width: 20rem;">
-                            <a href="{{asset("storage/mitra_images/".$mitras->images)}}" class="example-image-link"
-                                data-lightbox="example-2" data-title="{{ $mitras->images }}">
-                                <img src="{{asset("storage/mitra_images/".$mitras->images)}}" alt="image-1"
-                                    class="card-img-top"></a>
-                        </div>
+                    <div class="col-md-3 mb-5">
+                        <a href="{{asset("storage/mitra_images/".$mitras->images)}}" class="example-image-link"
+                            data-lightbox="example-2" data-title="{{ $mitras->images }}">
+                            <img src="{{asset("storage/mitra_images/".$mitras->images)}}" alt="image-1"
+                                class="card-img-top"></a>
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table class="table table-borderless">
                         <tr>
                             <th>Pemilik</th>
                             <td>{{$mitras->owner}}</td>
@@ -88,7 +86,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="d-flex flex-row">
+                <div class="d-flex justify-content-end">
                     <a href="/admin-mitras/{{$mitras->id}}/edit"
                         class="btn btn-primary mr-2 btn-edit text-light">Edit</a>
                     <form action="{{ route('admin-mitras.destroy', $mitras->id) }}" method="POST">

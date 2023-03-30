@@ -48,46 +48,66 @@
     </nav>
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container">
-            <h1>Detail User</h1>
+            <h1>Detail Desa</h1>
             <div class="d-flex justify-content-start mt-4">
-                <a href="/db_admin-user" class="mr-4"><img class="img-back mb-2" src="{{asset('img/back.png')}}"
+                <a href="/db_admin-desa" class="mr-4"><img class="img-back mb-2" src="{{asset('img/back.png')}}"
                         alt=""></a>
-                <h4>{{ $users->name }}</h4>
+                <h4>Tawangsari</h4>
             </div>
             <div class="row mt-4">
+                {{-- @php
+                $image = explode('|', $products->images);
+                @endphp
+                @foreach ($image as $item) --}}
                 <div class="col-md-3">
                     <div class="card mb-5" style="max-width: 20rem;">
-                        <a href="{{asset("storage/user_images/".$users->images)}}" class="example-image-link"
-                            data-lightbox="example-2" data-title="{{ $users->images }}">
-                            <img src="{{asset("storage/user_images/".$users->images)}}" alt="image-1"
-                                class="card-img-top"></a>
+                        <a href="{{asset('img/desa.png')}}" class="example-image-link" data-lightbox="example-2"
+                            data-title="">
+                            <img src="{{asset('img/desa.png')}}" alt="image-1" class="card-img-top"></a>
                     </div>
                 </div>
+                {{-- @endforeach --}}
             </div>
         </div>
         <div class="container">
             <div class="table-responsive">
                 <table class="table table-borderless">
                     <tr>
-                        <th>Email</th>
-                        <td>{{$users->email}}</td>
+                        <th>Nama Desa</th>
+                        <td>Tawangsari</td>
                     </tr>
                     <tr>
-                        <th>Username</th>
-                        <td>{{$users->name}}</td>
+                        <th>Kecamatan</th>
+                        <td>Caturtunggal</td>
                     </tr>
                     <tr>
-                        <th>Level</th>
-                        <td>{{$users->level}}</td>
+                        <th>Kabupaten/Kota</th>
+                        <td>Sleman</td>
+                    </tr>
+                    <tr>
+                        <th>Provinsi</th>
+                        <td>Daerah Istimewa Yogyakarta</td>
+                    </tr>
+                    <tr>
+                        <th>Deskripsi</th>
+                        <td>
+                            {{-- @php
+                            $paragraph = explode('<br />', $products->description);
+                            @endphp
+                            @foreach ($paragraph as $item) --}}
+                            <div>8yegf8eygr uyge riuygew igei uygweiuygr iweug iu</div>
+                            {{-- @endforeach --}}
+                        </td>
                     </tr>
                 </table>
             </div>
             <div class="d-flex justify-content-end">
-                <form action="{{ route('admin-users.destroy', $users->id) }}" method="POST">
+                <a href="/admin-desas/id/edit" class="btn btn-primary mr-2 mb-3 btn-edit text-light">Edit</a>
+                <form action="" method="POST">
                     @method('DELETE')
                     {{ csrf_field() }}
-                    <input type="hidden" name="id" value="{{ $users->id }}">
-                    <button type="button" class="btn btn-danger btn-delete mb-3" data-toggle="modal"
+                    <input type="hidden" name="id" value="id">
+                    <button type="button" class="btn btn-danger btn-delete" data-toggle="modal"
                         data-target="#modalConfirmDelete">
                         Delete
                     </button>
@@ -96,7 +116,7 @@
                         <div class="modal-dialog modal-dialog-centered modal-notify modal-danger">
                             <div class="modal-content text-center">
                                 <div class="modal-header d-flex justify-content-center">
-                                    <p class="heading">Are you sure to delete this account?</p>
+                                    <p class="heading">Are you sure to delete nama desa?</p>
                                 </div>
                                 <div class="modal-body"><i class="fa-solid fa-trash fa-4x"></i></div>
                                 <div class="modal-footer flex-center">
@@ -110,6 +130,5 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection

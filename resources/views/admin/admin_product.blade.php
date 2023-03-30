@@ -48,13 +48,17 @@
     </nav>
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container">
-            <h1>{{$title}}</h1>
-            @if (Auth::user()->level == 'admin')
-            <a href="/db_admin-product" class="btn btn-info btn-edit text-light">Back</a>
-            @else
-            <a href="/db_mitra-product/{{Auth::user()->id}}" class="btn btn-info btn-edit text-light">Back</a>
-            @endif
-            <h2>{{ $products->product_name }}</h2>
+            <h1>Ddivetail Produk</h1>
+            <div class="d-flex justify-content-start mt-4">
+                @if (Auth::user()->level == 'admin')
+                <a href="/db_admin-product" class="mr-4"><img class="img-back mb-2" src="{{asset('img/back.png')}}"
+                        alt=""></a>
+                @else
+                <a href="/db_mitra-product/{{Auth::user()->id}}" class="mr-4"><img class="img-back"
+                        src="{{asset('img/back.png')}}" alt=""></a>
+                @endif
+                <h4>{{ $products->product_name }}</h4>
+            </div>
             <div class="row mt-4">
                 @php
                 $image = explode('|', $products->images);
@@ -73,7 +77,7 @@
         </div>
         <div class="container">
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-borderless">
                     <tr>
                         <th>Mitra</th>
                         <td>{{$products->mitra}}</td>
@@ -103,7 +107,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="d-flex flex-row">
+            <div class="d-flex justify-content-end">
                 <a href="/admin-products/{{$products->id}}/edit"
                     class="btn btn-primary mr-2 mb-3 btn-edit text-light">Edit</a>
                 <form action="{{ route('admin-products.destroy', $products->id) }}" method="POST">

@@ -51,14 +51,13 @@
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container-fluid">
             <div class="dashboard-heading">
-                <h2 class="dashboard-title">My Products</h2>
+                <h2 class="dashboard-title">Produk Saya</h2>
                 <p class="dashboard-subtitle">Manage it well and get money</p>
             </div>
             <div class="dashboard-content">
                 <div class="row">
                     <div class="col-12">
-                        <a href="/admin-products/create" class="btn btn-success btn-dashboard">Add New
-                            Product</a>
+                        <a href="/admin-products/create" class="btn btn-success btn-dashboard">Tambah Produk</a>
                     </div>
                 </div>
                 <div class="row mt-4">

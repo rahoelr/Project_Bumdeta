@@ -126,7 +126,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col text-right">
-                                            <button type="submit" class="btn btn-success px-5 btn-dashboard">
+                                            <button type="submit" class="btn px-5 btn-admin-ab-us">
                                                 Simpan Data
                                             </button>
                                         </div>

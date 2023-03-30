@@ -48,9 +48,12 @@
     </nav>
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container">
-            <h1>{{$title}}</h1>
-            <a href="/db_admin-article" class="btn btn-info btn-edit text-light">Back</a>
-            <h2>{{ $articles->title }}</h2>
+            <h1>Detail Artikel</h1>
+            <div class="d-flex justify-content-start mt-4">
+                <a href="/db_admin-article" class="mr-4"><img class="img-back mb-2" src="{{asset('img/back.png')}}"
+                        alt=""></a>
+                <h4>{{ $articles->title }}</h4>
+            </div>
             <div class="row mt-4">
                 <div class="col-md-3">
                     <div class="card mb-5" style="max-width: 20rem;">
@@ -64,7 +67,7 @@
         </div>
         <div class="container">
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-borderless">
                     <tr>
                         <th>Penulis</th>
                         <td>{{$articles->author}}</td>
@@ -86,7 +89,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="d-flex flex-row">
+            <div class="d-flex justify-content-end">
                 <a href="/admin-articles/{{$articles->id}}/edit"
                     class="btn btn-primary mr-2 mb-3 btn-edit text-light">Edit</a>
                 <form action="{{ route('admin-articles.destroy', $articles->id) }}" method="POST">

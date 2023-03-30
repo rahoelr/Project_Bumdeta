@@ -48,13 +48,16 @@
     </nav>
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container">
-            <h1>{{$title}}</h1>
-            <h2>{{ $messages->fullName }}</h2>
-            <a href="/db_admin-message" class="btn btn-info btn-edit text-light mb-3">Back</a>
+            <h1>Detail Pesan</h1>
+            <div class="d-flex justify-content-start mt-4">
+                <a href="/db_admin-message" class="mr-4"><img class="img-back mb-2" src="{{asset('img/back.png')}}"
+                        alt=""></a>
+                <h4>{{ $messages->fullName }}</h4>
+            </div>
         </div>
         <div class="container">
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-borderless">
                     <tr>
                         <th>Email</th>
                         <td>{{$messages->email}}</td>
@@ -76,7 +79,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="d-flex flex-row">
+            <div class="d-flex justify-content-end">
                 <form action="{{ route('admin-message.destroy', $messages->id) }}" method="POST">
                     @method('DELETE')
                     {{ csrf_field() }}

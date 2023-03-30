@@ -109,6 +109,10 @@
                         </a>
                     </div>
                 </div>
+                <div class="d-flex justify-content-end">
+                    <a href="/admin-landing/{{$landings->id}}/edit"
+                        class="btn btn-primary mb-3 btn-edit text-light">Edit</a>
+                </div>
             </div>
         </div>
     </div>

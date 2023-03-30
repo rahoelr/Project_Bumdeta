@@ -50,9 +50,11 @@
         <div class="container">
             <h1>Edit {{$products->product_name}}</h1>
             @if (Auth::user()->level == 'admin')
-            <a href="/db_admin-product-detail/{{$products->id}}" class="btn btn-info btn-edit text-light">Back</a>
+            <a href="/db_admin-product-detail/{{$products->id}}"><img class="mr-4 img-back-form"
+                    src="{{asset('img/back.png')}}" alt=""></a>
             @else
-            <a href="/db_admin-product-detail/{{$products->id}}" class="btn btn-info btn-edit text-light">Back</a>
+            <a href="/db_admin-product-detail/{{$products->id}}"><img class="mr-4 img-back-form"
+                    src="{{asset('img/back.png')}}" alt=""></a>
             @endif
             <form action="{{ route('admin-products.update', $products->id) }}" method="POST"
                 enctype="multipart/form-data">

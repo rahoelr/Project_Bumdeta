@@ -50,9 +50,11 @@
         <div class="container">
             <h1>Edit Mitra</h1>
             @if (Auth::user()->level == 'admin')
-            <a href="/db_admin-mitra-detail/{{$mitras->id}}" class="btn btn-info btn-edit text-light">Back</a>
+            <a href="/db_admin-mitra-detail/{{$mitras->id}}"><img class="mr-4 img-back-form"
+                    src="{{asset('img/back.png')}}" alt=""></a>
             @else
-            <a href="/db_mitra-toko/{{Auth::user()->id}}" class="btn btn-info btn-edit text-light">Back</a>
+            <a href="/db_mitra-toko/{{Auth::user()->id}}"><img class="mr-4 img-back-form"
+                    src="{{asset('img/back.png')}}" alt=""></a>
             @endif
             <form action="{{ route('admin-mitras.update', $mitras->id) }}" method="POST" enctype="multipart/form-data">
                 @method('PUT')

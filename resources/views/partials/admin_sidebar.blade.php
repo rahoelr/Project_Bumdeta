@@ -9,12 +9,17 @@
         <a href="/db_admin-landing/1"
             class="list-group-item list-group-item-action dashboard-admin {{($title === "| Landing Page") ? 'active' : ''}}">Landing
             Page</a>
+        <a href="/db_admin-desa"
+            class="list-group-item list-group-item-action dashboard-admin {{($title === "| Desa") ? 'active' : ''}}">Desa</a>
         <a href="/db_admin-product"
             class="list-group-item list-group-item-action dashboard-admin {{($title === "| Product") ? 'active' : ''}}">Produk</a>
         <a href="/db_admin-category"
             class="list-group-item list-group-item-action dashboard-admin {{($title === "| Category") ? 'active' : ''}}">Category</a>
         <a href="/db_admin-mitra"
             class="list-group-item list-group-item-action dashboard-admin {{($title === "| Mitra") ? 'active' : ''}}">Mitra</a>
+        <a href="/db_admin-jenis_usaha"
+            class="list-group-item list-group-item-action dashboard-admin {{($title === "| Jenis Usaha") ? 'active' : ''}}">Jenis
+            Usaha</a>
         <a href="/db_admin-article"
             class="list-group-item list-group-item-action dashboard-admin {{($title === "| Article") ? 'active' : ''}}">Artikel</a>
         <a href="/db_admin-aboutus/1"

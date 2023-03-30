@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+<!-- Page Content -->
 <div id="page-content-wrapper">
     <nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top" data-aos="fade-down">
         <div class="container-fluid">
@@ -46,70 +47,52 @@
             </div>
         </div>
     </nav>
+
+    <!-- Page Content -->
     <div class="section-content section-dashboard-home" data-aos="fade-up">
-        <div class="container">
-            <h1>Detail User</h1>
-            <div class="d-flex justify-content-start mt-4">
-                <a href="/db_admin-user" class="mr-4"><img class="img-back mb-2" src="{{asset('img/back.png')}}"
-                        alt=""></a>
-                <h4>{{ $users->name }}</h4>
+        <div class="container-fluid">
+            <div class="dashboard-heading">
+                <h2 class="dashboard-title">Jenis Usaha</h2>
+                <p class="dashboard-subtitle">Kelola jenis usaha</p>
+                @if (\Session::has('success'))
+                <div class="alert alert-success">
+                    {!! \Session::get('success') !!}
+                </div>
+                @endif
             </div>
-            <div class="row mt-4">
-                <div class="col-md-3">
-                    <div class="card mb-5" style="max-width: 20rem;">
-                        <a href="{{asset("storage/user_images/".$users->images)}}" class="example-image-link"
-                            data-lightbox="example-2" data-title="{{ $users->images }}">
-                            <img src="{{asset("storage/user_images/".$users->images)}}" alt="image-1"
-                                class="card-img-top"></a>
+            <div class="dashboard-content">
+                <div class="row">
+                    <div class="col-12">
+                        <a href="admin-jenisUsahas/create" class="btn btn-success btn-dashboard">Tambah Jenis Usaha</a>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="table-responsive">
-                <table class="table table-borderless">
-                    <tr>
-                        <th>Email</th>
-                        <td>{{$users->email}}</td>
-                    </tr>
-                    <tr>
-                        <th>Username</th>
-                        <td>{{$users->name}}</td>
-                    </tr>
-                    <tr>
-                        <th>Level</th>
-                        <td>{{$users->level}}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="d-flex justify-content-end">
-                <form action="{{ route('admin-users.destroy', $users->id) }}" method="POST">
-                    @method('DELETE')
-                    {{ csrf_field() }}
-                    <input type="hidden" name="id" value="{{ $users->id }}">
-                    <button type="button" class="btn btn-danger btn-delete mb-3" data-toggle="modal"
-                        data-target="#modalConfirmDelete">
-                        Delete
-                    </button>
-
-                    <div class="modal fade modal-delete" id="modalConfirmDelete" data-backdrop="false">
-                        <div class="modal-dialog modal-dialog-centered modal-notify modal-danger">
-                            <div class="modal-content text-center">
-                                <div class="modal-header d-flex justify-content-center">
-                                    <p class="heading">Are you sure to delete this account?</p>
-                                </div>
-                                <div class="modal-body"><i class="fa-solid fa-trash fa-4x"></i></div>
-                                <div class="modal-footer flex-center">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                    <button type="submit" class="btn btn-outline-danger">Yes</button>
+                <div class="row mt-4">
+                    <div class="col-12 mt-2">
+                        {{-- @if(count($messages)>0)
+                        @foreach ($messages as $message)href="/db_admin-jenisUsaha-detail/{{$message->id}}" --}}
+                        <div class="card card-list d-block">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-11">Fotocopy</div>
+                                    <div class="col-md-1 d-none d-md-block">
+                                        <img src="{{asset('img/dashboard-arrow-right.svg')}}" alt="" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </form>
+                    {{-- @endforeach
+                        @else
+                        <h3 class="text-center">No messages yet!!!</h3>
+                        @endif --}}
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                {{-- {{ $messages->links() }} --}}
             </div>
         </div>
     </div>
 </div>
 </div>
+<!-- /#page-content-wrapper -->
 @endsection

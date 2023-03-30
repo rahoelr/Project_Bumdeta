@@ -71,7 +71,7 @@
                                 <div class="row">
                                     <div class="col-md-2">{{$message->fullName}}</div>
                                     <div class="col-md-3">{{$message->email}}</div>
-                                    <div class="col-md-2">{{$message->subject}}</div>
+                                    <div class="col-md-2">{{substr($message->subject, 0, 10)}}</div>
                                     <div class="col-md-4">
                                         {{ substr($message->content, 0, 20) }}
                                     </div>

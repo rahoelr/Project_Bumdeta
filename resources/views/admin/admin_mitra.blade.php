@@ -47,24 +47,25 @@
         </div>
     </nav>
     <div class="section-content section-dashboard-home" data-aos="fade-up">
-        <div class="container">
-            <h1>{{$title}}</h1>
-            <a href="/db_admin-mitra" class="btn btn-info btn-edit text-light">Back</a>
-            <h2>{{ $mitras->mitra_name }}</h2>
+        <div class="container mb-4">
+            <h1>Detail Mitra</h1>
+            <div class="d-flex justify-content-start mt-4">
+                <a href="/db_admin-mitra" class="mr-4"><img class="img-back mb-2" src="{{asset('img/back.png')}}"
+                        alt=""></a>
+                <h4>{{ $mitras->mitra_name }}</h4>
+            </div>
             <div class="row mt-4">
                 <div class="col-md-3">
-                    <div class="card mb-5" style="max-width: 20rem;">
-                        <a href="{{asset("storage/mitra_images/".$mitras->images)}}" class="example-image-link"
-                            data-lightbox="example-2" data-title="{{ $mitras->images }}">
-                            <img src="{{asset("storage/mitra_images/".$mitras->images)}}" alt="image-1"
-                                class="card-img-top"></a>
-                    </div>
+                    <a href="{{asset("storage/mitra_images/".$mitras->images)}}" class="example-image-link"
+                        data-lightbox="example-2" data-title="{{ $mitras->images }}">
+                        <img src="{{asset("storage/mitra_images/".$mitras->images)}}" alt="image-1"
+                            class="card-img-top"></a>
                 </div>
             </div>
         </div>
         <div class="container">
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-borderless">
                     <tr>
                         <th>Pemilik</th>
                         <td>{{$mitras->owner}}</td>
@@ -79,7 +80,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="d-flex flex-row">
+            <div class=" d-flex justify-content-end">
                 <a href="/admin-mitras/{{$mitras->id}}/edit"
                     class="btn btn-primary mr-2 mb-3 btn-edit text-light">Edit</a>
                 <form action="{{ route('admin-mitras.destroy', $mitras->id) }}" method="POST">

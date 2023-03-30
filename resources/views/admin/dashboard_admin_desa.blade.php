@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+<!-- Page Content -->
 <div id="page-content-wrapper">
     <nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top" data-aos="fade-down">
         <div class="container-fluid">
@@ -46,54 +47,46 @@
             </div>
         </div>
     </nav>
-    <div class="section-content section-dashboard-home" data-aos="fade-up">
-        <div class="container">
-            <h1>Detail Kategori</h1>
-            <div class="d-flex justify-content-start mt-4">
-                <a href="/db_admin-category" class="mr-4"><img class="img-back mb-2" src="{{asset('img/back.png')}}"
-                        alt=""></a>
-                <h4>{{$categories->category}}</h4>
-            </div>
-            <div class="row mt-4">
-                <div class="col-md-3">
-                    <a href="{{asset("storage/category_images/".$categories->images)}}" class="example-image-link"
-                        data-lightbox="example-2" data-title="{{ $categories->images }}">
-                        <img src="{{asset("storage/category_images/".$categories->images)}}" alt="image-1"
-                            class="card-img-top"></a>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="d-flex justify-content-end">
-                <a href="/admin-categories/{{$categories->id}}/edit"
-                    class="btn btn-primary mr-2 mb-3 btn-edit text-light">Edit</a>
-                <form action="{{ route('admin-categories.destroy', $categories->id) }}" method="POST">
-                    @method('DELETE')
-                    {{ csrf_field() }}
-                    <input type="hidden" name="id" value="{{ $categories->id }}">
-                    <button type="button" class="btn btn-danger btn-delete" data-toggle="modal"
-                        data-target="#modalConfirmDelete">
-                        Delete
-                    </button>
 
-                    <div class="modal fade modal-delete" id="modalConfirmDelete" data-backdrop="false">
-                        <div class="modal-dialog modal-dialog-centered modal-notify modal-danger">
-                            <div class="modal-content text-center">
-                                <div class="modal-header d-flex justify-content-center">
-                                    <p class="heading">Are you sure to delete this category?</p>
-                                </div>
-                                <div class="modal-body"><i class="fa-solid fa-trash fa-4x"></i></div>
-                                <div class="modal-footer flex-center">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                                    <button type="submit" class="btn btn-outline-danger">Yes</button>
-                                </div>
-                            </div>
-                        </div>
+    <div class="section-content section-dashboard-home" data-aos="fade-up">
+        <div class="container-fluid">
+            <div class="dashboard-heading">
+                <h2 class="dashboard-title">Desa</h2>
+                <p class="dashboard-subtitle">Kelola Semua Desa</p>
+                @if (\Session::has('success'))
+                <div class="alert alert-success">
+                    {!! \Session::get('success') !!}
+                </div>
+                @endif
+            </div>
+            <div class="dashboard-content">
+                <div class="row">
+                    <div class="col-12">
+                        <a href="admin-desas/create" class="btn btn-success btn-dashboard">Tambah Desa</a>
                     </div>
-                </form>
+                </div>
+                <div class="row mt-4">
+                    {{-- @if(count($articles)>0)
+                    @foreach ($articles as $article) href="/db_admin-desa-detail/{{$desa->id}}"--}}
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <a class="card card-dashboard-product d-block" href="/db_admin-desa-detail">
+                            <div class="card-body">
+                                <img src="{{asset('img/desa.png')}}" alt="" class="w-100 mb-2" />
+                                <div class="product-title">Tawangsari</div>
+                            </div>
+                        </a>
+                    </div>
+                    {{-- @endforeach
+                    @else
+                    <h3 class="text-center">Data desa tidak ditemukan!!!</h3>
+                    @endif --}}
+                </div>
+                <div class="d-flex justify-content-center">
+                    {{-- {{ $articles->links() }} --}}
+                </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+<!-- /#page-content-wrapper -->
 @endsection

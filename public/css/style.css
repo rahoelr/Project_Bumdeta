@@ -745,3 +745,20 @@ footer .text-28 {
 .product-price {
     color: #ff7261;
 }
+
+.img-back-form {
+    height: 34px;
+    width: 34px;
+    margin-top: 0.4rem;
+    vertical-align: bottom !important;
+}
+
+.img-back {
+    height: 31px;
+    width: 31px;
+}
+
+.btn-admin-ab-us {
+    background-color: #ff7261 !important;
+    color: #eff2f7 !important;
+}

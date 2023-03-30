@@ -49,7 +49,8 @@
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container">
             <h1>Edit Category</h1>
-            <a href="/db_admin-category-detail/{{$categories->id}}" class="btn btn-info btn-edit text-light">Back</a>
+            <a href="/db_admin-category-detail/{{$categories->id}}"><img class="mr-4 img-back-form"
+                    src="{{asset('img/back.png')}}" alt=""></a>
             <form action="{{ route('admin-categories.update', $categories->id) }}" method="POST"
                 enctype="multipart/form-data">
                 @method('PUT')

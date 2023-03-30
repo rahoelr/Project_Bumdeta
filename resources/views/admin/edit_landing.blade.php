@@ -48,8 +48,10 @@
     </nav>
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container">
-            <h1>Edit Landing Page Data</h1>
-            <a href="/db_admin-landing-detail/{{$landings->id}}" class="btn btn-info btn-edit text-light">Back</a>
+            <div class="d-flex justify-content-start">
+                <h1>Edit Landing Page Data</h1>
+            </div>
+            <a href="/db_admin-landing/1"><img class="mr-4 img-back-form" src="{{asset('img/back.png')}}" alt=""></a>
             <form action="{{ route('admin-landing.update', $landings->id) }}" method="POST"
                 enctype="multipart/form-data">
                 @method('PUT')
