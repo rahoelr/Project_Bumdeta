@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BUMDETA {{ $title }}</title>
+    <title>BUMDES SITE {{ $title }}</title>
     <link rel="shortcut icon" href="{{asset("img/Logo.png")}}" type="image/x-icon">
     <link href="{{ asset("template_1/style/main.css") }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
