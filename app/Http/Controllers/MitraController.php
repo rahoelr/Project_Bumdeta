@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Desa;
 use App\Models\Mitra;
+use App\Models\Kecamatan;
+use App\Models\JenisUsaha;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +52,10 @@ class MitraController extends Controller
     public function create()
     {
         $data = array(
-            'title' => "| Mitra"
+            'title' => "| Mitra",
+            "usahas" => JenisUsaha::orderBy('jenisUsaha', 'asc')->get(),
+            "desas" => Desa::orderBy('desa', 'asc')->get(),
+            'kecamatans' => Kecamatan::orderBy('kecamatan', 'asc')->get()
         );
         return view('admin.add_mitra')->with($data);
     }
@@ -68,7 +74,8 @@ class MitraController extends Controller
                 'mitra_name' => 'required|unique:mitras,mitra_name|max:50',
                 'owner' => 'required|max:30',
                 't_o_business' => 'required|max:30',
-                'address' => 'required|max:100'
+                'desa' => 'required|max:100',
+                'kecamatan' => 'required|max:100'
             ]
         );
         if ($files = $request->file('images')) {
@@ -86,7 +93,8 @@ class MitraController extends Controller
         $mitra->mitra_name = $request->input('mitra_name');
         $mitra->owner = $request->input('owner');
         $mitra->t_o_business = $request->input('t_o_business');
-        $mitra->address = $request->input('address');
+        $mitra->desa = $request->input('desa');
+        $mitra->kecamatan = $request->input('kecamatan');
         $mitra->userId = Auth::user()->id;
         $mitra->save();
         if (Auth::user()->level == 'admin') {
@@ -129,7 +137,10 @@ class MitraController extends Controller
     {
         return view('admin.edit_mitra', [
             'title' => "| Mitra",
-            'mitras' => Mitra::find($id)
+            'mitras' => Mitra::find($id),
+            "usahas" => JenisUsaha::orderBy('jenisUsaha', 'asc')->get(),
+            "desas" => Desa::orderBy('desa', 'asc')->get(),
+            'kecamatans' => Kecamatan::orderBy('kecamatan', 'asc')->get()
         ]);
     }
 
@@ -148,14 +159,16 @@ class MitraController extends Controller
                 'mitra_name' => 'required|max:50',
                 'owner' => 'required|max:30',
                 't_o_business' => 'required|max:30',
-                'address' => 'required|max:100'
+                'desa' => 'required|max:100',
+                'kecamatan' => 'required|max:100'
             ]
         );
         $mitra = Mitra::find($id);
         $mitra->mitra_name = $request->input('mitra_name');
         $mitra->owner = $request->input('owner');
         $mitra->t_o_business = $request->input('t_o_business');
-        $mitra->address = $request->input('address');
+        $mitra->desa = $request->input('desa');
+        $mitra->kecamatan = $request->input('kecamatan');
         if ($files = $request->file('images')) {
             if ($mitra->images) {
                 unlink('storage/mitra_images/' . $mitra->images);

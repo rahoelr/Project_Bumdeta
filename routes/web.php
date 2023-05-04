@@ -14,6 +14,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\JenisUsahaController;
 use App\Http\Controllers\LandingPageController;
 
 /*
@@ -60,6 +61,7 @@ Route::resource('admin-message', 'App\Http\Controllers\MessageController');
 Route::resource('admin-landing', 'App\Http\Controllers\LandingpageController');
 Route::resource('admin-users', 'App\Http\Controllers\UserController');
 Route::resource('admin-desas', 'App\Http\Controllers\DesaController');
+Route::resource('admin-jenisUsahas', 'App\Http\Controllers\JenisUsahaController');
 
 Auth::routes([
     'reset' => true,
@@ -89,13 +91,5 @@ Route::get('/db_admin-team-detail/{id}', [TeamController::class, 'adminShow']);
 Route::get('/db_admin-user', [UserController::class, 'index']);
 Route::get('/db_admin-user-detail/{id}', [UserController::class, 'show']);
 Route::get('/db_admin-desa-detail/{id}', [DesaController::class, 'adminShow']);
-
-
-// dummy
-
-
-Route::get('/db_admin-jenis_usaha', function () {
-    return view('admin.dashboard_admin_jenisUsaha', [
-        "title" => "| Jenis Usaha"
-    ]);
-});
+Route::get('/db_admin-jenis_usaha', [JenisUsahaController::class, 'index']);
+Route::get('/db_admin-usaha-detail/{id}', [JenisUsahaController::class, 'adminShow']);

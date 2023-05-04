@@ -105,7 +105,7 @@
                         </div>
                         <div class="Price">
                             <label for="price">Harga Produk</label>
-                            <input type="text" name="price" id="price" class="form-control @error('price')
+                            <input type="number" name="price" id="price" class="form-control @error('price')
                         is-invalid
                     @enderror" value="{{ $products->price }}">
                             @error('price')
@@ -127,7 +127,7 @@
                         </div>
                         <div class="Phone">
                             <label for="p_number">Nomor Whatsapp</label>
-                            <input type="text" name="p_number" id="p_number" class="form-control mb-0 @error('p_number')
+                            <input type="number" name="p_number" id="p_number" class="form-control mb-0 @error('p_number')
                         is-invalid
                     @enderror" value="{{ $products->p_number }}">
                             <small class="form-text text-muted ml-4 mb-1">*Nomor whatsapp harus disertai kode negara

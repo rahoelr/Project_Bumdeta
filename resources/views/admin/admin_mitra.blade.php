@@ -75,8 +75,12 @@
                         <td>{{$mitras->t_o_business}}</td>
                     </tr>
                     <tr>
-                        <th>Alamat</th>
-                        <td>{{$mitras->address}}</td>
+                        <th>Desa</th>
+                        <td>{{$mitras->desa}}</td>
+                    </tr>
+                    <tr>
+                        <th>Kecamatan</th>
+                        <td>{{$mitras->kecamatan}}</td>
                     </tr>
                 </table>
             </div>

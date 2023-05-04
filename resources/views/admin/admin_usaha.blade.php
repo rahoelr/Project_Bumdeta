@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-<!-- Page Content -->
 <div id="page-content-wrapper">
     <nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top" data-aos="fade-down">
         <div class="container-fluid">
@@ -47,52 +46,61 @@
             </div>
         </div>
     </nav>
-
-    <!-- Page Content -->
     <div class="section-content section-dashboard-home" data-aos="fade-up">
-        <div class="container-fluid">
-            <div class="dashboard-heading">
-                <h2 class="dashboard-title">Jenis Usaha</h2>
-                <p class="dashboard-subtitle">Kelola jenis usaha</p>
-                @if (\Session::has('success'))
-                <div class="alert alert-success">
-                    {!! \Session::get('success') !!}
-                </div>
-                @endif
+        <div class="container">
+            <h1>Detail Jenis Usaha</h1>
+            <div class="d-flex justify-content-start mt-4">
+                <a href="/db_admin-jenis_usaha" class="mr-4"><img class="img-back mb-2" src="{{asset('img/back.png')}}"
+                        alt=""></a>
             </div>
-            <div class="dashboard-content">
-                <div class="row">
-                    <div class="col-12">
-                        <a href="admin-jenisUsahas/create" class="btn btn-success btn-dashboard">Tambah Jenis Usaha</a>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    @if(count($jenisUsahas)>0)
-                    @foreach ($jenisUsahas as $usaha)
-                    <div class="col-12 mt-2">
-                        <a class="card card-list d-block" href="/db_admin-usaha-detail/{{$usaha->id}}">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-11">{{$usaha->jenisUsaha}}</div>
-                                    <div class="col-md-1 d-none d-md-block">
-                                        <img src="{{asset('img/dashboard-arrow-right.svg')}}" alt="" />
-                                    </div>
+        </div>
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table table-borderless">
+                    <tr>
+                        <th>id</th>
+                        <td>{{$jenisUsahas->id}}</td>
+                    </tr>
+                    <tr>
+                        <th>Tanggal Dibuat</th>
+                        <td>{{$jenisUsahas->updated_at}}</td>
+                    </tr>
+                    <tr>
+                        <th>Nama Jenis Usaha</th>
+                        <td>{{$jenisUsahas->jenisUsaha}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="d-flex justify-content-end">
+                <a href="/admin-jenisUsahas/{{$jenisUsahas->id}}/edit"
+                    class="btn btn-primary mr-2 mb-3 btn-edit text-light">Edit</a>
+                <form action="{{ route('admin-jenisUsahas.destroy', $jenisUsahas->id) }}" method="POST">
+                    @method('DELETE')
+                    {{ csrf_field() }}
+                    <input type="hidden" name="id" value="{{ $jenisUsahas->id }}">
+                    <button type="button" class="btn btn-danger btn-delete" data-toggle="modal"
+                        data-target="#modalConfirmDelete">
+                        Delete
+                    </button>
+
+                    <div class="modal fade modal-delete" id="modalConfirmDelete" data-backdrop="false">
+                        <div class="modal-dialog modal-dialog-centered modal-notify modal-danger">
+                            <div class="modal-content text-center">
+                                <div class="modal-header d-flex justify-content-center">
+                                    <p class="heading">Apakah anda yakin untuk menghapus data jenis usaha ini?</p>
+                                </div>
+                                <div class="modal-body"><i class="fa-solid fa-trash fa-4x"></i></div>
+                                <div class="modal-footer flex-center">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+                                    <button type="submit" class="btn btn-outline-danger">Ya</button>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
-                    @endforeach
-                    @else
-                    <h3 class="text-center">Tidak terdapat data jenis usaha!!!</h3>
-                    @endif
-                </div>
-            </div>
-            <div class="d-flex justify-content-center">
-                {{ $jenisUsahas->links() }}
+                </form>
             </div>
         </div>
     </div>
 </div>
 </div>
-<!-- /#page-content-wrapper -->
 @endsection

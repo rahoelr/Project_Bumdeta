@@ -20,7 +20,7 @@
                         <div class="products-title">{{$mitra->mitra_name}}</div>
                         <div class="products-desc">Pemilik: {{$mitra->owner}}</div>
                         <div class="products-desc">Jenis Usaha: {{$mitra->t_o_business}}</div>
-                        <div class="products-desc">Alamat: {{$mitra->address}}</div>
+                        <div class="products-desc">Alamat: Desa {{$mitra->desa}}, Kecamatan {{$mitra->kecamatan}}</div>
                     </div>
                 </div>
                 @endforeach

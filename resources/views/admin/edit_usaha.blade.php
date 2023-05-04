@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-<!-- Page Content -->
 <div id="page-content-wrapper">
     <nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top" data-aos="fade-down">
         <div class="container-fluid">
@@ -47,52 +46,59 @@
             </div>
         </div>
     </nav>
-
-    <!-- Page Content -->
     <div class="section-content section-dashboard-home" data-aos="fade-up">
-        <div class="container-fluid">
-            <div class="dashboard-heading">
-                <h2 class="dashboard-title">Jenis Usaha</h2>
-                <p class="dashboard-subtitle">Kelola jenis usaha</p>
-                @if (\Session::has('success'))
-                <div class="alert alert-success">
-                    {!! \Session::get('success') !!}
-                </div>
-                @endif
-            </div>
-            <div class="dashboard-content">
-                <div class="row">
-                    <div class="col-12">
-                        <a href="admin-jenisUsahas/create" class="btn btn-success btn-dashboard">Tambah Jenis Usaha</a>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    @if(count($jenisUsahas)>0)
-                    @foreach ($jenisUsahas as $usaha)
-                    <div class="col-12 mt-2">
-                        <a class="card card-list d-block" href="/db_admin-usaha-detail/{{$usaha->id}}">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-11">{{$usaha->jenisUsaha}}</div>
-                                    <div class="col-md-1 d-none d-md-block">
-                                        <img src="{{asset('img/dashboard-arrow-right.svg')}}" alt="" />
-                                    </div>
-                                </div>
+        <div class="container">
+            <h1>Edit Jenis Usaha</h1>
+            <a href="/db_admin-usaha-detail/{{$jenisUsahas->id}}"><img class="mr-4 img-back-form"
+                    src="{{asset('img/back.png')}}" alt=""></a>
+            <form action="{{ route('admin-jenisUsahas.update', $jenisUsahas->id) }}" method="POST"
+                enctype="multipart/form-data">
+                @method('PUT')
+                {{ csrf_field() }}
+                <div class="content">
+                    <div class="kanan">
+                        <div class="jenisUsaha">
+                            <label for="jenisUsaha">Jenis Usaha</label>
+                            <input type="text" name="jenisUsaha" id="jenisUsaha" class="form-control @error('jenisUsaha')
+                        is-invalid
+                    @enderror" value="{{ $jenisUsahas->jenisUsaha }}">
+                            @error('jenisUsaha')
+                            <div class="invalid-feedback ml-4">
+                                {{ $message }}
                             </div>
-                        </a>
+                            @enderror
+                        </div>
                     </div>
-                    @endforeach
-                    @else
-                    <h3 class="text-center">Tidak terdapat data jenis usaha!!!</h3>
-                    @endif
                 </div>
-            </div>
-            <div class="d-flex justify-content-center">
-                {{ $jenisUsahas->links() }}
-            </div>
+                <button type="submit" class="buttonProd">Simpan Data</button>
+            </form>
         </div>
     </div>
 </div>
-</div>
-<!-- /#page-content-wrapper -->
+<script>
+    let fileInput = document.getElementById("input-file");
+    let imageContainer = document.getElementById("images")
+    let numOfFiles = document.getElementById("num-of-files");
+
+    function previewImage() {
+        imageContainer.innerHTML = "";
+        numOfFiles.textContent = '';
+
+        for (i of fileInput.files) {
+            let reader = new FileReader();
+            let figure = document.createElement("figure");
+            let figCap = document.createElement("figcaption");
+            figCap.innerText = '';
+            figure.appendChild(figCap);
+            reader.onload = () => {
+                let img = document.createElement("img");
+                img.setAttribute("src", reader.result);
+                figure.insertBefore(img, figCap);
+            }
+            imageContainer.appendChild(figure);
+            reader.readAsDataURL(i);
+        }
+    }
+
+</script>
 @endsection

@@ -94,21 +94,64 @@
                         </div>
                         <div class="type-of-business">
                             <label for="t_o_business">Jenis Usaha</label>
-                            <input type="text" name="t_o_business" id="t_o_business" class="form-control @error('t_o_business')
+                            <select class="form-control @error('t_o_business')
                         is-invalid
-                    @enderror" value="{{ $mitras->t_o_business }}">
+                    @enderror" name="t_o_business" id="t_o_business">
+                                @if(count($usahas)>0)
+                                @foreach ($usahas as $usaha)
+                                <option value='{{$usaha->jenisUsaha}}'
+                                    {{($mitras->t_o_business === $usaha->jenisUsaha) ? 'selected' : ''}}>
+                                    {{$usaha->jenisUsaha}}</option>
+                                @endforeach
+                                @else
+                                <option value='Tidak ada data jenis usaha!!' disabled>Tidak ada data jenis usaha!!!
+                                </option>
+                                @endif
+                            </select>
                             @error('t_o_business')
                             <div class="invalid-feedback ml-4">
                                 {{ $message }}
                             </div>
                             @enderror
                         </div>
-                        <div class="Address">
-                            <label for="address">Alamat Toko</label>
-                            <input type="text" name="address" id="address" class="form-control @error('address')
+                        <div class="desa">
+                            <label for="desa">Alamat Desa</label>
+                            <select class="form-control @error('desa')
                         is-invalid
-                    @enderror" value="{{ $mitras->address }}">
-                            @error('address')
+                    @enderror" name="desa" id="desa">
+                                @if(count($desas)>0)
+                                @foreach ($desas as $desa)
+                                <option value='{{$desa->desa}}' {{($mitras->desa === $desa->desa) ? 'selected' : ''}}>
+                                    {{$desa->desa}}</option>
+                                @endforeach
+                                @else
+                                <option value='Tidak ada data desa!!' disabled>Tidak ada data desa!!!
+                                </option>
+                                @endif
+                            </select>
+                            @error('desa')
+                            <div class="invalid-feedback ml-4">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+                        <div class="kecamatan">
+                            <label for="kecamatan">Alamat Kecamatan</label>
+                            <select class="form-control @error('kecamatan')
+                        is-invalid
+                    @enderror" name="kecamatan" id="kecamatan">
+                                @if(count($kecamatans)>0)
+                                @foreach ($kecamatans as $kecamatan)
+                                <option value='{{$kecamatan->kecamatan}}'
+                                    {{($mitras->kecamatan === $kecamatan->kecamatan) ? 'selected' : ''}}>
+                                    {{$kecamatan->kecamatan}}</option>
+                                @endforeach
+                                @else
+                                <option value='Tidak ada data kecamatan!!' disabled>Tidak ada data kecamatan!!!
+                                </option>
+                                @endif
+                            </select>
+                            @error('kecamatan')
                             <div class="invalid-feedback ml-4">
                                 {{ $message }}
                             </div>

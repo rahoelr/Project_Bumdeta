@@ -12,6 +12,9 @@
                     <a href="/home" class="nav-link">Beranda</a>
                 </li>
                 <li class="nav-item">
+                    <a href="/desa" class="nav-link">Desa</a>
+                </li>
+                <li class="nav-item">
                     <a href="/produk" class="nav-link">Produk</a>
                 </li>
                 <li class="nav-item">
