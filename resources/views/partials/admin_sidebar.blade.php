@@ -9,7 +9,7 @@
         <a href="/db_admin-landing/1"
             class="list-group-item list-group-item-action dashboard-admin {{($title === "| Landing Page") ? 'active' : ''}}">Landing
             Page</a>
-        <a href="/db_admin-desa"
+        <a href="/admin-desas"
             class="list-group-item list-group-item-action dashboard-admin {{($title === "| Desa") ? 'active' : ''}}">Desa</a>
         <a href="/db_admin-product"
             class="list-group-item list-group-item-action dashboard-admin {{($title === "| Product") ? 'active' : ''}}">Produk</a>

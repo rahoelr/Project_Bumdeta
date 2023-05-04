@@ -14,18 +14,15 @@
                 <form action="/sort-desa" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="row">
-                        <div class="col-4" data-aos="fade-up">
-                            <input type="checkbox" name="Kecamatan Kotagede" id="Kecamatan Kotagede" value="yes"><span
-                                class="inpt-sort">Kecamatan Kotagede</span>
+                        @php
+                        $i = 100;
+                        @endphp
+                        @foreach ($kecamatans as $kecamatan)
+                        <div class="col-4 mb-2" data-aos="fade-up">
+                            <input type="checkbox" name="{{$kecamatan->kecamatan}}" id="{{$kecamatan->kecamatan}}"
+                                value="yes"><span class="inpt-sort">Kecamatan {{$kecamatan->kecamatan}}</span>
                         </div>
-                        <div class="col-4" data-aos="fade-up">
-                            <input type="checkbox" name="Kecamatan Kotagede" id="Kecamatan Kotagede" value="yes"><span
-                                class="inpt-sort">Kecamatan Kotagede</span>
-                        </div>
-                        <div class="col-4" data-aos="fade-up">
-                            <input type="checkbox" name="Kecamatan Kotagede" id="Kecamatan Kotagede" value="yes"><span
-                                class="inpt-sort">Kecamatan Kotagede</span>
-                        </div>
+                        @endforeach
                     </div>
                     <button type="submit" class="btn-sort">Sortir</button>
                 </form>
@@ -44,7 +41,7 @@
                     <a href="/detail_desa/{{$desa->id}}" class="component-products d-block">
                         <div class="products-thumbnail mitra-thumbnail">
                             <div class="products-image" style="
-                                background-image: url('{{asset("storage/mitra_images/".$desa->images)}}');
+                                background-image: url('{{asset("storage/desa_images/".$desa->images)}}');
                             "></div>
                         </div>
                         <div class="products-title">Desa {{$desa->desa}}</div>

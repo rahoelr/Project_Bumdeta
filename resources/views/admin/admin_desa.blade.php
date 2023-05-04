@@ -55,18 +55,18 @@
                 <h4>Tawangsari</h4>
             </div>
             <div class="row mt-4">
-                {{-- @php
-                $image = explode('|', $products->images);
+                @php
+                $image = explode('|', $desas->images);
                 @endphp
-                @foreach ($image as $item) --}}
+                @foreach ($image as $item)
                 <div class="col-md-3">
                     <div class="card mb-5" style="max-width: 20rem;">
-                        <a href="{{asset('img/desa.png')}}" class="example-image-link" data-lightbox="example-2"
-                            data-title="">
-                            <img src="{{asset('img/desa.png')}}" alt="image-1" class="card-img-top"></a>
+                        <a href="{{asset("storage/desa_images/".$item)}}" class="example-image-link"
+                            data-lightbox="example-2" data-title="{{ $item }}">
+                            <img src="{{asset("storage/desa_images/".$item)}}" alt="image-1" class="card-img-top"></a>
                     </div>
                 </div>
-                {{-- @endforeach --}}
+                @endforeach
             </div>
         </div>
         <div class="container">
@@ -74,36 +74,37 @@
                 <table class="table table-borderless">
                     <tr>
                         <th>Nama Desa</th>
-                        <td>Tawangsari</td>
+                        <td>{{$desas->desa}}</td>
                     </tr>
                     <tr>
                         <th>Kecamatan</th>
-                        <td>Caturtunggal</td>
+                        <td>{{$desas->kecamatan}}</td>
                     </tr>
                     <tr>
                         <th>Kabupaten/Kota</th>
-                        <td>Sleman</td>
+                        <td>{{$desas->kabupaten}}</td>
                     </tr>
                     <tr>
                         <th>Provinsi</th>
-                        <td>Daerah Istimewa Yogyakarta</td>
+                        <td>{{$desas->provinsi}}</td>
                     </tr>
                     <tr>
                         <th>Deskripsi</th>
                         <td>
-                            {{-- @php
-                            $paragraph = explode('<br />', $products->description);
+                            @php
+                            $paragraph = explode('<br />', $desas->description);
                             @endphp
-                            @foreach ($paragraph as $item) --}}
-                            <div>8yegf8eygr uyge riuygew igei uygweiuygr iweug iu</div>
-                            {{-- @endforeach --}}
+                            @foreach ($paragraph as $item)
+                            <div>{{$item}}</div>
+                            @endforeach
                         </td>
                     </tr>
                 </table>
             </div>
             <div class="d-flex justify-content-end">
-                <a href="/admin-desas/id/edit" class="btn btn-primary mr-2 mb-3 btn-edit text-light">Edit</a>
-                <form action="" method="POST">
+                <a href="/admin-desas/{{$desas->id}}/edit"
+                    class="btn btn-primary mr-2 mb-3 btn-edit text-light">Edit</a>
+                <form action="{{ route('admin-desas.destroy', $desas->id) }}" method="POST">
                     @method('DELETE')
                     {{ csrf_field() }}
                     <input type="hidden" name="id" value="id">

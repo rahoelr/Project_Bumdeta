@@ -66,23 +66,26 @@
                     </div>
                 </div>
                 <div class="row mt-4">
-                    {{-- @if(count($articles)>0)
-                    @foreach ($articles as $article) href="/db_admin-desa-detail/{{$desa->id}}"--}}
+                    @if(count($desas)>0)
+                    @foreach ($desas as $desa)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <a class="card card-dashboard-product d-block" href="/db_admin-desa-detail">
+                        <a class="card card-dashboard-product d-block" href="/db_admin-desa-detail/{{$desa->id}}">
                             <div class="card-body">
-                                <img src="{{asset('img/desa.png')}}" alt="" class="w-100 mb-2" />
-                                <div class="product-title">Tawangsari</div>
+                                @php
+                                $image = explode('|', $desa->images);
+                                @endphp
+                                <img src="{{asset("storage/desa_images/".$image[0])}}" alt="" class="w-100 mb-2" />
+                                <div class="product-title">{{ $desa->desa }}</div>
                             </div>
                         </a>
                     </div>
-                    {{-- @endforeach
+                    @endforeach
                     @else
                     <h3 class="text-center">Data desa tidak ditemukan!!!</h3>
-                    @endif --}}
+                    @endif
                 </div>
                 <div class="d-flex justify-content-center">
-                    {{-- {{ $articles->links() }} --}}
+                    {{ $desas->links() }}
                 </div>
             </div>
         </div>

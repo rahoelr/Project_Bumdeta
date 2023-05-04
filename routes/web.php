@@ -88,20 +88,11 @@ Route::get('/db_admin-team', [TeamController::class, 'index']);
 Route::get('/db_admin-team-detail/{id}', [TeamController::class, 'adminShow']);
 Route::get('/db_admin-user', [UserController::class, 'index']);
 Route::get('/db_admin-user-detail/{id}', [UserController::class, 'show']);
+Route::get('/db_admin-desa-detail/{id}', [DesaController::class, 'adminShow']);
 
 
 // dummy
 
-Route::get('/db_admin-desa', function () {
-    return view('admin.dashboard_admin_desa', [
-        "title" => "| Desa"
-    ]);
-});
-Route::get('/db_admin-desa-detail', function () {
-    return view('admin.admin_desa', [
-        "title" => "| Desa"
-    ]);
-});
 
 Route::get('/db_admin-jenis_usaha', function () {
     return view('admin.dashboard_admin_jenisUsaha', [

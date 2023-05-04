@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Desa;
+use App\Models\Kecamatan;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+
+date_default_timezone_set("Asia/Jakarta");
 
 class DesaController extends Controller
 {
@@ -14,7 +18,10 @@ class DesaController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.dashboard_admin_desa', [
+            "title" => "| Desa",
+            "desas" => Desa::orderBy('desa', 'asc')->paginate(20)
+        ]);
     }
 
     public function sort(Request $request)
@@ -37,7 +44,11 @@ class DesaController extends Controller
      */
     public function create()
     {
-        //
+        $data = array(
+            'title' => "| Desa",
+            'kecamatans' => Kecamatan::orderBy('kecamatan', 'asc')->get()
+        );
+        return view('admin.add_desa')->with($data);
     }
 
     /**
@@ -48,7 +59,38 @@ class DesaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'images' => 'required',
+                'desa' => 'required|unique:desas,desa|max:50',
+                'kecamatan' => 'required|max:30',
+                'kabupaten' => 'required|max:30',
+                'provinsi' => 'required|max:100',
+                'description' => 'required'
+            ]
+        );
+        $image = array();
+        if ($files = $request->file('images')) {
+            foreach ($files as $file) {
+                $filenameWithExt = $file->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $file->getClientOriginalExtension();
+                $filenameSimpan = $filename . '_' . time() . '.' . $extension;
+                $file->storeAs('public/desa_images', $filenameSimpan);
+                $thumbnailPath = public_path("storage/desa_images/{$filenameSimpan}");
+                $img = Image::make($thumbnailPath)->resize(923, 540)->save($thumbnailPath);
+                $image[] = $filenameSimpan;
+            }
+        }
+        $desa = new Desa;
+        $desa->images = implode('|', $image);
+        $desa->desa = $request->input('desa');
+        $desa->kecamatan = $request->input('kecamatan');
+        $desa->kabupaten = $request->input('kabupaten');
+        $desa->provinsi = $request->input('provinsi');
+        $desa->description = nl2br($request->input('description'));
+        $desa->save();
+        return redirect('admin-desas')->with('success', 'Berhasil Menambah Desa Baru!!');
     }
 
     /**
@@ -61,8 +103,18 @@ class DesaController extends Controller
     {
         return view('desa', [
             'title' => "| Desa",
-            "desas" => Desa::orderBy('desa', 'asc')->paginate(10)
+            "desas" => Desa::orderBy('desa', 'asc')->paginate(10),
+            'kecamatans' => Kecamatan::orderBy('kecamatan', 'asc')->get()
         ]);
+    }
+
+    public function adminShow($id)
+    {
+        $data = array(
+            'title' => "| Desa",
+        );
+        $desas = Desa::find($id);
+        return view('admin.admin_desa', compact('desas'))->with($data);
     }
 
     /**
@@ -73,7 +125,11 @@ class DesaController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.edit_desa', [
+            'title' => "| Desa",
+            'desa' => Desa::find($id),
+            'kecamatans' => Kecamatan::orderBy('kecamatan', 'asc')->get()
+        ]);
     }
 
     /**
@@ -85,7 +141,44 @@ class DesaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            [
+                'images' => 'required',
+                'desa' => 'required|max:50',
+                'kecamatan' => 'required|max:30',
+                'kabupaten' => 'required|max:30',
+                'provinsi' => 'required|max:100',
+                'description' => 'required'
+            ]
+        );
+        $desa = Desa::find($id);
+        $desa->desa = $request->input('desa');
+        $desa->kecamatan = $request->input('kecamatan');
+        $desa->kabupaten = $request->input('kabupaten');
+        $desa->provinsi = $request->input('provinsi');
+        $desa->description = nl2br($request->input('description'));
+        $image = array();
+        if ($files = $request->file('images')) {
+            if ($desa->images) {
+                $imgs = explode('|', $desa->images);
+                foreach ($imgs as $item) {
+                    unlink('storage/desa_images/' . $item);
+                }
+            }
+            foreach ($files as $file) {
+                $filenameWithExt = $file->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $file->getClientOriginalExtension();
+                $filenameSimpan = $filename . '_' . time() . '.' . $extension;
+                $file->storeAs('public/desa_images', $filenameSimpan);
+                $thumbnailPath = public_path("storage/desa_images/{$filenameSimpan}");
+                $img = Image::make($thumbnailPath)->resize(923, 540)->save($thumbnailPath);
+                $image[] = $filenameSimpan;
+            }
+        }
+        $desa->images = implode('|', $image);
+        $desa->update();
+        return redirect('admin-desas')->with('success', 'Berhasil diupdate!!');
     }
 
     /**
@@ -96,6 +189,14 @@ class DesaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $desa = Desa::find($id);
+        if ($desa->images) {
+            $image = explode('|', $desa->images);
+            foreach ($image as $item) {
+                unlink('storage/desa_images/' . $item);
+            }
+        }
+        $desa->delete();
+        return redirect('admin-desas')->with('success', 'Berhasil dihapus!!');
     }
 }
