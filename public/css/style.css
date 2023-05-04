@@ -762,3 +762,25 @@ footer .text-28 {
     background-color: #ff7261 !important;
     color: #eff2f7 !important;
 }
+
+.inpt-sort {
+    font-size: large;
+    font-weight: 600;
+    margin-left: 3px;
+}
+
+.btn-sort {
+    width: 7%;
+    height: 35px;
+    border-radius: 10px;
+    background-color: #FF8372;
+    border: 1px solid #FF8372;
+    font-weight: bold;
+    font-size: 15px;
+    color: #fff;
+    float: left;
+    display: block;
+    margin-top: 5px;
+    margin-right: 55.800px;
+    margin-bottom: 30px;
+}

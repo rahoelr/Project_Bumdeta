@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DesaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
@@ -34,6 +35,8 @@ Route::get('/tentang_kami', [AboutUsController::class, 'show']);
 
 Route::get('/mitra', [MitraController::class, 'show']);
 
+Route::get('/desa', [DesaController::class, 'show']);
+
 Route::get('/produk', [ProductController::class, 'list_product']);
 
 Route::get('/artikel', [ArticleController::class, 'show']);
@@ -41,6 +44,10 @@ Route::get('/artikel', [ArticleController::class, 'show']);
 Route::get('/detail-artikel/{id}', [ArticleController::class, 'detail_article']);
 
 Route::get('/detail_produk/{id}', [ProductController::class, 'details_product']);
+
+Route::get('/detail_desa/{id}', [DesaController::class, 'details_desa']);
+
+Route::post('/sort-desa', [DesaController::class, 'sort']);
 
 Route::resource('admin-products', 'App\Http\Controllers\ProductController');
 Route::resource('admin-mitras', 'App\Http\Controllers\MitraController');
@@ -52,6 +59,7 @@ Route::resource('users', 'App\Http\Controllers\UserController');
 Route::resource('admin-message', 'App\Http\Controllers\MessageController');
 Route::resource('admin-landing', 'App\Http\Controllers\LandingpageController');
 Route::resource('admin-users', 'App\Http\Controllers\UserController');
+Route::resource('admin-desas', 'App\Http\Controllers\DesaController');
 
 Auth::routes([
     'reset' => true,

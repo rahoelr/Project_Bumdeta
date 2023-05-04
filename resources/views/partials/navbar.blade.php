@@ -82,6 +82,9 @@
                 <li class="nav-item {{($title === "") ? 'active' : ''}}">
                     <a href="/home" class="nav-link">Beranda</a>
                 </li>
+                <li class="nav-item {{($title === "| Desa") ? 'active' : ''}}">
+                    <a href="/desa" class="nav-link">Desa</a>
+                </li>
                 <li class="nav-item {{($title === "| Product") ? 'active' : ''}}">
                     <a href="/produk" class="nav-link">Produk</a>
                 </li>
