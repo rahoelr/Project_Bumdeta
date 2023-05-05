@@ -723,12 +723,12 @@ footer .text-28 {
 
 .small-img-group {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 }
 
 .small-img-col {
-    flex-basis: 100%;
+    flex-basis: 25%;
     cursor: pointer;
 }
 
