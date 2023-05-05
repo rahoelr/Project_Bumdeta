@@ -26,6 +26,11 @@
                 <li class="nav-item">
                     <a href="/tentang_kami" class="nav-link">Tentang Kami</a>
                 </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" style="width: 40px; height:40px">
+                        <img src="{{asset("img/Search.svg")}}" alt=""/>
+                    </a>
+                </li>
                 <li class="nav-item active">
                     @auth
                     <a href="{{route("logout")}}" class="btn btn-success nav-link px-4 text-white">Log Out</a>

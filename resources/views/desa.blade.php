@@ -23,9 +23,9 @@
                                 value="yes"><span class="inpt-sort">Kecamatan {{$kecamatan->kecamatan}}</span>
                         </div>
                         @endforeach
-                    </div>
-                    <button type="submit" class="btn-sort">Sortir</button>
+                    </div><br>
                 </form>
+                <button type="submit" class="btn-sort"><center>Sortir</center></button>
             </div>
             <div class="row">
                 <div class="col-12" data-aos="fade-up">
