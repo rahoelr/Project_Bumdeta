@@ -93,3 +93,4 @@ Route::get('/db_admin-user-detail/{id}', [UserController::class, 'show']);
 Route::get('/db_admin-desa-detail/{id}', [DesaController::class, 'adminShow']);
 Route::get('/db_admin-jenis_usaha', [JenisUsahaController::class, 'index']);
 Route::get('/db_admin-usaha-detail/{id}', [JenisUsahaController::class, 'adminShow']);
+//tes
