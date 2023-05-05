@@ -12,6 +12,9 @@
                 <li class="nav-item {{($title === "") ? 'active' : ''}}">
                     <a href="/home" class="nav-link">Beranda</a>
                 </li>
+                <li class="nav-item {{($title === "| Desa") ? 'active' : ''}}">
+                    <a href="/desa" class="nav-link">Desa</a>
+                </li>
                 <li class="nav-item {{($title === "| Product") ? 'active' : ''}}">
                     <a href="/produk" class="nav-link">Produk</a>
                 </li>
@@ -23,6 +26,11 @@
                 </li>
                 <li class="nav-item {{($title === "| About Us") ? 'active' : ''}}">
                     <a href="/tentang_kami" class="nav-link">Tentang Kami</a>
+                </li>
+                <li class="nav-item {{($title === "| Search") ? 'active' : ''}}">
+                    <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" style="width: 40px; height:40px">
+                        <img src="{{asset("img/Search.svg")}}" alt=""/>
+                    </a>
                 </li>
             </ul>
             <ul class="navbar-nav d-none d-lg-flex">
@@ -96,6 +104,11 @@
                 </li>
                 <li class="nav-item {{($title === "| About Us") ? 'active' : ''}}">
                     <a href="/tentang_kami" class="nav-link">Tentang Kami</a>
+                </li>
+                <li class="nav-item {{($title === "| Search") ? 'active' : ''}}">
+                    <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" style="width: 40px; height:40px">
+                        <img src="{{asset("img/Search.svg")}}" alt=""/>
+                    </a>
                 </li>
                 <li class="nav-item">
                     @auth
