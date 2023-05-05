@@ -25,7 +25,9 @@
                         @endforeach
                     </div><br>
                 </form>
-                <button type="submit" class="btn-sort"><center>Sortir</center></button>
+                <button type="submit" class="btn-sort">
+                    <center>Sortir</center>
+                </button>
             </div>
             <div class="row">
                 <div class="col-12" data-aos="fade-up">
@@ -37,11 +39,14 @@
                 $i = 100;
                 @endphp
                 @foreach ($desas as $desa)
+                @php
+                $image = explode('|', $desa->images);
+                @endphp
                 <div class="col-6 col-md-4 col-lg-6" data-aos="fade-up" data-aos-delay="{{$i+=50}}">
                     <a href="/detail_desa/{{$desa->id}}" class="component-products d-block">
                         <div class="products-thumbnail mitra-thumbnail">
                             <div class="products-image" style="
-                                background-image: url('{{asset("storage/desa_images/".$desa->images)}}');
+                                background-image: url('{{asset("storage/desa_images/".$image[0])}}');
                             "></div>
                         </div>
                         <div class="products-title">Desa {{$desa->desa}}</div>

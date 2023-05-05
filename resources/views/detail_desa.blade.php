@@ -22,25 +22,25 @@
     <!-- Start section gallery -->
     <section class="container product">
         <div class="col">
-            <div class="col-lg-9 col-md-9 col-9">
+            <div class="col-lg-12 col-md-12 col-12">
                 @php
                 $image = explode('|', $desas->images);
                 @endphp
                 <div class="row">
                     <div class="col-lg-9 col-md-9 col-9">
                         <img class="img-fluid pb-1 w-100 products-details" id="MainImg"
-                            src="{{asset("storage/desa_images/".$image[0])}}" alt="" data-aos="zoom-in" data-aos-delay="200" 
-                            style="width:700px">
+                            src="{{asset("storage/desa_images/".$image[0])}}" alt="" data-aos="zoom-in"
+                            data-aos-delay="200">
                     </div>
                     <div class="col-lg-3 col-md-3 col-3" data-aos="fade-up">
-                            <div class="small-img-group">
-                                <div class="small-img-col thumb">
-                                    @foreach ($image as $item)
-                                    <img src="{{asset("storage/desa_images/".$item)}}" class="small-img w-100 pb-1" alt=""
-                                        data-aos="zoom-in" data-aos-delay="200">
-                                    @endforeach
-                                </div>
+                        <div class="small-img-group">
+                            <div class="small-img-col thumb">
+                                @foreach ($image as $item)
+                                <img src="{{asset("storage/desa_images/".$item)}}" class="small-img w-100 pb-3" alt=""
+                                    data-aos="zoom-in" data-aos-delay="200">
+                                @endforeach
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
