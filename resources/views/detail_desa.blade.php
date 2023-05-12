@@ -27,12 +27,12 @@
                 $image = explode('|', $desas->images);
                 @endphp
                 <div class="row">
-                    <div class="col-lg-9 col-md-9 col-9">
+                    <div class="col-lg-8 col-md-9 col-9">
                         <img class="img-fluid pb-1 w-100 products-details" id="MainImg"
                             src="{{asset("storage/desa_images/".$image[0])}}" alt="" data-aos="zoom-in"
                             data-aos-delay="200">
                     </div>
-                    <div class="col-lg-3 col-md-3 col-3" data-aos="fade-up">
+                    <div class="col-lg-4 col-md-3 col-3" data-aos="fade-up">
                         <div class="small-img-group">
                             <div class="small-img-col thumb">
                                 @foreach ($image as $item)
