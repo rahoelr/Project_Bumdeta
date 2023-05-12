@@ -58,8 +58,8 @@
             $i = 200;
             $j = 200;
             @endphp
-            @if (count($products) > 3)
-            @for ($k = 0; $k < 4; $k++) <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up"
+            @if (count($products) > 2)
+            @for ($k = 0; $k < 3; $k++) <div class="col-6 col-md-4 col-lg-4" data-aos="fade-up"
                 data-aos-delay="{{$i+=200}}">
                 @if ($products[$k]->mitra == $mitra->mitra_name)
                 @php
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <div class="products-text">
-                        {{$products[$k]->products_name}}
+                        {{$products[$k]->product_name}}
                     </div>
                 </a>
                 @endif
