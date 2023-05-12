@@ -58,8 +58,8 @@
             $i = 200;
             $j = 200;
             @endphp
-            @if (count($mitras) > 3)
-            @for ($k = 0; $k < 4; $k++) <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up"
+            @if (count($mitras) > 2)
+            @for ($k = 0; $k < 3; $k++) <div class="col-6 col-md-4 col-lg-4" data-aos="fade-up"
                 data-aos-delay="{{$i+=200}}">
                 @if ($mitras[$k]->desa == $desas->desa)
                 @php
