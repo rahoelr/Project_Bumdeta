@@ -46,6 +46,8 @@ Route::get('/detail-artikel/{id}', [ArticleController::class, 'detail_article'])
 
 Route::get('/detail_produk/{id}', [ProductController::class, 'details_product']);
 
+Route::get('/detail_mitra/{id}', [MitraController::class, 'details_mitra']);
+
 Route::get('/detail_desa/{id}', [DesaController::class, 'details_desa']);
 
 Route::post('/sort-desa', [DesaController::class, 'sort']);

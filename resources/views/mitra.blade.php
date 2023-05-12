@@ -12,15 +12,18 @@
                 @foreach ($mitras as $mitra)
                 <div class="col-6 col-md-4 col-lg-6" data-aos="fade-up" data-aos-delay="{{$i+=50}}">
                     <div class="component-products d-block">
-                        <div class="products-thumbnail mitra-thumbnail">
-                            <div class="products-image" style="
+                        <a href="/detail_mitra/{{$mitra->id}}" class="component-products d-block">
+                            <div class="products-thumbnail mitra-thumbnail">
+                                <div class="products-image" style="
                                 background-image: url('{{asset("storage/mitra_images/".$mitra->images)}}');
                             "></div>
-                        </div>
-                        <div class="products-title">{{$mitra->mitra_name}}</div>
-                        <div class="products-desc">Pemilik: {{$mitra->owner}}</div>
-                        <div class="products-desc">Jenis Usaha: {{$mitra->t_o_business}}</div>
-                        <div class="products-desc">Alamat: Desa {{$mitra->desa}}, Kecamatan {{$mitra->kecamatan}}</div>
+                            </div>
+                            <div class="products-title">{{$mitra->mitra_name}}</div>
+                            <div class="products-desc">Pemilik: {{$mitra->owner}}</div>
+                            <div class="products-desc">Jenis Usaha: {{$mitra->t_o_business}}</div>
+                            <div class="products-desc">Alamat: Desa {{$mitra->desa}}, Kecamatan {{$mitra->kecamatan}}
+                            </div>
+                        </a>
                     </div>
                 </div>
                 @endforeach

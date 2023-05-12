@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Desa;
+use App\Models\Mitra;
 use App\Models\Kecamatan;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Intervention\Image\Facades\Image;
 
 date_default_timezone_set("Asia/Jakarta");
@@ -34,6 +36,7 @@ class DesaController extends Controller
         return view('detail_desa', [
             'title' => "| Detail Desa",
             "desas" => Desa::find($id),
+            "mitras" => Mitra::orderBy('created_at', 'desc')->get()
         ]);
     }
 

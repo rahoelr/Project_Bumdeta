@@ -784,3 +784,8 @@ footer .text-28 {
     margin-right: 55.800px;
     margin-bottom: 30px;
 }
+
+.details-desa-section {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}

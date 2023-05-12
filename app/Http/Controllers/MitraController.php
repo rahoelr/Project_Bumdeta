@@ -6,6 +6,7 @@ use App\Models\Desa;
 use App\Models\Mitra;
 use App\Models\Kecamatan;
 use App\Models\JenisUsaha;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,15 @@ class MitraController extends Controller
         return view('admin.dashboard_admin_mitra', [
             "title" => "| Mitra",
             "mitras" => Mitra::orderBy('mitra_name', 'asc')->paginate(20)
+        ]);
+    }
+
+    public function details_mitra($id)
+    {
+        return view('detail_mitra', [
+            'title' => "| Detail Mitra",
+            "mitra" => Mitra::find($id),
+            "products" => Product::orderBy('created_at', 'desc')->get()
         ]);
     }
 
@@ -214,6 +224,6 @@ class MitraController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ["except" => ["show"]]);
+        $this->middleware('auth', ["except" => ["show", "details_mitra"]]);
     }
 }
