@@ -20,8 +20,29 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function search(Request $request)
     {
+        if ($request->search) {
+            return view('hasil_pencarian', [
+                "title" => $request->search,
+                "data" => Product::where('product_name', 'LIKE', '%' . $request->search . '%')->paginate(20)
+            ]);
+        } else {
+            return view('produk', [
+                "title" => "| Product",
+                "categories" => Category::orderBy('category', 'asc')->get(),
+                "products" => Product::orderBy('product_name', 'asc')->paginate(20)
+            ]);
+        }
+    }
+
+    public function sort($cate)
+    {
+        return view('sort_produk', [
+            "title" => 'Sorting Produk',
+            "kategori" => $cate,
+            "data" => Product::where('category', 'LIKE', '%' . $cate . '%')->paginate(20)
+        ]);
     }
 
     public function adminView()
@@ -83,7 +104,7 @@ class ProductController extends Controller
             [
                 'images' => 'required',
                 'product_name' => 'required|unique:products,product_name|max:50',
-                'category' => 'required|max:30',
+                'category' => 'required',
                 'price' => 'required|max:30',
                 'mitra' => 'required|max:30',
                 'p_number' => 'required|max:13',
@@ -103,10 +124,11 @@ class ProductController extends Controller
                 $image[] = $filenameSimpan;
             }
         }
+        $checkbox = join(',', $request->input('category'));
         $product = new Product;
         $product->images = implode('|', $image);
         $product->product_name = $request->input('product_name');
-        $product->category = $request->input('category');
+        $product->category = $checkbox;
         $product->price = $request->input('price');
         $product->description = nl2br($request->input('description'));
         $product->mitra = $request->input('mitra');
@@ -185,16 +207,17 @@ class ProductController extends Controller
             [
                 'images' => 'required',
                 'product_name' => 'required|max:50',
-                'category' => 'required|max:30',
+                'category' => 'required',
                 'price' => 'required|max:30',
                 'mitra' => 'required|max:30',
                 'p_number' => 'required|max:13',
                 'description' => 'required'
             ]
         );
+        $checkbox = join(',', $request->input('category'));
         $product = Product::find($id);
         $product->product_name = $request->input('product_name');
-        $product->category = $request->input('category');
+        $product->category = $checkbox;
         $product->price = $request->input('price');
         $product->description = nl2br($request->input('description'));
         $product->mitra = $request->input('mitra');
@@ -253,6 +276,6 @@ class ProductController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ["except" => ["details_product", "list_product"]]);
+        $this->middleware('auth', ["except" => ["details_product", "list_product", "search", "sort"]]);
     }
 }

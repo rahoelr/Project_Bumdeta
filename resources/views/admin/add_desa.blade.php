@@ -95,28 +95,6 @@
                             </div>
                             @enderror
                         </div>
-                        <div class="kabupaten">
-                            <label for="kabupaten">Nama Kabupaten</label>
-                            <input type="text" name="kabupaten" id="kabupaten" class="form-control @error('kabupaten')
-                        is-invalid
-                    @enderror" placeholder="Masukkan Nama Kabupaten" value="{{ old('kabupaten') }}">
-                            @error('kabupaten')
-                            <div class="invalid-feedback ml-4">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
-                        <div class="provinsi">
-                            <label for="provinsi">Nama Provinsi</label>
-                            <input type="text" name="provinsi" id="provinsi" class="form-control @error('provinsi')
-                        is-invalid
-                    @enderror" placeholder="Masukkan Nama Provinsi" value="{{ old('provinsi') }}">
-                            @error('provinsi')
-                            <div class="invalid-feedback ml-4">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
                         <div class="desc">
                             <label for="description">Deskripsi Singkat</label>
                             <textarea class="form-control @error('description')

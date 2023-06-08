@@ -84,24 +84,25 @@
                         </div>
                         <div class="category">
                             <label for="category">Kategori</label>
-                            <select class="form-control @error('category')
-                        is-invalid
-                    @enderror" name="category" id="category">
+                            <div class="row">
+                                @php
+                                $cate = explode(',', $products->category);
+                                $j = count($cate);
+                                @endphp
                                 @if(count($categories)>0)
                                 @foreach ($categories as $category)
-                                <option value='{{$category->category}}'
-                                    {{($products->category === $category->category) ? 'selected' : ''}}>
-                                    {{$category->category}}</option>
+                                <div class="col-3 mb-2" style="text-align: center;" data-aos="fade-up">
+                                    <input class="check-inpt" type="checkbox" name="category[]"
+                                        id="{{$category->category}}" value="{{$category->category}}" @for ($i=0; $i <
+                                        $j; $i++) {{($category->category ===  $cate[$i]) ? 'checked' : ''}} @endfor>
+                                    <p class="inpt-sort text-center" style="font-size: 14px;">{{$category->category}}
+                                    </p>
+                                </div>
                                 @endforeach
                                 @else
-                                <option value='No categories yet!!!' disabled>No categories yet!!!</option>
+                                <p class="inpt-sort text-center">No categories yet!!!</p>
                                 @endif
-                            </select>
-                            @error('category')
-                            <div class="invalid-feedback ml-4">
-                                {{ $message }}
                             </div>
-                            @enderror
                         </div>
                         <div class="Price">
                             <label for="price">Harga Produk</label>

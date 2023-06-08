@@ -19,15 +19,16 @@
                         @endphp
                         @foreach ($kecamatans as $kecamatan)
                         <div class="col-4 mb-2" data-aos="fade-up">
-                            <input type="checkbox" name="{{$kecamatan->kecamatan}}" id="{{$kecamatan->kecamatan}}"
-                                value="yes"><span class="inpt-sort">Kecamatan {{$kecamatan->kecamatan}}</span>
+                            <input type="checkbox" name="kecamatan[]" id="{{$kecamatan->kecamatan}}"
+                                value="{{$kecamatan->kecamatan}}"><span class="inpt-sort">Kecamatan
+                                {{$kecamatan->kecamatan}}</span>
                         </div>
                         @endforeach
-                    </div><br>
+                    </div>
+                    <button type="submit" class="btn-sort">
+                        <center>Sortir</center>
+                    </button>
                 </form>
-                <button type="submit" class="btn-sort">
-                    <center>Sortir</center>
-                </button>
             </div>
             <div class="row">
                 <div class="col-12" data-aos="fade-up">

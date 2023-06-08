@@ -52,6 +52,8 @@ Route::get('/detail_desa/{id}', [DesaController::class, 'details_desa']);
 
 Route::post('/sort-desa', [DesaController::class, 'sort']);
 
+Route::get('/sort-produk/{cate}', [ProductController::class, 'sort']);
+
 Route::resource('admin-products', 'App\Http\Controllers\ProductController');
 Route::resource('admin-mitras', 'App\Http\Controllers\MitraController');
 Route::resource('admin-articles', 'App\Http\Controllers\ArticleController');
@@ -73,6 +75,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/db_mitra/{id}', [ProductController::class, 'mitraViewlatest']);
 Route::get('/db_mitra-product/{id}', [ProductController::class, 'mitraView']);
+Route::get('/search', [ProductController::class, 'search']);
 Route::get('/db_mitra-toko/{id}', [MitraController::class, 'mitraView']);
 Route::get('/db_admin', [ProductController::class, 'adminViewlatest']);
 Route::get('/db_admin-landing/{id}', [LandingPageController::class, 'adminView']);

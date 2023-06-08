@@ -28,7 +28,36 @@ class DesaController extends Controller
 
     public function sort(Request $request)
     {
-        //
+        $arr = ['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'];
+        if (!empty($request->kecamatan)) {
+            $i = 0;
+            foreach ($request->kecamatan as $k) {
+                $arr[$i] = $k;
+                $i++;
+            }
+        }
+        // dd($arr);
+        return view('sort_desa', [
+            "title" => 'Sorting Desa',
+            "data" => Desa::where('kecamatan', '=', $arr[0])
+                ->orWhere('kecamatan', '=', $arr[1])
+                ->orWhere('kecamatan', '=', $arr[2])
+                ->orWhere('kecamatan', '=', $arr[3])
+                ->orWhere('kecamatan', '=', $arr[4])
+                ->orWhere('kecamatan', '=', $arr[5])
+                ->orWhere('kecamatan', '=', $arr[6])
+                ->orWhere('kecamatan', '=', $arr[7])
+                ->orWhere('kecamatan', '=', $arr[8])
+                ->orWhere('kecamatan', '=', $arr[9])
+                ->orWhere('kecamatan', '=', $arr[10])
+                ->orWhere('kecamatan', '=', $arr[11])
+                ->orWhere('kecamatan', '=', $arr[12])
+                ->orWhere('kecamatan', '=', $arr[13])
+                ->orWhere('kecamatan', '=', $arr[14])
+                ->orWhere('kecamatan', '=', $arr[15])
+                ->orWhere('kecamatan', '=', $arr[16])
+                ->paginate(20)
+        ]);
     }
 
     public function details_desa($id)
@@ -67,8 +96,6 @@ class DesaController extends Controller
                 'images' => 'required',
                 'desa' => 'required|unique:desas,desa|max:50',
                 'kecamatan' => 'required|max:30',
-                'kabupaten' => 'required|max:30',
-                'provinsi' => 'required|max:100',
                 'description' => 'required'
             ]
         );
@@ -89,8 +116,6 @@ class DesaController extends Controller
         $desa->images = implode('|', $image);
         $desa->desa = $request->input('desa');
         $desa->kecamatan = $request->input('kecamatan');
-        $desa->kabupaten = $request->input('kabupaten');
-        $desa->provinsi = $request->input('provinsi');
         $desa->description = nl2br($request->input('description'));
         $desa->save();
         return redirect('admin-desas')->with('success', 'Berhasil Menambah Desa Baru!!');
@@ -149,16 +174,12 @@ class DesaController extends Controller
                 'images' => 'required',
                 'desa' => 'required|max:50',
                 'kecamatan' => 'required|max:30',
-                'kabupaten' => 'required|max:30',
-                'provinsi' => 'required|max:100',
                 'description' => 'required'
             ]
         );
         $desa = Desa::find($id);
         $desa->desa = $request->input('desa');
         $desa->kecamatan = $request->input('kecamatan');
-        $desa->kabupaten = $request->input('kabupaten');
-        $desa->provinsi = $request->input('provinsi');
         $desa->description = nl2br($request->input('description'));
         $image = array();
         if ($files = $request->file('images')) {

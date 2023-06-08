@@ -74,10 +74,11 @@
                             <div class="card-body">
                                 @php
                                 $image = explode('|', $product->images);
+                                $cate = explode(',', $product->category);
                                 @endphp
                                 <img src="{{asset("storage/product_images/".$image[0])}}" alt="" class="w-100 mb-2" />
                                 <div class="product-title">{{ $product->product_name }}</div>
-                                <div class="product-category">{{ $product->category }}</div>
+                                <div class="product-category">{{ $cate[0] }}</div>
                             </div>
                         </a>
                     </div>

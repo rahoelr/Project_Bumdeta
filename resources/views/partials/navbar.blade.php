@@ -28,8 +28,9 @@
                     <a href="/tentang_kami" class="nav-link">Tentang Kami</a>
                 </li>
                 <li class="nav-item {{($title === "| Search") ? 'active' : ''}}">
-                    <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" style="width: 40px; height:40px">
-                        <img src="{{asset("img/Search.svg")}}" alt=""/>
+                    <a id="openModalBtn" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        style="width: 40px; height:40px">
+                        <img src="{{asset("img/Search.svg")}}" alt="" />
                     </a>
                 </li>
             </ul>
@@ -75,6 +76,48 @@
         </div>
     </div>
 </nav>
+<div id="searchModal" class="modal-search">
+    <!-- Modal content -->
+    <div class="modal-content-search">
+        <span class="close">&times;</span>
+        <div class="container">
+            <form action="/search" method="GET">
+                <div class="input-group input-group-lg">
+                    <input type="search" name="search" id="form1" class="form-control search-form"
+                        placeholder="Cari Produk Yang Anda Inginkan" aria-label="Search" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    // Get the modal element
+    var modal = document.getElementById("searchModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("openModalBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Open the modal when the button is clicked
+    btn.onclick = function () {
+        modal.style.display = "block";
+    };
+
+    // Close the modal when the <span> (close button) is clicked
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    // Close the modal when the user clicks outside of it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+
+</script>
 @endauth
 @guest
 <nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top navbar-fixed-top" data-aos="fade-down">
@@ -106,8 +149,9 @@
                     <a href="/tentang_kami" class="nav-link">Tentang Kami</a>
                 </li>
                 <li class="nav-item {{($title === "| Search") ? 'active' : ''}}">
-                    <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" style="width: 40px; height:40px">
-                        <img src="{{asset("img/Search.svg")}}" alt=""/>
+                    <a id="openModalBtn" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        style="width: 40px; height:40px">
+                        <img src="{{asset("img/Search.svg")}}" alt="" />
                     </a>
                 </li>
                 <li class="nav-item">
@@ -122,4 +166,46 @@
         </div>
     </div>
 </nav>
+<div id="searchModal" class="modal-search">
+    <!-- Modal content -->
+    <div class="modal-content-search">
+        <span class="close">&times;</span>
+        <div class="container">
+            <form action="/search" method="GET">
+                <div class="input-group input-group-lg">
+                    <input type="search" name="search" id="form1" class="form-control search-form"
+                        placeholder="Cari Produk Yang Anda Inginkan" aria-label="Search" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    // Get the modal element
+    var modal = document.getElementById("searchModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("openModalBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Open the modal when the button is clicked
+    btn.onclick = function () {
+        modal.style.display = "block";
+    };
+
+    // Close the modal when the <span> (close button) is clicked
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    // Close the modal when the user clicks outside of it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+
+</script>
 @endguest

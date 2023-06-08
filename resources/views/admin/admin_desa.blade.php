@@ -50,9 +50,9 @@
         <div class="container">
             <h1>Detail Desa</h1>
             <div class="d-flex justify-content-start mt-4">
-                <a href="/db_admin-desa" class="mr-4"><img class="img-back mb-2" src="{{asset('img/back.png')}}"
+                <a href="/admin-desas" class="mr-4"><img class="img-back mb-2" src="{{asset('img/back.png')}}"
                         alt=""></a>
-                <h4>Tawangsari</h4>
+                <h4>Desa {{$desas->desa}}</h4>
             </div>
             <div class="row mt-4">
                 @php
@@ -79,14 +79,6 @@
                     <tr>
                         <th>Kecamatan</th>
                         <td>{{$desas->kecamatan}}</td>
-                    </tr>
-                    <tr>
-                        <th>Kabupaten/Kota</th>
-                        <td>{{$desas->kabupaten}}</td>
-                    </tr>
-                    <tr>
-                        <th>Provinsi</th>
-                        <td>{{$desas->provinsi}}</td>
                     </tr>
                     <tr>
                         <th>Deskripsi</th>
