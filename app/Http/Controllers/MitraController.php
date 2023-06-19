@@ -7,6 +7,7 @@ use App\Models\Mitra;
 use App\Models\Kecamatan;
 use App\Models\JenisUsaha;
 use App\Models\Product;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -61,13 +62,25 @@ class MitraController extends Controller
      */
     public function create()
     {
+        $client1 = new Client();
+        $url1 = "http://localhost/UAS_PSAIT_API/kecamatan_api.php";
+
+        $response1 = $client1->request('GET', $url1, [
+            'verify'  => false,
+        ]);
+        $responseBodyKecamatan = json_decode($response1->getBody(), true);
+        $client = new Client();
+        $url = "http://localhost/UAS_PSAIT_API/jenis_usaha_api.php";
+
+        $response = $client->request('GET', $url, [
+            'verify'  => false,
+        ]);
+        $responseBodyUsaha = json_decode($response->getBody(), true);
         $data = array(
             'title' => "| Mitra",
-            "usahas" => JenisUsaha::orderBy('jenisUsaha', 'asc')->get(),
-            "desas" => Desa::orderBy('desa', 'asc')->get(),
-            'kecamatans' => Kecamatan::orderBy('kecamatan', 'asc')->get()
+            "desas" => Desa::orderBy('desa', 'asc')->get()
         );
-        return view('admin.add_mitra')->with($data);
+        return view('admin.add_mitra', compact('responseBodyKecamatan', 'responseBodyUsaha'))->with($data);
     }
 
     /**

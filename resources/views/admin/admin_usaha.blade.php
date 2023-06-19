@@ -59,25 +59,25 @@
                 <table class="table table-borderless">
                     <tr>
                         <th>id</th>
-                        <td>{{$jenisUsahas->id}}</td>
+                        <td>{{$responseBody["data"][0]["id"]}}</td>
                     </tr>
                     <tr>
                         <th>Tanggal Dibuat</th>
-                        <td>{{$jenisUsahas->updated_at}}</td>
+                        <td>{{$responseBody["data"][0]["created_at"]}}</td>
                     </tr>
                     <tr>
                         <th>Nama Jenis Usaha</th>
-                        <td>{{$jenisUsahas->jenisUsaha}}</td>
+                        <td>{{$responseBody["data"][0]["jenisUsaha"]}}</td>
                     </tr>
                 </table>
             </div>
             <div class="d-flex justify-content-end">
-                <a href="/admin-jenisUsahas/{{$jenisUsahas->id}}/edit"
+                <a href="/admin-jenisUsahas/{{$responseBody["data"][0]["id"]}}/edit"
                     class="btn btn-primary mr-2 mb-3 btn-edit text-light">Edit</a>
-                <form action="{{ route('admin-jenisUsahas.destroy', $jenisUsahas->id) }}" method="POST">
+                <form action="{{ route('admin-jenisUsahas.destroy', $responseBody["data"][0]["id"]) }}" method="POST">
                     @method('DELETE')
                     {{ csrf_field() }}
-                    <input type="hidden" name="id" value="{{ $jenisUsahas->id }}">
+                    <input type="hidden" name="id" value="{{ $responseBody["data"][0]["id"] }}">
                     <button type="button" class="btn btn-danger btn-delete" data-toggle="modal"
                         data-target="#modalConfirmDelete">
                         Delete

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JenisUsaha;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class JenisUsahaController extends Controller
@@ -14,10 +15,17 @@ class JenisUsahaController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard_admin_jenisUsaha', [
-            "title" => "| Jenis Usaha",
-            "jenisUsahas" => JenisUsaha::orderBy('jenisUsaha', 'asc')->paginate(20)
+        $client = new Client();
+        $url = "http://localhost/UAS_PSAIT_API/jenis_usaha_api.php";
+
+        $response = $client->request('GET', $url, [
+            'verify'  => false,
         ]);
+        $responseBody = json_decode($response->getBody(), true);
+        // dd($responseBody["data"]);
+        return view('admin.dashboard_admin_jenisUsaha', [
+            "title" => "| Jenis Usaha"
+        ], compact('responseBody'));
     }
 
     /**
@@ -46,9 +54,15 @@ class JenisUsahaController extends Controller
                 'jenisUsaha' => 'required|unique:jenis_usahas,jenisUsaha'
             ]
         );
-        $jenisUsaha = new JenisUsaha;
-        $jenisUsaha->jenisUsaha = $request->input('jenisUsaha');
-        $jenisUsaha->save();
+        $client = new Client();
+        $url = "http://localhost/UAS_PSAIT_API/jenis_usaha_api.php";
+        $form_params = [
+            'jenisUsaha'             => $request->input('jenisUsaha')
+        ];
+        $response = $client->request('POST', $url, [
+            'form_params' => $form_params
+        ]);
+        $responseBody = json_decode($response->getBody(), true);
         return redirect('db_admin-jenis_usaha')->with('success', 'Berhasil Menambah Jenis Usaha Baru!!');
     }
 
@@ -68,8 +82,15 @@ class JenisUsahaController extends Controller
         $data = array(
             'title' => "| Jenis Usaha",
         );
-        $jenisUsahas = JenisUsaha::find($id);
-        return view('admin.admin_usaha', compact('jenisUsahas'))->with($data);
+        $client = new Client();
+        $url = "http://localhost/UAS_PSAIT_API/jenis_usaha_api.php?id=" . $id;
+
+        $response = $client->request('GET', $url, [
+            'verify'  => false,
+        ]);
+        $responseBody = json_decode($response->getBody(), true);
+        // dd($responseBody["data"]);
+        return view('admin.admin_usaha', compact('responseBody'))->with($data);
     }
 
     /**
@@ -80,10 +101,20 @@ class JenisUsahaController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.edit_usaha', [
+        $data = array(
             'title' => "| Jenis Usaha",
-            'jenisUsahas' => JenisUsaha::find($id)
+        );
+        $client = new Client();
+        $url = "http://localhost/UAS_PSAIT_API/jenis_usaha_api.php?id=" . $id;
+
+        $response = $client->request('GET', $url, [
+            'verify'  => false,
         ]);
+        $responseBody = json_decode($response->getBody(), true);
+        // dd($responseBody["data"]);
+        return view('admin.edit_usaha', [
+            'title' => "| Jenis Usaha"
+        ], compact('responseBody'));
     }
 
     /**
@@ -100,9 +131,15 @@ class JenisUsahaController extends Controller
                 'jenisUsaha' => 'required'
             ]
         );
-        $jenisUsaha = JenisUsaha::find($id);
-        $jenisUsaha->jenisUsaha = $request->input('jenisUsaha');
-        $jenisUsaha->update();
+        $client = new Client();
+        $url = "http://localhost/UAS_PSAIT_API/jenis_usaha_api.php?id=" . $id;
+        $form_params = [
+            'jenisUsaha'             => $request->input('jenisUsaha')
+        ];
+        $response = $client->request('POST', $url, [
+            'form_params' => $form_params
+        ]);
+        $responseBody = json_decode($response->getBody(), true);
         return redirect('db_admin-jenis_usaha')->with('success', 'Berhasil diupdate!!');
     }
 
@@ -114,8 +151,13 @@ class JenisUsahaController extends Controller
      */
     public function destroy($id)
     {
-        $jenisUsaha = JenisUsaha::find($id);
-        $jenisUsaha->delete();
+        $client = new Client();
+        $url = "http://localhost/UAS_PSAIT_API/jenis_usaha_api.php?id=" . $id;
+
+        $response = $client->request('DELETE', $url, [
+            'verify'  => false,
+        ]);
+        $responseBody = json_decode($response->getBody(), true);
         return redirect('db_admin-jenis_usaha')->with('success', 'Berhasil dihapus!!');
     }
 }

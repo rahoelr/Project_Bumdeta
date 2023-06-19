@@ -67,31 +67,28 @@
                     </div>
                 </div>
                 <div class="row mt-4">
-                    @if(count($jenisUsahas)>0)
-                    @foreach ($jenisUsahas as $usaha)
-                    <div class="col-12 mt-2">
-                        <a class="card card-list d-block" href="/db_admin-usaha-detail/{{$usaha->id}}">
+                    @if(count($responseBody["data"])>0)
+                    @for ($i = 0; $i < count($responseBody["data"]); $i++) <div class="col-12 mt-2">
+                        <a class="card card-list d-block"
+                            href="/db_admin-usaha-detail/{{$responseBody["data"][$i]["id"]}}">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-11">{{$usaha->jenisUsaha}}</div>
+                                    <div class="col-md-11">{{$responseBody["data"][$i]["jenisUsaha"]}}</div>
                                     <div class="col-md-1 d-none d-md-block">
                                         <img src="{{asset('img/dashboard-arrow-right.svg')}}" alt="" />
                                     </div>
                                 </div>
                             </div>
                         </a>
-                    </div>
-                    @endforeach
-                    @else
-                    <h3 class="text-center">Tidak terdapat data jenis usaha!!!</h3>
-                    @endif
                 </div>
-            </div>
-            <div class="d-flex justify-content-center">
-                {{ $jenisUsahas->links() }}
+                @endfor
+                @else
+                <h3 class="text-center">Tidak terdapat data jenis usaha!!!</h3>
+                @endif
             </div>
         </div>
     </div>
+</div>
 </div>
 </div>
 <!-- /#page-content-wrapper -->
