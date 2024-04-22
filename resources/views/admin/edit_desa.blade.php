@@ -81,16 +81,16 @@
                             <select class="form-control @error('kecamatan')
                         is-invalid
                     @enderror" name="kecamatan" id="kecamatan">
-                                @if(count($kecamatans)>0)
-                                @foreach ($kecamatans as $kecamatan)
-                                <option value='{{$kecamatan->kecamatan}}'
-                                    {{($desa->kecamatan === $kecamatan->kecamatan) ? 'selected' : ''}}>
-                                    {{$kecamatan->kecamatan}}</option>
-                                @endforeach
-                                @else
-                                <option value='Tidak ada data kecamatan!!!' disabled>Tidak ada data kecamatan!!!
-                                </option>
-                                @endif
+                                @if(count($responseBody["data"])>0)
+                                @for ($i = 0; $i < count($responseBody["data"]); $i++) <option
+                                    value='{{$responseBody["data"][$i]["kecamatan"]}}'
+                                    {{($desa->kecamatan === $responseBody["data"][$i]["kecamatan"]) ? 'selected' : ''}}>
+                                    {{$responseBody["data"][$i]["kecamatan"]}}</option>
+                                    @endfor
+                                    @else
+                                    <option value='Tidak ada data kecamatan!!!' disabled>Tidak ada data kecamatan!!!
+                                    </option>
+                                    @endif
                             </select>
                             @error('category')
                             <div class="invalid-feedback ml-4">

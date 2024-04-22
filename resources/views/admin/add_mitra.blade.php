@@ -94,15 +94,16 @@
                             <select class="form-control @error('t_o_business')
                         is-invalid
                     @enderror" name="t_o_business" id="t_o_business">
-                                @if(count($usahas)>0)
-                                @foreach ($usahas as $usaha)
-                                <option value='{{$usaha->jenisUsaha}}'
-                                    {{($usaha->jenisUsaha ===  old('t_o_business')) ? 'selected' : ''}}>
-                                    {{$usaha->jenisUsaha}}</option>
-                                @endforeach
-                                @else
-                                <option value='Tidak ada jenis usaha!!!' disabled>Tidak ada data jenis usaha!!!</option>
-                                @endif
+                                @if(count($responseBodyUsaha["data"])>0)
+                                @for ($i = 0; $i < count($responseBodyUsaha["data"]); $i++) <option
+                                    value='{{$responseBodyUsaha["data"][$i]["jenisUsaha"]}}'
+                                    {{($responseBodyUsaha["data"][$i]["jenisUsaha"] ===  old('t_o_business')) ? 'selected' : ''}}>
+                                    {{$responseBodyUsaha["data"][$i]["jenisUsaha"]}}</option>
+                                    @endfor
+                                    @else
+                                    <option value='Tidak ada jenis usaha!!!' disabled>Tidak ada data jenis usaha!!!
+                                    </option>
+                                    @endif
                             </select>
                             @error('t_o_business')
                             <div class="invalid-feedback ml-4">
@@ -135,15 +136,15 @@
                             <select class="form-control @error('kecamatan')
                         is-invalid
                     @enderror" name="kecamatan" id="kecamatan">
-                                @if(count($kecamatans)>0)
-                                @foreach ($kecamatans as $kecamatan)
-                                <option value='{{$kecamatan->kecamatan}}'
-                                    {{($kecamatan->kecamatan ===  old('kecamatan')) ? 'selected' : ''}}>
-                                    {{$kecamatan->kecamatan}}</option>
-                                @endforeach
-                                @else
-                                <option value='Tidak ada kecamatan!!!' disabled>Tidak ada data kecamatan!!!</option>
-                                @endif
+                                @if(count($responseBodyKecamatan["data"])>0)
+                                @for ($i = 0; $i < count($responseBodyKecamatan["data"]); $i++) <option
+                                    value='{{$responseBodyKecamatan["data"][$i]["kecamatan"]}}'
+                                    {{($responseBodyKecamatan["data"][$i]["kecamatan"] ===  old('kecamatan')) ? 'selected' : ''}}>
+                                    {{$responseBodyKecamatan["data"][$i]["kecamatan"]}}</option>
+                                    @endfor
+                                    @else
+                                    <option value='Tidak ada kecamatan!!!' disabled>Tidak ada data kecamatan!!!</option>
+                                    @endif
                             </select>
                             @error('kecamatan')
                             <div class="invalid-feedback ml-4">

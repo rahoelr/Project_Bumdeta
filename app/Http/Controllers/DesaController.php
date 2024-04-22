@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Desa;
 use App\Models\Mitra;
+use GuzzleHttp\Client;
 use App\Models\Kecamatan;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -77,10 +78,16 @@ class DesaController extends Controller
     public function create()
     {
         $data = array(
-            'title' => "| Desa",
-            'kecamatans' => Kecamatan::orderBy('kecamatan', 'asc')->get()
+            'title' => "| Desa"
         );
-        return view('admin.add_desa')->with($data);
+        $client = new Client();
+        $url = "http://localhost/UAS_PSAIT_API/kecamatan_api.php";
+
+        $response = $client->request('GET', $url, [
+            'verify'  => false,
+        ]);
+        $responseBody = json_decode($response->getBody(), true);
+        return view('admin.add_desa', compact('responseBody'))->with($data);
     }
 
     /**
@@ -129,11 +136,18 @@ class DesaController extends Controller
      */
     public function show()
     {
+        $client = new Client();
+        $url = "http://localhost/UAS_PSAIT_API/kecamatan_api.php";
+
+        $response = $client->request('GET', $url, [
+            'verify'  => false,
+        ]);
+        $responseBody = json_decode($response->getBody(), true);
+
         return view('desa', [
             'title' => "| Desa",
-            "desas" => Desa::orderBy('desa', 'asc')->paginate(10),
-            'kecamatans' => Kecamatan::orderBy('kecamatan', 'asc')->get()
-        ]);
+            "desas" => Desa::orderBy('desa', 'asc')->paginate(10)
+        ], compact('responseBody'));
     }
 
     public function adminShow($id)
@@ -153,11 +167,17 @@ class DesaController extends Controller
      */
     public function edit($id)
     {
+        $client = new Client();
+        $url = "http://localhost/UAS_PSAIT_API/kecamatan_api.php";
+
+        $response = $client->request('GET', $url, [
+            'verify'  => false,
+        ]);
+        $responseBody = json_decode($response->getBody(), true);
         return view('admin.edit_desa', [
             'title' => "| Desa",
-            'desa' => Desa::find($id),
-            'kecamatans' => Kecamatan::orderBy('kecamatan', 'asc')->get()
-        ]);
+            'desa' => Desa::find($id)
+        ], compact('responseBody'));
     }
 
     /**

@@ -49,9 +49,9 @@
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container">
             <h1>Edit Jenis Usaha</h1>
-            <a href="/db_admin-usaha-detail/{{$jenisUsahas->id}}"><img class="mr-4 img-back-form"
+            <a href="/db_admin-usaha-detail/{{$responseBody["data"][0]["id"]}}"><img class="mr-4 img-back-form"
                     src="{{asset('img/back.png')}}" alt=""></a>
-            <form action="{{ route('admin-jenisUsahas.update', $jenisUsahas->id) }}" method="POST"
+            <form action="{{ route('admin-jenisUsahas.update', $responseBody["data"][0]["id"]) }}" method="POST"
                 enctype="multipart/form-data">
                 @method('PUT')
                 {{ csrf_field() }}
@@ -61,7 +61,7 @@
                             <label for="jenisUsaha">Jenis Usaha</label>
                             <input type="text" name="jenisUsaha" id="jenisUsaha" class="form-control @error('jenisUsaha')
                         is-invalid
-                    @enderror" value="{{ $jenisUsahas->jenisUsaha }}">
+                    @enderror" value="{{ $responseBody["data"][0]["jenisUsaha"] }}">
                             @error('jenisUsaha')
                             <div class="invalid-feedback ml-4">
                                 {{ $message }}
