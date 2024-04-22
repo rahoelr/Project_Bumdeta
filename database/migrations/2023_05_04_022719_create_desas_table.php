@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('desa', 200);
             $table->string('kecamatan', 200);
-            $table->string('kabupaten', 200);
-            $table->string('provinsi', 200);
+            $table->string('kabupaten', 200)->nullable();
+            $table->string('provinsi', 200)->nullable();
             $table->mediumText('description');
             $table->string('images');
         });

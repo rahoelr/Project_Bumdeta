@@ -19,8 +19,11 @@ return new class extends Migration
             $table->string('mitra_name', 200);
             $table->string('owner', 200);
             $table->string('t_o_business', 200);
-            $table->string('address', 200);
-            $table->string('images');
+            $table->string('address', 200)->nullable(); // Tambahkan nullable()
+            $table->string('desa', 200); // Tambahkan kolom 'desa'
+            $table->string('kecamatan', 200); // Tambahkan kolom 'kecamatan'
+            $table->string('images')->nullable(); // Tambahkan nullable()
+            // $table->foreignId('userId')->constrained('users'); // Tambahkan kolom 'userId'
         });
     }
 

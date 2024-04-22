@@ -14,8 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('name');
-            $table->string('level');
+            if (!Schema::hasColumn('users', 'name')) {
+                $table->string('name');
+            }
+            if (!Schema::hasColumn('users', 'level')) {
+                $table->string('level');
+            }
         });
     }
 
