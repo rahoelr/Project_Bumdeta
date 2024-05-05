@@ -6,9 +6,9 @@
     <div class="list-group list-group-flush">
         <a href="/db_admin"
             class="list-group-item list-group-item-action dashboard-admin {{($title === "| Dashboard") ? 'active' : ''}}">Dashboard</a>
-        <a href="/db_admin-landing/1"
+        {{-- <a href="/db_admin-landing/1"
             class="list-group-item list-group-item-action dashboard-admin {{($title === "| Landing Page") ? 'active' : ''}}">Landing
-            Page</a>
+            Page</a> --}}
         <a href="/admin-desas"
             class="list-group-item list-group-item-action dashboard-admin {{($title === "| Desa") ? 'active' : ''}}">Desa</a>
         <a href="/db_admin-product"

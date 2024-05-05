@@ -66,6 +66,7 @@
                 <div class="row mt-3">
                     <div class="col-12 mt-2">
                         <h5 class="mb-3">Carousel</h5>
+                        @if($landings)
                         <a class="card card-list d-block" href="/db_admin-landing-detail/{{$landings->id}}">
                             @php
                             $image = explode('|', $landings->carousel);
@@ -85,9 +86,15 @@
                             </div>
                             @endforeach
                         </a>
+                        @else
+                        <p>Tidak ada data landings yang ditemukan.</p>
+                        <!-- Tampilkan formulir untuk mengisi data landing page -->
+                        <!-- Anda bisa menambahkan formulir sesuai kebutuhan -->
+                        @endif
                     </div>
                     <div class="col-12 mt-2">
                         <h5 class="mb-3">Testimoni</h5>
+                        @if($landings)
                         <a class="card card-list d-block" href="/db_admin-landing-detail/{{$landings->id}}">
                             @php
                             $image = explode('|', $landings->testimoni);
@@ -107,11 +114,18 @@
                             </div>
                             @endforeach
                         </a>
+                        @else
+                        <p>Tidak ada data landings yang ditemukan.</p>
+                        <!-- Tampilkan formulir untuk mengisi data testimoni -->
+                        <!-- Anda bisa menambahkan formulir sesuai kebutuhan -->
+                        @endif
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
+                    @if($landings)
                     <a href="/admin-landing/{{$landings->id}}/edit"
                         class="btn btn-primary mb-3 btn-edit text-light">Edit</a>
+                    @endif
                 </div>
             </div>
         </div>
