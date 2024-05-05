@@ -35,8 +35,8 @@
                     <hr class="mb-4 mt-0 d-inline-block mx-auto"
                         style="width: 60px; background-color: #bddd99; height: 2px" />
                     <p class="text-16" style="color: white">
-                        Bumdeta adalah sebuah website yang menampilkan berbagai seluk
-                        beluk tentang Bumdes Tawangsari seperti profil, produk, berita,
+                        Website ini bertujuan unutk menampilkan berbagai seluk
+                        beluk tentang Desa Ngargoyoso seperti profil, produk, berita,
                         dan lain-lain.
                     </p>
                 </div>
@@ -70,10 +70,10 @@
                     <hr class="mb-4 mt-0 d-inline-block mx-auto"
                         style="width: 60px; background-color: #bddd99; height: 2px" />
                     <p class="text-16" style="color: white">
-                        <i class="fas fa-phone mr-3"></i> 08123456789
+                        <i class="fas fa-phone mr-3"></i> 083105000088
                     </p>
                     <p class="text-16" style="color: white">
-                        <i class="fas fa-envelope mr-3"></i> bumdeta@gmail.com
+                        <i class="fas fa-envelope mr-3"></i> desa_ngargoyoso@gmail.com
                     </p>
                 </div>
                 <!-- Grid column -->
@@ -85,7 +85,7 @@
                     <hr class="mb-4 mt-0 d-inline-block mx-auto"
                         style="width: 60px; background-color: #bddd99; height: 2px" />
                     <p class="text-16" style="color: white">
-                        <i class="fas fa-home mr-3"></i> Desa Tawangsari, Sleman
+                        <i class="fas fa-home mr-3"></i> Desa Ngargoyoso, Karanganyar
                     </p>
                 </div>
                 <!-- Grid column -->
@@ -97,8 +97,8 @@
 
     <!-- Copyright -->
     <div class="text-center p-3 text-16" style="background-color: #396051">
-        © 2022 Copyright:
-        <a class="text-white text-16" href="https://bumdeta.com/">Bumdeta.com</a>
+        © 2024 Copyright:
+        <a class="text-white text-16" href="https://bumdeta.com/">Ngargoyoso.com</a>
     </div>
     <!-- Copyright -->
 </footer>
