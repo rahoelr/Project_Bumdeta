@@ -20,7 +20,7 @@ return new class extends Migration
             $table->mediumText('logo_meaning');
             $table->mediumText('visi');
             $table->mediumText('misi');
-            $table->string('images');
+            $table->string('images')->nullable();
         });
     }
 

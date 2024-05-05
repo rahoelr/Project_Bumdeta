@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Kecamatan;
 use App\Models\JenisUsaha;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User; // tambahkan import untuk kelas User
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -80,6 +82,14 @@ class DatabaseSeeder extends Seeder
         JenisUsaha::create([
             'jenisUsaha' => 'Jasa',
         ]);
+
+        // DB::table('about_us')->insert([
+        //     'history' => 'Sejarah Desa Ngargoyoso',
+        //     'logo_meaning' => 'Logo ini berarti',
+        //     'visi' => 'Tulis visi disini',
+        //     'misi' => 'Tulis misi disini',
+        //     'images' => 'public/img/Logo.png', // Ganti dengan nama file gambar yang ingin Anda gunakan
+        // ]);
 
     }
 }

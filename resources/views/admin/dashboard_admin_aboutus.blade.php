@@ -64,24 +64,22 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <form action="{{ route('admin-about_us.update', $about_us->id) }}" method="POST"
-                                    enctype="multipart/form-data">
+                                @if($about_us)
+                                <form action="{{ route('admin-about_us.update', $about_us->id) }}" method="POST" enctype="multipart/form-data">
                                     @method('PUT')
                                     {{ csrf_field() }}
                                     <div class="row mb-2">
                                         <div class="col-md-12">
                                             <div class="form-group text-center">
-                                                <label class="label-edit" for="file-input"><input type="file" class="form-control 
-                                                        @error('images')
-                                                            is-invalid
-                                                        @enderror" id="input-file" name="images" accept="image/*"
-                                                        onchange="previewImage()"><i class="fa-solid fa-upload"></i>
-                                                    &nbsp; Choose A Logo</label>
+                                                <label class="label-edit" for="file-input">
+                                                    <input type="file" class="form-control @error('images') is-invalid @enderror" id="input-file" name="images" accept="image/*" onchange="previewImage()">
+                                                    <i class="fa-solid fa-upload"></i> &nbsp; Choose A Logo
+                                                </label>
                                                 <p class="text-center" id="num-of-files">No File Chosen</p>
                                                 <div id="images">
-                                                    <figure><img
-                                                            src="{{asset("storage/aboutUs_images/".$about_us->images)}}"
-                                                            alt=""></figure>
+                                                    <figure>
+                                                        <img src="{{asset("storage/aboutUs_images/".$about_us->images)}}" alt="">
+                                                    </figure>
                                                 </div>
                                             </div>
                                         </div>
@@ -132,6 +130,68 @@
                                         </div>
                                     </div>
                                 </form>
+                                @else
+                                <form action="{{ route('admin-about_us.store') }}" method="POST" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <div class="row mb-2">
+                                        <div class="col-md-12">
+                                            <div class="form-group text-center">
+                                                <label class="label-edit" for="file-input">
+                                                    <input type="file" class="form-control @error('images') is-invalid @enderror" id="input-file" name="images" accept="image/*" onchange="previewImage()">
+                                                    <i class="fa-solid fa-upload"></i> &nbsp; Choose A Logo
+                                                </label>
+                                                <p class="text-center" id="num-of-files">No File Chosen</p>
+                                                <div id="images"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="history">Sejarah Singkat</label>
+                                                <textarea class="form-control @error('history')
+                                                        is-invalid
+                                                    @enderror" placeholder="Masukkan Sejarah Singkat Organisasi"
+                                                    name="history" id="history"
+                                                    rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="logo_meaning">Makna Logo</label>
+                                                <textarea class="form-control @error('logo_meaning')
+                                                is-invalid
+                                                @enderror" placeholder="Masukkan Makna Logo Organisasi"
+                                                    name="logo_meaning" id="logo_meaning"
+                                                    rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="visi">Visi</label>
+                                                <textarea class="form-control @error('visi')
+                                                is-invalid
+                                                @enderror" placeholder="Masukkan Visi Organisasi" name="visi" id="visi"
+                                                    rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="mission">Misi</label>
+                                                <textarea class="form-control @error('misi')
+                                                is-invalid
+                                                @enderror" placeholder="Masukkan Misi Organisasi" name="misi" id="misi"
+                                                    rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-right">
+                                            <button type="submit" class="btn px-5 btn-admin-ab-us">
+                                                Simpan Data
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                @endif
                             </div>
                         </div>
                     </div>
