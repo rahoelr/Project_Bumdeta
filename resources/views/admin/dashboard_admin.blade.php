@@ -85,7 +85,7 @@
                             @endfor
                             @else
                             @foreach ($products as $product)
-                            <a class="card card-list d-block" href="/dashboard-product-details.html">
+                            <a class="card card-list d-block" href="/db_admin-product-detail/{{$product->id}}">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-1">
@@ -103,6 +103,7 @@
                                     </div>
                                 </div>
                             </a>
+                            
                             @endforeach
                             @endif
                     </div>
