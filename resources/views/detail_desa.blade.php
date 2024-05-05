@@ -91,7 +91,7 @@
                         style="background-image: url('{{asset("storage/mitra_images/".$image[0])}}')"></div>
                 </div>
                 <div class="products-text">
-                    {{$mitras->mitra_name}}
+                    {{$mitra->mitra_name}}
                 </div>
             </a>
             @endif
