@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('kabupaten', 200);
             $table->string('provinsi', 200);
             $table->mediumText('description');
-            $table->string('images');
+            $table->string('images')->nullable();
         });
     }
 

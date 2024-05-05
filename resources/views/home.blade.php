@@ -18,21 +18,21 @@
                             <li data-target="#storeCarousel" data-slide-to="2"></li>
                         </ol>
                         <div class="carousel-inner">
-                            @php
+                            {{-- @php
                             $carousel = explode('|', $landings->carousel);
-                            @endphp
+                            @endphp --}}
                             <div class="carousel-item active">
-                                <img src="{{asset("storage/landingPage_images/".$carousel[0])}}" alt="Carousel Image"
+                                <img src="{{asset("storage/landingPage_images/carousel_1_new")}}" alt="Carousel Image"
                                     class="d-block w-100" />
                             </div>
-                            <div class="carousel-item">
+                            {{-- <div class="carousel-item">
                                 <img src="{{asset("storage/landingPage_images/".$carousel[1])}}" alt="Carousel Image"
                                     class="d-block w-100" />
                             </div>
                             <div class="carousel-item">
                                 <img src="{{asset("storage/landingPage_images/".$carousel[2])}}" alt="Carousel Image"
                                     class="d-block w-100" />
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -153,7 +153,7 @@
             @endif
         </div>
     </section>
-    <section class="testimoni-carousel">
+    {{-- <section class="testimoni-carousel">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12" data-aos="zoom-in" data-aos-delay="100">
@@ -184,7 +184,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <section class="store-new-products">
         <div class="container">
             <div class="row">

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('owner', 200);
             $table->string('t_o_business', 200);
             $table->string('address', 200);
-            $table->string('images');
+            $table->string('images')->nullable();
         });
     }
 
