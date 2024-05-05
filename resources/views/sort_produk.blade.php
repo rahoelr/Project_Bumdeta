@@ -36,7 +36,7 @@
                         @php
                         $image = explode('|', $product->images);
                         @endphp
-                        <a href="/detail_product/{{$product->id}}" class="component-products d-block">
+                        <a href="/detail_produk/{{$product->id}}" class="component-products d-block">
                             <div class="products-thumbnail">
                                 <div class="products-image" style="
                             background-image: url('{{asset("storage/product_images/".$image[0])}}');"></div>

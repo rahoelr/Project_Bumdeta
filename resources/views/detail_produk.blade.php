@@ -51,7 +51,7 @@
                 <p class="product-desc mb-0" data-aos="fade-up" data-aos-delay="100">{{$item}}</p>
                 @endforeach
                 <div class="col-lg-6 p-0 mt-2" data-aos="zoom-in">
-                    <a href="https://wa.me/6285866963759?text={{$message}}" target="_blank"
+                    <a href="https://wa.me/{{$products->p_number}}?text={{$message}}" target="_blank"
                         class="btn btn-success px4 text-white btn-block mb-3">Beli Sekarang</a>
                 </div>
             </div>
