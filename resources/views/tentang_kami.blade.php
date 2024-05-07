@@ -64,13 +64,17 @@
             $i = 100;
             @endphp
             @foreach ($teams as $team)
-            <div class="team" data-aos="fade-up" data-aos-delay="{{$i+=200}}">
-                <img src="{{asset("storage/team_images/".$team->images)}}">
-                <h4 class="fourth-title">{{ $team->name }}</h4>
-                <p>{{ $team->position }}</p>
+            <div class="team" data-aos="fade-up" data-aos-delay="{{$i+=200}}" style="position: relative; border-radius: 10px; overflow: hidden;">
+                <img src="{{asset("storage/team_images/".$team->images)}}" style="object-fit: cover; width: 100%; height: 100%; border-radius: 10px;">
+                <div style="position: absolute; bottom: 0; left: 0; right: 0; background-color: rgba(0, 0, 0, 0.5); padding: 10px;">
+                    <h4 class="fourth-title" style="color: white;">{{ $team->name }}</h4>
+                    <p style="color: white;">{{ $team->position }}</p>
+                </div>
             </div>
             @endforeach
         </div>
+        
+        
     </div>
 </div>
 @endsection
