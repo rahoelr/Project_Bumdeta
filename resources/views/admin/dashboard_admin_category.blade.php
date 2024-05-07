@@ -68,12 +68,10 @@
                 <div class="row mt-4">
                     @if(count($categories)>0)
                     @foreach ($categories as $category)
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <a class="card card-dashboard-product d-block"
-                            href="/db_admin-category-detail/{{$category->id}}">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                        <a class="card card-dashboard-product d-block" href="/db_admin-category-detail/{{$category->id}}">
                             <div class="card-body">
-                                <img src="{{asset("storage/category_images/".$category->images)}}" alt=""
-                                    class="w-100 mb-2" />
+                                <img src="{{asset("storage/category_images/".$category->images)}}" alt="" class="w-100 mb-2" />
                                 <div class="product-title text-center">
                                     {{ $category->category }}
                                 </div>
@@ -85,10 +83,12 @@
                     <h3 class="text-center">No categories yet!!!</h3>
                     @endif
                 </div>
+                
                 <div class="d-flex justify-content-center">
                     {{ $categories->links() }}
                 </div>
             </div>
+            
         </div>
     </div>
 </div>
