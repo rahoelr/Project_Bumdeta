@@ -22,7 +22,7 @@
             <span><i class="fa-solid fa-calendar-days"></i> {{$article->updated_at}}</span>
             <span><i class="fa-solid fa-user"></i> Penulis: {{$article->author}}</span>
         </div>
-        <img class="img-article" data-aos="zoom-in" src="{{asset("storage/article_images/".$article->images)}}" alt="">
+        <img class="img-article" style="border-radius:10px" data-aos="zoom-in" src="{{asset("storage/article_images/".$article->images)}}" alt="">
         <div data-aos="fade-up">
             @php
             $paragraph = explode('<br />', $article->description);

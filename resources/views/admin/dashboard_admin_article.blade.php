@@ -71,9 +71,10 @@
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <a class="card card-dashboard-product d-block" href="/db_admin-article-detail/{{$article->id}}">
                             <div class="card-body">
-                                <img src="{{asset("storage/article_images/".$article->images)}}" alt=""
-                                    class="w-100 mb-2" />
-                                <div class="product-title">
+                                <div style="position: relative; width: 100%; height: 200px; overflow: hidden; border-radius:10px">
+                                    <img src="{{asset("storage/article_images/".$article->images)}}" alt="" class="w-100" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); object-fit: cover; object-position: center; height: 100%;" />
+                                </div>
+                                <div class="product-title mt-3">
                                     {{ substr($article->title, 0, 23) }}...
                                 </div>
                                 <div class="product-category">{{ $article->updated_at }}</div>
@@ -88,6 +89,7 @@
                 <div class="d-flex justify-content-center">
                     {{ $articles->links() }}
                 </div>
+                
             </div>
         </div>
     </div>

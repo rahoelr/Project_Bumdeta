@@ -62,24 +62,27 @@
             </div>
             <div class="dashboard-content">
                 <div class="row mt-4">
-                    @if(count($users)>0)
-                    @foreach ($users as $user)
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <a class="card card-dashboard-product d-block" href="/db_admin-user-detail/{{$user->id}}">
-                            <div class="card-body">
-                                <img src="{{asset("storage/user_images/".$user->images)}}" alt="" class="w-100 mb-2" />
-                                <div class="product-title">{{ $user->name }}</div>
+                    @if(count($users) > 0)
+                        @foreach ($users as $user)
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <a class="card card-dashboard-product d-block" href="/db_admin-user-detail/{{$user->id}}">
+                                    <div class="card-body">
+                                        <div style="height: 300px; overflow: hidden; border-radius: 10px">
+                                            <img src="{{ asset("storage/user_images/".$user->images) }}" alt="" class="w-100" style="object-fit: cover; object-position: center; height: 100%;" />
+                                        </div>
+                                        <div class="product-title mt-3">{{ $user->name }}</div>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                    @endforeach
+                        @endforeach
                     @else
-                    <h3 class="text-center">No users yet!!!</h3>
+                        <h3 class="text-center">No users yet!!!</h3>
                     @endif
                 </div>
                 <div class="d-flex justify-content-center">
                     {{ $users->links() }}
                 </div>
+                
             </div>
         </div>
     </div>

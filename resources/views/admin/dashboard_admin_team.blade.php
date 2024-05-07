@@ -70,8 +70,10 @@
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <a class="card card-dashboard-product d-block" href="/db_admin-team-detail/{{$team->id}}">
                             <div class="card-body">
-                                <img src="{{asset("storage/team_images/".$team->images)}}" alt="" class="w-100 mb-2" />
-                                <div class="product-title">{{ $team->name }}</div>
+                                <div style="width: 100%; height: 300px; overflow: hidden; border-radius:10px">
+                                    <img src="{{asset("storage/team_images/".$team->images)}}" alt="" class="w-100" style="object-fit: cover; object-position: center; height: 100%;" />
+                                </div>
+                                <div class="product-title mt-3">{{ $team->name }}</div>
                                 <div class="product-category">{{ $team->position }}</div>
                             </div>
                         </a>
@@ -84,6 +86,7 @@
                 <div class="d-flex justify-content-center">
                     {{ $teams->links() }}
                 </div>
+                
             </div>
         </div>
     </div>
