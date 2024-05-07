@@ -67,64 +67,66 @@
                     <div class="col-12 mt-2">
                         <h5 class="mb-3">Carousel</h5>
                         @if($landings)
-                        <a class="card card-list d-block" href="/db_admin-landing-detail/{{$landings->id}}">
-                            @php
-                            $image = explode('|', $landings->carousel);
-                            $i = 1;
-                            @endphp
-                            @foreach ($image as $item)
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        <img src="{{asset("storage/landingPage_images/".$item)}}" alt="" />
-                                    </div>
-                                    <div class="col-md-10">Carousel {{$i++}}</div>
-                                    <div class="col-md-1 d-none d-md-block">
-                                        <img src="{{asset('img/dashboard-arrow-right.svg')}}" alt="" />
+                            @foreach (explode('|', $landings->carousel) as $index => $item)
+                                <div class="card card-list d-block">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <img src="{{asset("storage/landingPage_images/".$item)}}" alt="" />
+                                            </div>
+                                            <div class="col-md-10">Carousel {{$index + 1}}</div>
+                                            <div class="col-md-1 d-none d-md-block">
+                                                <img src="{{asset('img/dashboard-arrow-right.svg')}}" alt="" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
-                        </a>
                         @else
-                        <p>Tidak ada data landings yang ditemukan.</p>
-                        <!-- Tampilkan formulir untuk mengisi data landing page -->
-                        <!-- Anda bisa menambahkan formulir sesuai kebutuhan -->
+                            <form action="{{ route('store.carousel') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="carousel_images">Upload Carousel Images:</label>
+                                    <input type="file" class="form-control" id="carousel_images" name="carousel_images[]" multiple required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                         @endif
                     </div>
+
                     <div class="col-12 mt-2">
                         <h5 class="mb-3">Testimoni</h5>
                         @if($landings)
-                        <a class="card card-list d-block" href="/db_admin-landing-detail/{{$landings->id}}">
-                            @php
-                            $image = explode('|', $landings->testimoni);
-                            $i = 1;
-                            @endphp
-                            @foreach ($image as $item)
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        <img src="{{asset("storage/landingPage_images/".$item)}}" alt="" />
-                                    </div>
-                                    <div class="col-md-10">Testimoni {{$i++}}</div>
-                                    <div class="col-md-1 d-none d-md-block">
-                                        <img src="{{asset('img/dashboard-arrow-right.svg')}}" alt="" />
+                            @foreach (explode('|', $landings->testimoni) as $index => $item)
+                                <div class="card card-list d-block">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <img src="{{asset("storage/landingPage_images/".$item)}}" alt="" />
+                                            </div>
+                                            <div class="col-md-10">Testimoni {{$index + 1}}</div>
+                                            <div class="col-md-1 d-none d-md-block">
+                                                <img src="{{asset('img/dashboard-arrow-right.svg')}}" alt="" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
-                        </a>
                         @else
-                        <p>Tidak ada data landings yang ditemukan.</p>
-                        <!-- Tampilkan formulir untuk mengisi data testimoni -->
-                        <!-- Anda bisa menambahkan formulir sesuai kebutuhan -->
+                            <form action="{{ route('store.testimoni') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="testimoni_images">Upload Testimoni Images:</label>
+                                    <input type="file" class="form-control" id="testimoni_images" name="testimoni_images[]" multiple required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                         @endif
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
                     @if($landings)
-                    <a href="/admin-landing/{{$landings->id}}/edit"
-                        class="btn btn-primary mb-3 btn-edit text-light">Edit</a>
+                        <a href="/admin-landing/{{$landings->id}}/edit" class="btn btn-primary mb-3 btn-edit text-light">Edit</a>
                     @endif
                 </div>
             </div>

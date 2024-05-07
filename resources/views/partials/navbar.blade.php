@@ -1,5 +1,5 @@
 @auth
-<nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top navbar-fixed-top" data-aos="fade-down">
+<nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top navbar-fixed-top px-3" data-aos="fade-down">
     <div class="container">
         <a href="/home" class="navbar brand">
             <img src="{{ asset('img/logo_nav.svg') }}" alt="Logo" />
@@ -37,10 +37,10 @@
             <ul class="navbar-nav d-none d-lg-flex">
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown">
-                        <img src="{{asset("storage/user_images/".Auth::user()->images)}}" alt=""
-                            class="rounded-circle mr-2 profile-picture" />
+                        <img src="{{asset("storage/user_images/".Auth::user()->images)}}" alt="" class="rounded-circle mr-2 profile-picture" style="max-width: 100%; height: auto;" />
                         Hi, {{ Auth::user()->name }}
                     </a>
+                    
                     <div class="dropdown-menu">
                         @if (Auth::user()->level == 'admin')
                         <a href="/db_admin" class="dropdown-item">Dashboard</a>
@@ -120,7 +120,7 @@
 </script>
 @endauth
 @guest
-<nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top navbar-fixed-top" data-aos="fade-down">
+<nav class="navbar navbar-expand-lg navbar-light navbar-store fixed-top navbar-fixed-top px-3 mb-3" data-aos="fade-down">
     <div class="container">
         <a href="/home" class="navbar brand">
             <img src="{{ asset('img/logo_auth.svg') }}" alt="Logo" />

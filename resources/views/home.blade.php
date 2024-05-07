@@ -7,10 +7,10 @@
         {!! \Session::get('success') !!}
     </div>
     @endif
-    <section class="store-carousel">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12" data-aos="zoom-in">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-12" data-aos="zoom-in">
+                <div class="position-relative">
                     <div id="storeCarousel" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li class="active" data-target="#storeCarousel" data-slide-to="0"></li>
@@ -22,21 +22,27 @@
                             $carousel = explode('|', $landings->carousel);
                             @endphp --}}
                             <div class="carousel-item active">
-                                <img src="/img/desa.png" alt="Carousel Image" class="d-block w-100" />
-                            </div>
-                            {{-- <div class="carousel-item">
-                                <img src="{{asset("storage/landingPage_images/".$carousel[1])}}" alt="Carousel Image" class="d-block w-100" />
+                                <img src="/img/landing_page_text.svg" alt="Carousel Image" class="d-block w-100" style="max-height: 400px; object-fit: cover; border-radius: 10px;">
                             </div>
                             <div class="carousel-item">
-                                <img src="{{asset("storage/landingPage_images/".$carousel[2])}}" alt="Carousel Image" class="d-block w-100" />
-                            </div> --}}
+                                <img src="/img/landing_page_2.svg" alt="Carousel Image" class="d-block w-100" style="max-height: 400px; object-fit: cover; border-radius: 10px;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/img/landing_page_3.svg" alt="Carousel Image" class="d-block w-100" style="max-height: 400px; object-fit: cover; border-radius: 10px;">
+                            </div>
                         </div>
                     </div>
-                    
+                    {{-- <div class="carousel-caption d-none d-md-block position-absolute top-50 start-50 translate-middle">
+                        <h5>Teks di Atas Gambar</h5>
+                        <p>Deskripsi atau informasi tambahan</p>
+                    </div> --}}
                 </div>
             </div>
         </div>
+    </div>
     </section>
+    
+        
     <section class="store-trend-categories">
         <div class="container">
             <div class="row">
@@ -51,9 +57,10 @@
                 @foreach ($categories as $category)
                 <div class="col-6 col-md-3 col-lg-2" data-aos="fade-up" data-aos-delay="{{$i+=200}}">
                     <a href="/produk" class="component-categories d-block">
-                        <div class="categories-image">
-                            <img src="{{asset("storage/category_images/".$category->images)}}" alt="" class="w-100" />
+                        <div class="categories-image" style="border-radius: 10px;">
+                            <img src="{{asset("storage/category_images/".$category->images)}}" alt="" class="w-100" style="object-fit: cover; height: 100%; width: 100%;" />
                         </div>
+                        
                         <p class="categories-text">{{$category->category}}</p>
                     </a>
                 </div>
