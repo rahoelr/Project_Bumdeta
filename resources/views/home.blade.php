@@ -158,14 +158,14 @@
             @endif
         </div>
     </section>
-    <section class="testimoni-carousel">
-        <div class="container">
+    {{-- <section class="testimoni-carousel">
+        <div class="container"> --}}
             {{-- <div class="row">
                 <div class="col-12" data-aos="fade-up">
                     <h5>Testimoni</h5>
                 </div>
             </div> --}}
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-lg-12" data-aos="zoom-in" data-aos-delay="100">
                     @if($landings && $landings->testimoni)
                     <div id="testimoniCarousel" class="carousel slide" data-ride="carousel">
@@ -192,7 +192,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     
     <section class="store-new-products">
         <div class="container">
