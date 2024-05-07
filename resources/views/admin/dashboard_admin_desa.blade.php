@@ -74,7 +74,7 @@
                                 @php
                                 $image = explode('|', $desa->images);
                                 @endphp
-                                <img src="{{asset("storage/desa_images/".$image[0])}}" alt="" class="w-100 mb-2" />
+                                <img src="{{asset("storage/desa_images/".$image[0])}}" alt="" class="w-100 mb-2" style="border-radius: 10px" />
                                 <div class="product-title">{{ $desa->desa }}</div>
                             </div>
                         </a>

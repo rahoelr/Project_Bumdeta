@@ -71,9 +71,10 @@
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <a class="card card-dashboard-product d-block" href="/db_admin-mitra-detail/{{$mitra->id}}">
                             <div class="card-body">
-                                <img src="{{asset("storage/mitra_images/".$mitra->images)}}" alt=""
-                                    class="w-100 mb-2" />
-                                <div class="product-title">{{ $mitra->mitra_name }}</div>
+                                <div class="image-container" style="position:relative;width:100%;height:200px;overflow:hidden;border-radius:10px;">
+                                    <img src="{{asset("storage/mitra_images/".$mitra->images)}}" alt="" class="image" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);min-width:100%;min-height:100%;width:auto;height:auto;border-radius:20px;" />
+                                </div>
+                                <div class="product-title mt-3" >{{ $mitra->mitra_name }}</div>
                                 <div class="product-category">{{ $mitra->t_o_business }}</div>
                             </div>
                         </a>
@@ -87,6 +88,7 @@
                     {{ $mitras->links() }}
                 </div>
             </div>
+            
         </div>
     </div>
 </div>
