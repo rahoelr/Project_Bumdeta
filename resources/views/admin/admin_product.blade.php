@@ -48,7 +48,7 @@
     </nav>
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container">
-            <h1>Ddivetail Produk</h1>
+            <h1>Detail Produk</h1>
             <div class="d-flex justify-content-start mt-4">
                 @if (Auth::user()->level == 'admin')
                 <a href="/db_admin-product" class="mr-4"><img class="img-back mb-2" src="{{asset('img/back.png')}}"
