@@ -67,9 +67,9 @@
                         <a class="card card-dashboard-product d-block" href="/db_admin-product-detail/{{$product->id}}">
                             <div class="card-body">
                                 @php
-                                $image = explode('|', $product->images);
+                                $image = explode('|', $product->image1);
                                 @endphp
-                                <img src="{{asset("storage/product_images/".$image[0])}}" alt="" class="w-100 mb-2" />
+                                <img src="{{asset("storage/product_images/".$image[0])}}" alt="" class="w-100 mb-2" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px" />
                                 <div class="product-title">{{ $product->product_name }}</div>
                                 <div class="product-category">{{ $product->category }}</div>
                             </div>

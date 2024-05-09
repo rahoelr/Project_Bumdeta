@@ -69,9 +69,9 @@
                                 <div class="row">
                                     <div class="col-md-1">
                                         @php
-                                        $image = explode('|', $products[$j]->images);
+                                        $image = explode('|', $products[$j]->image1);
                                         @endphp
-                                        <img src="{{asset("storage/product_images/".$image[0])}}" alt="" />
+                                        <img src="{{asset("storage/product_images/".$image[0])}}" alt=""  />
                                     </div>
                                     <div class="col-md-4">{{$products[$j]->product_name}}</div>
                                     <div class="col-md-3">{{$products[$j]->price}}</div>
@@ -93,9 +93,9 @@
                                     <div class="row">
                                         <div class="col-md-1">
                                             @php
-                                            $image = explode('|', $product->images);
+                                            $image = explode('|', $product->image1);
                                             @endphp
-                                            <img src="{{asset("storage/product_images/".$image[0])}}" alt="" />
+                                            <img src="{{asset("storage/product_images/".$image[0])}}" alt="" style="object-fit: cover; border-radius: 4px"/>
                                         </div>
                                         <div class="col-md-4">{{$product->product_name}}</div>
                                         <div class="col-md-3">{{$product->price}}</div>
