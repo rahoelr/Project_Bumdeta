@@ -82,7 +82,7 @@
         @foreach ($mitras as $mitra)
         <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="{{$j+=200}}">
             @if ($mitra->desa == $desas->desa)
-            <a href="/detail-mitra/{{$mitra->id}}" class="component-products d-block">
+            <a href="/detail_mitra/{{$mitra->id}}" class="component-products d-block">
                 @php
                 $image = explode('|', $mitra->images);
                 @endphp

@@ -69,18 +69,19 @@
                                 <div class="row">
                                     <div class="col-md-1">
                                         @php
-                                        $image = explode('|', $products[$k]->images);
+                                            $image = explode('|', $products[$k]->image1);
                                         @endphp
-                                        <img src="{{asset("storage/product_images/".$image[0])}}" alt="" />
+                                        <img src="{{ asset("storage/product_images/".$image[0]) }}" alt="" style="object-fit: cover; border-radius: 3px;">
                                     </div>
-                                    <div class="col-md-4">{{$products[$k]->product_name}}</div>
-                                    <div class="col-md-3">{{$products[$k]->price}}</div>
-                                    <div class="col-md-3">{{$products[$k]->created_at}}</div>
+                                    <div class="col-md-4">{{ $products[$k]->product_name }}</div>
+                                    <div class="col-md-3">{{ $products[$k]->price }}</div>
+                                    <div class="col-md-3">{{ $products[$k]->created_at }}</div>
                                     <div class="col-md-1 d-none d-md-block">
-                                        <img src="{{asset('img/dashboard-arrow-right.svg')}}" alt="" />
+                                        <img src="{{ asset('img/dashboard-arrow-right.svg') }}" alt="">
                                     </div>
                                 </div>
                             </div>
+                            
                             </a>
                             @endfor
                             @else

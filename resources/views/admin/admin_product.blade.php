@@ -61,19 +61,21 @@
             </div>
             <div class="row mt-4">
                 @php
-                $image = explode('|', $products->images);
+                    $images = [$products->image1, $products->image2, $products->image3, $products->image4];
                 @endphp
-                @foreach ($image as $item)
-                <div class="col-md-3">
-                    <div class="card mb-5" style="max-width: 20rem;">
-                        <a href="{{asset("storage/product_images/".$item)}}" class="example-image-link"
-                            data-lightbox="example-2" data-title="{{ $item }}">
-                            <img src="{{asset("storage/product_images/".$item)}}" alt="image-1"
-                                class="card-img-top"></a>
-                    </div>
-                </div>
+                @foreach ($images as $image)
+                    @if ($image)
+                        <div class="col-md-3">
+                            <div class="card mb-5" style="max-width: 20rem;">
+                                <a href="{{ asset("storage/product_images/".$image) }}" class="example-image-link" data-lightbox="example-2" data-title="{{ $image }}">
+                                    <img src="{{ asset("storage/product_images/".$image) }}" alt="{{ $image }}" class="card-img-top" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px">
+                                </a>
+                            </div>
+                        </div>
+                    @endif
                 @endforeach
-            </div>
+            </div>            
+                              
         </div>
         <div class="container">
             <div class="table-responsive">

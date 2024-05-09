@@ -100,47 +100,53 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
-            [
-                'images' => 'required',
-                'product_name' => 'required|unique:products,product_name|max:50',
-                'category' => 'required',
-                'price' => 'required|max:30',
-                'mitra' => 'required|max:30',
-                'p_number' => 'required|max:13',
-                'description' => 'required'
-            ]
-        );
-        $image = array();
-        if ($files = $request->file('images')) {
-            foreach ($files as $file) {
+        $request->validate([
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'product_name' => 'required|unique:products,product_name|max:50',
+            'category' => 'required',
+            'price' => 'required|max:30',
+            'mitra' => 'required|max:30',
+            'p_number' => 'required|max:13',
+            'description' => 'required'
+        ]);
+    
+        $images = [];
+
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
                 $filenameWithExt = $file->getClientOriginalName();
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension = $file->getClientOriginalExtension();
-                $filenameSimpan = $filename . '_' . time() . '.' . $extension;
-                $file->storeAs('public/product_images', $filenameSimpan);
-                $thumbnailPath = public_path("storage/product_images/{$filenameSimpan}");
-                $img = Image::make($thumbnailPath)->resize(800, 400)->save($thumbnailPath);
-                $image[] = $filenameSimpan;
+                $filenameToStore = $filename . '_' . time() . '.' . $extension;
+                $file->storeAs('public/product_images', $filenameToStore);
+                $images[] = $filenameToStore;
             }
         }
-        $checkbox = join(',', $request->input('category'));
+        
+    
         $product = new Product;
-        $product->images = implode('|', $image);
+        $product->image1 = isset($images[0]) ? $images[0] : null;
+        $product->image2 = isset($images[1]) ? $images[1] : null;
+        $product->image3 = isset($images[2]) ? $images[2] : null;
+        $product->image4 = isset($images[3]) ? $images[3] : null;
         $product->product_name = $request->input('product_name');
-        $product->category = $checkbox;
+        $product->category = implode(',', $request->input('category'));
         $product->price = $request->input('price');
         $product->description = nl2br($request->input('description'));
         $product->mitra = $request->input('mitra');
         $product->p_number = $request->input('p_number');
-        $product->userId = Auth::user()->id;
+        $product->userId = Auth::user()->id; // Set userId sesuai dengan user yang sedang login
         $product->save();
+    
         if (Auth::user()->level == 'admin') {
             return redirect('db_admin-product')->with('success', 'Berhasil Menambah Produk Baru!!');
         } else {
             return redirect('db_mitra-product/' . Auth::user()->id)->with('success', 'Berhasil Menambah Produk Baru!!');
         }
     }
+    
+
+    
 
     /**
      * Display the specified resource.

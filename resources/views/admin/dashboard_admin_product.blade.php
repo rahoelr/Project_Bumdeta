@@ -68,25 +68,25 @@
                 </div>
                 <div class="row mt-4">
                     @if(count($products)>0)
-                    @foreach ($products as $product)
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <a class="card card-dashboard-product d-block" href="/db_admin-product-detail/{{$product->id}}">
-                            <div class="card-body">
-                                @php
-                                $image = explode('|', $product->images);
-                                $cate = explode(',', $product->category);
-                                @endphp
-                                <img src="{{asset("storage/product_images/".$image[0])}}" alt="" class="w-100 mb-2" />
-                                <div class="product-title">{{ $product->product_name }}</div>
-                                <div class="product-category">{{ $cate[0] }}</div>
+                        @foreach ($products as $product)
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <a class="card card-dashboard-product d-block" href="/db_admin-product-detail/{{$product->id}}">
+                                    <div class="card-body">
+                                        @php
+                                            $image = explode('|', $product->image1);
+                                            $cate = explode(',', $product->category);
+                                        @endphp
+                                        <img src="{{asset("storage/product_images/".$image[0])}}" alt="" class="w-100 mb-2" style="width: 100px; height: 200px; object-fit: cover; border-radius: 8px" />
+                                        <div class="product-title">{{ $product->product_name }}</div>
+                                        <div class="product-category">{{ $cate[0] }}</div>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                    @endforeach
+                        @endforeach
                     @else
-                    <h3 class="text-center">No products yet!!!</h3>
+                        <h3 class="text-center">No products yet!!!</h3>
                     @endif
-                </div>
+                </div>                
                 <div class="d-flex justify-content-center">
                     {{ $products->links() }}
                 </div>

@@ -38,22 +38,23 @@
                 @php
                 $i = 100;
                 @endphp
-                @foreach ($products as $object)
-                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="{{$i+=100}}">
+                @foreach ($products as $product)
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="{{ $i += 100 }}">
                     @php
-                    $image = explode('|', $object->images);
+                    $images = [$product->image1, $product->image2, $product->image3, $product->image4];
                     @endphp
-                    <a href="/detail_produk/{{$object->id}}" class="component-products d-block">
+                    <a href="/detail_produk/{{ $product->id }}" class="component-products d-block">
                         <div class="products-thumbnail">
-                            <div class="products-image" style="
-                    background-image: url('{{asset("storage/product_images/".$image[0])}}');"></div>
+                            @if ($images[0])
+                            <div class="products-image" style="background-image: url('{{ asset('storage/product_images/' . $images[0]) }}');"></div>
+                            @endif
                         </div>
-                        <div class="products-text">{{$object->product_name}}</div>
-                        <div class="products-price">Rp {{$object->price}}</div>
+                        <div class="products-text">{{ $product->product_name }}</div>
+                        <div class="products-price">Rp {{ $product->price }}</div>
                     </a>
                 </div>
-                @endforeach
-            </div>
+            @endforeach            
+            </div>            
             <div class="d-flex">
                 {{ $products->links() }}
             </div>
