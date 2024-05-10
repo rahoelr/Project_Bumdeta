@@ -80,6 +80,9 @@ class TeamController extends Controller
         if ($request->input('position') == 'Manager Unit Barang & Jasa') {
             $level = '6';
         }
+        if ($request->input('position') == 'Dokumentasi') {
+            $level = '7';
+        }
         $team = new Team;
         $team->images = $image;
         $team->name = $request->input('name');
@@ -159,6 +162,9 @@ class TeamController extends Controller
         }
         if ($request->input('position') == 'Manager Unit Barang & Jasa') {
             $level = '6';
+        }
+        if ($request->input('position') == 'Dokumentasi') {
+            $level = '7';
         }
         $team->level = $level;
         if ($files = $request->file('images')) {
