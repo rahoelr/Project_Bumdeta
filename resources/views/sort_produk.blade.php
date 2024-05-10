@@ -34,7 +34,7 @@
                     @foreach ($data as $product)
                     <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="{{$j+=200}}">
                         @php
-                        $image = explode('|', $product->images);
+                        $image = explode('|', $product->image1);
                         @endphp
                         <a href="/detail_produk/{{$product->id}}" class="component-products d-block">
                             <div class="products-thumbnail">
