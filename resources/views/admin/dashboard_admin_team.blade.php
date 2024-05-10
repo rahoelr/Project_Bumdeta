@@ -70,14 +70,15 @@
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                         <a class="card card-dashboard-product d-block" href="/db_admin-team-detail/{{$team->id}}">
                             <div class="card-body">
-                                <div style="width: 100%; height: 300px; overflow: hidden; border-radius:10px">
-                                    <img src="{{asset("storage/team_images/".$team->images)}}" alt="" class="w-100" style="object-fit: cover; object-position: center; height: 100%;" />
+                                <div style="width: 100%; height: 340px; overflow: hidden; border-radius: 10px;">
+                                    <img src="{{ asset('storage/team_images/' . $team->images) }}" alt="" class="w-100" style="object-fit: cover; height: 100%;">
                                 </div>
                                 <div class="product-title mt-3">{{ $team->name }}</div>
                                 <div class="product-category">{{ $team->position }}</div>
                             </div>
                         </a>
                     </div>
+                    
                     @endforeach
                     @else
                     <h3 class="text-center">No teams yet!!!</h3>
