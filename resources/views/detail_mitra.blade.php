@@ -63,7 +63,7 @@
                 data-aos-delay="{{$i+=200}}">
                 @if ($products[$k]->mitra == $mitra->mitra_name)
                 @php
-                $image = explode('|', $products[$k]->images);
+                $image = explode('|', $products[$k]->image1);
                 @endphp
                 <a href="/detail_produk/{{$products[$k]->id}}" class="component-products d-block">
                     <div class="products-thumbnail">
