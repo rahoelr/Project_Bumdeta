@@ -65,14 +65,14 @@
                             <p id="num-of-files">No File Chosen</p>
                             <div id="images" class="d-flex flex-wrap">
                                 <!-- Display existing images -->
-                                @foreach ([$products->image1, $products->image2, $products->image3, $products->image4] as $index => $image)
+                                {{-- @foreach ([$products->image1, $products->image2, $products->image3, $products->image4] as $index => $image)
                                     @if ($image)
                                         <figure class="m-2" id="existing-image-{{ $index }}">
                                             <img src="{{ asset('storage/product_images/' . $image) }}"
                                                 class="img-thumbnail" onclick="removeImage({{ $index }})">
                                         </figure>
                                     @endif
-                                @endforeach
+                                @endforeach --}}
 
                             </div>
                         </div>
