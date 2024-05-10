@@ -84,7 +84,7 @@
             @if ($product->mitra == $mitra->mitra_name)
             <a href="/detail_produk/{{$product->id}}" class="component-products d-block">
                 @php
-                $image = explode('|', $product->images);
+                $image = explode('|', $product->image1);
                 @endphp
                 <div class="products-thumbnail">
                     <div class="products-image"
