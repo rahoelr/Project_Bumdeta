@@ -48,7 +48,7 @@
         </nav>
         <div class="section-content section-dashboard-home" data-aos="fade-up">
             <div class="container">
-                <h1>Tambahkan Produk aa</h1>
+                <h1>Tambahkan Produk</h1>
                 @if (Auth::user()->level == 'admin')
                     <a href="/db_admin-product" class="btn btn-info btn-edit text-light">Back</a>
                 @else

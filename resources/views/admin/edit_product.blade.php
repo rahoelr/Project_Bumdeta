@@ -48,27 +48,28 @@
     </nav>
     <div class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container">
-            <h1>Edit {{$products->product_name}}</h1>
-            @if (Auth::user()->level == 'admin')
-            <a href="/db_admin-product-detail/{{$products->id}}"><img class="mr-4 img-back-form"
-                    src="{{asset('img/back.png')}}" alt=""></a>
-            @else
-            <a href="/db_admin-product-detail/{{$products->id}}"><img class="mr-4 img-back-form"
-                    src="{{asset('img/back.png')}}" alt=""></a>
-            @endif
-            <form action="{{ route('admin-products.update', $products->id) }}" method="POST"
-                enctype="multipart/form-data">
+            <h1>Edit Produk</h1>
+            <a href="{{ Auth::user()->level == 'admin' ? '/db_admin-product' : '/db_mitra-product/' . Auth::user()->id }}"
+                class="btn btn-info btn-edit text-light">Back</a>
+            <form action="{{ route('admin-products.update', $products->id) }}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 {{ csrf_field() }}
                 <div class="content">
                     <div class="kiri">
-                        <label for="file-input"><input type="file" class="form-control 
-                        @error('images')
-                            is-invalid
-                        @enderror" id="input-file" name="images[]" accept="image/*" onchange="previewImage()"
-                                multiple><i class="fa-solid fa-upload"></i> &nbsp; Choose A Pictures</label>
+                        <label for="input-file">
+                            <input type="file" class="form-control @error('images.*') is-invalid @enderror"
+                                id="input-file" name="images[]" accept="image/*" onchange="previewImage()" multiple>
+                            <i class="fa-solid fa-upload"></i> &nbsp; Choose Pictures
+                        </label>
                         <p id="num-of-files">No File Chosen</p>
-                        <div id="images"></div>
+                        <div id="images" class="d-flex flex-wrap">
+                            <!-- Display existing images -->
+                            {{-- @foreach(explode('|', $products->image1) as $image)
+                                <figure class="m-2">
+                                    <img src="{{ asset('storage/product_images/' . $image) }}" class="img-thumbnail">
+                                </figure>
+                            @endforeach --}}
+                        </div>
                     </div>
                     <div class="kanan">
                         <div class="name">
@@ -169,14 +170,27 @@
 </div>
 <script>
     let fileInput = document.getElementById("input-file");
-    let imageContainer = document.getElementById("images")
+    let imageContainer = document.getElementById("images");
     let numOfFiles = document.getElementById("num-of-files");
 
+    let imageFiles = [];
+
     function previewImage() {
-        imageContainer.innerHTML = "";
         numOfFiles.textContent = '';
 
-        for (i of fileInput.files) {
+        let files = fileInput.files;
+
+        if (files.length < 1) {
+            alert("Please select at least one image.");
+            return;
+        }
+
+        if (files.length > 4) {
+            alert("You can only select up to three images.");
+            return;
+        }
+
+        for (let i = 0; i < files.length; i++) {
             let reader = new FileReader();
             let figure = document.createElement("figure");
             let figCap = document.createElement("figcaption");
@@ -185,12 +199,29 @@
             reader.onload = () => {
                 let img = document.createElement("img");
                 img.setAttribute("src", reader.result);
-                figure.insertBefore(img, figCap);
-            }
+                img.classList.add("img-thumbnail", "m-2");
+                img.addEventListener("click", function() {
+                    imageFiles.splice(i, 1); // Remove image from array
+                    figure.remove(); // Remove image from preview
+                    updateNumOfFiles();
+                });
+                figure.appendChild(img);
+            };
+
+            imageFiles.push(files[i]); // Add image to array
             imageContainer.appendChild(figure);
-            reader.readAsDataURL(i);
+            reader.readAsDataURL(files[i]);
         }
+
+        updateNumOfFiles();
     }
 
+    function updateNumOfFiles() {
+        if (imageFiles.length > 0) {
+            numOfFiles.textContent = `${imageFiles.length} File(s) Chosen`;
+        } else {
+            numOfFiles.textContent = 'No File Chosen';
+        }
+    }
 </script>
 @endsection

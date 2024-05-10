@@ -209,53 +209,51 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate(
-            [
-                'images' => 'required',
-                'product_name' => 'required|max:50',
-                'category' => 'required',
-                'price' => 'required|max:30',
-                'mitra' => 'required|max:30',
-                'p_number' => 'required|max:13',
-                'description' => 'required'
-            ]
-        );
-        $checkbox = join(',', $request->input('category'));
+        $request->validate([
+            'product_name' => 'required|max:50',
+            'category' => 'required',
+            'price' => 'required|max:30',
+            'mitra' => 'required|max:30',
+            'p_number' => 'required|max:13',
+            'description' => 'required'
+        ]);
+    
         $product = Product::find($id);
         $product->product_name = $request->input('product_name');
-        $product->category = $checkbox;
+        $product->category = implode(',', $request->input('category'));
         $product->price = $request->input('price');
         $product->description = nl2br($request->input('description'));
         $product->mitra = $request->input('mitra');
         $product->p_number = $request->input('p_number');
-        $image = array();
-        if ($files = $request->file('images')) {
-            if ($product->images) {
-                $imgs = explode('|', $product->images);
-                foreach ($imgs as $item) {
-                    unlink('storage/product_images/' . $item);
-                }
-            }
-            foreach ($files as $file) {
+    
+        // Proses penyimpanan gambar
+        $images = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
                 $filenameWithExt = $file->getClientOriginalName();
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension = $file->getClientOriginalExtension();
-                $filenameSimpan = $filename . '_' . time() . '.' . $extension;
-                $file->storeAs('public/product_images', $filenameSimpan);
-                $thumbnailPath = public_path("storage/product_images/{$filenameSimpan}");
-                $img = Image::make($thumbnailPath)->resize(800, 400)->save($thumbnailPath);
-                $image[] = $filenameSimpan;
+                $filenameToStore = $filename . '_' . time() . '.' . $extension;
+                $file->storeAs('public/product_images', $filenameToStore);
+                $images[] = $filenameToStore;
             }
         }
-        $product->images = implode('|', $image);
+    
+        // Update kolom gambar di database sesuai dengan gambar yang baru diunggah
+        $product->image1 = isset($images[0]) ? $images[0] : $product->image1;
+        $product->image2 = isset($images[1]) ? $images[1] : $product->image2;
+        $product->image3 = isset($images[2]) ? $images[2] : $product->image3;
+        $product->image4 = isset($images[3]) ? $images[3] : $product->image4;
+    
         $product->userId = Auth::user()->id;
         $product->update();
+    
         if (Auth::user()->level == 'admin') {
             return redirect('db_admin-product')->with('success', 'Berhasil Mengubah Data Produk!!');
         } else {
             return redirect('db_mitra-product/' . Auth::user()->id)->with('success', 'Berhasil Mengubah Data Produk!!');
         }
-    }
+    }    
 
     /**
      * Remove the specified resource from storage.
